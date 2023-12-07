@@ -1,6 +1,5 @@
 # Base de donnée
 
-
 ![Diagramme UML](./defiut.jpg "Diagramme UML")
 
 ## Contraintes
@@ -8,7 +7,7 @@
 ##### Users
 
 - **password** contains the clear password's bcrypt hash
-- **mail** must match the following regex : ^[^@]+@.*univ-ubs\.fr$ (i.e. *@*univ-ubs.fr)
+- **mail** must match the following regex : `^[^@]+@.*univ-ubs\.fr$` (i.e. *@*univ-ubs.fr)
 
 ##### Challenges
 

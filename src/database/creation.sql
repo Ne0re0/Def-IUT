@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS Challenges;
 -- Users
 CREATE TABLE Users (
     idUser INTEGER 
-        CONSTRAINT pk_Users PRIMARY KEY,
+        CONSTRAINT pk_Users PRIMARY KEY AUTOINCREMENT,
     mail TEXT 
         CONSTRAINT nn_mail NOT NULL
         CONSTRAINT uq_mail UNIQUE
@@ -31,7 +31,7 @@ CREATE TABLE Users (
 -- Badges
 CREATE TABLE Badges (
     idBadge INTEGER 
-        CONSTRAINT pk_Badges PRIMARY KEY,
+        CONSTRAINT pk_Badges PRIMARY KEY AUTOINCREMENT,
     titleBadge TEXT
         CONSTRAINT nn_titleBadge NOT NULL
         CONSTRAINT uq_titleBadge UNIQUE,
@@ -65,7 +65,7 @@ CREATE TABLE Owns (
 -- Challenges
 CREATE TABLE Challenges (
     idChallenge INTEGER 
-        CONSTRAINT pk_Challenges PRIMARY KEY,
+        CONSTRAINT pk_Challenges PRIMARY KEY AUTOINCREMENT,
     titleChallenge TEXT 
         CONSTRAINT nn_titleChallenge NOT NULL
         CONSTRAINT uq_titleChallenge UNIQUE,
@@ -99,7 +99,7 @@ CREATE TABLE HasTried (
 
 -- Dockers
 CREATE TABLE Dockers (
-    idDocker INTEGER CONSTRAINT pk_Dockers PRIMARY KEY,
+    idDocker INTEGER CONSTRAINT pk_Dockers PRIMARY KEY AUTOINCREMENT,
     exposed INTEGER 
         CONSTRAINT nn_exposed NOT NULL
         CONSTRAINT ck_port CHECK (exposed > 0 AND exposed <= 65535),
@@ -112,7 +112,7 @@ CREATE TABLE Dockers (
 -- Files
 CREATE TABLE Files (
     idFile INTEGER 
-        CONSTRAINT pk_Files PRIMARY KEY,
+        CONSTRAINT pk_Files PRIMARY KEY AUTOINCREMENT,
     filename TEXT 
         CONSTRAINT nn_filename NOT NULL,
     itsChallenge INTEGER

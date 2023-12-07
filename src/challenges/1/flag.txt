@@ -1,0 +1,3 @@
+Pour valider ce challenge tu auras besoin de lire ce fichier
+
+Voici le flag : DEFIUT{ca-cest-du-flag}

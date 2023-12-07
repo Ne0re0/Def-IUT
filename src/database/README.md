@@ -18,8 +18,9 @@ Avec le navigateur
 sqlitebrowser database.db 
 ```
 
-### Réinitialisation
+### Initialisation / Réinitialisation
 ```bash
 sqlite3 database.db < creation.sql 
+sqlite3 database.db < insertion.sql 
 ```
 

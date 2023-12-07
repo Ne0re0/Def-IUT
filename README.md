@@ -1,2 +1,0 @@
-# Def-IUT
-Def'IUT

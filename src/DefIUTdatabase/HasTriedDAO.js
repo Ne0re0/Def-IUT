@@ -1,20 +1,19 @@
 var db = require('./sqlite_connection');
 
-var UserDAO = function() {
-    // Insérer un utilisateur
+var HasTriedDAO = function() {
+    // Insérer un HasTried
     this.insert = function(values, callback) {
-        const query = 'INSERT INTO User ( mail,nom,prenom,datedenaissance,sexe,taille,poids,password) VALUES (?, ?, ? ,? ,? ,? ,? ,? )';
+        const query = 'INSERT INTO HasTried (aUser, aChallenge, flagged , retryNB) VALUES (?, ?, ?, ?)';
         db.run(query, values, function(err) {
             if (err) {
                 return callback(err);
             }
-            callback(null, this.lastID); // Retourne l'ID du nouvel utilisateur
         });
     };
 
-    // Mettre à jour un utilisateur
+    // Mettre à jour un HasTried
     this.update = function(key, values, callback) {
-        const query = 'UPDATE User SET mail = ?,nom = ?, prenom = ?, datedenaissance = ?, sexe = ?, taille = ?, poids = ?, password = ? WHERE idUser = ?';
+        const query = 'UPDATE HasTried SET aUser = ?, aChallenge = ?, flagged = ?, retryNB = ? WHERE aUser = ? AND aChallenge = ?';
         values.push(key); // Ajouter la clé à la fin du tableau de valeurs
         console.log(values);
         db.run(query, values, function(err) {
@@ -26,37 +25,31 @@ var UserDAO = function() {
         });
     };
 
-    // Supprimer un utilisateur
+    // Supprimer un HasTried
     this.delete = function(key, callback) {
-        const query = 'DELETE FROM User WHERE idUser = ?';
+        const query = 'DELETE FROM HasTried WHERE aUser = ? AND aChallenge = ?';
         db.run(query, [key], function(err) {
             callback(err);
         });
     };
 
-    // Récupérer tous les utilisateurs
+    // Récupérer tous les HasTried
     this.findAll = function(callback) {
-        const query = 'SELECT * FROM User';
+        const query = 'SELECT * FROM HasTried';
         db.all(query, function(err, rows) {
             callback(err, rows);
         });
     };
-
-    // Trouver un utilisateur par sa clé mail
-    this.findByMail = function(key, callback) {
-        const query = 'SELECT * FROM User WHERE mail = ?';
-        db.get(query, [key], function(err, row) {
-            callback(err, row);
-        });
-    };
-    //TRouver un user par son id
+    
+    // Trouver un HasTried par son user et challenge associé
     this.findByID = function(key, callback) {
-        const query = 'SELECT * FROM User WHERE idUser = ?';
+        const query = 'SELECT * FROM HasTried WHERE aUser = ? AND aChallenge = ?';
         db.get(query, [key], function(err, row) {
             callback(err, row);
         });
     };
+    
 };
 
-var dao = new UserDAO();
+var dao = new HasTriedDAO();
 module.exports = dao;

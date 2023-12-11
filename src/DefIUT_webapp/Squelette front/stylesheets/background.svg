@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<svg width="1351.68" height="760.32" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" class="border shadow-md" preserveAspectRatio="none">
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect class="bg" fill="#00000" height="760.32" id="bg" width="1351.68" x="2" y="0"/>
+  <g id="svg_1" transform="rotate(45 675.84 380.16)">
+   <path d="m-675.84,590.32s327.92,-41 675.84,0s17.84,-27 675.84,0s327.92,-108 675.84,0s327.92,-7 675.84,0l110,0l0,770l-2813.36,0l0,-770z" fill="#B690A5" id="svg_2"/>
+   <path d="m-675.84,195s33.84,-87.5 675.84,0s327.92,-87.5 675.84,0s327.92,-87.5 675.84,0s287.84,-111 675.84,0l110,0l0,-795l-2813.36,0l0,795z" fill="#92466D" id="svg_3"/>
+  </g>
+ </g>
+
+</svg>

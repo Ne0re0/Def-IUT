@@ -16,7 +16,7 @@ CREATE TABLE Users (
     mail TEXT 
         CONSTRAINT nn_mail NOT NULL
         CONSTRAINT uq_mail UNIQUE
-        CONSTRAINT ck_mail CHECK (mail REGEXP '^[^@]+@.*univ-ubs\.fr$'),
+        CONSTRAINT ck_mail CHECK (mail REGEXP '^[^@]+@*univ-ubs\.fr$'),
     accountVerified INTEGER
         CONSTRAINT ck_accountVerified CHECK (accountVerified IN (0,1)),
     username TEXT
@@ -119,5 +119,4 @@ CREATE TABLE Files (
         CONSTRAINT nn_Files_itsChallenge NOT NULL
         CONSTRAINT uq_Files_itsChallenges UNIQUE,
     CONSTRAINT fk_Files_Challenges FOREIGN KEY (itsChallenge) REFERENCES Challenges(idChallenge)
-
 );

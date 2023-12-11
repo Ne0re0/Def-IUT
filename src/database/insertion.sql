@@ -21,7 +21,7 @@ INSERT INTO Categories VALUES ('Autre');
 -- Badges
 INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Bienvenue','Valider son premier défi');
 INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('First try','Valider un défi du premier coup');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Fisrt blood','Être le premier utilisateur de la plateforme à valider un défi');
+INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('First blood','Être le premier utilisateur de la plateforme à valider un défi');
 INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Happy hour','Valider un défi un jeudi entre 17 et 19 heures');
 INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Persévérant','Réaliser au moins 10 tentatives erronées avant de valider un défi');
 INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Explorateur','Valider un défi de chaque catégorie');

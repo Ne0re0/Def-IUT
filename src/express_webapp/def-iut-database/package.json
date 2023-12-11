@@ -1,0 +1,14 @@
+{
+  "name": "def-iut-database",
+  "version": "1.0.0",
+  "description": "database for DefIUT Web Application",
+  "main": "defIUT-db.js",
+  "scripts": {
+    "test": "defIUT-db-test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sqlite3": "^5.1.6"
+  }
+}

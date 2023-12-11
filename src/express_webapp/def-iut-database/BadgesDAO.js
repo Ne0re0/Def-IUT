@@ -1,61 +1,93 @@
-var db = require('./sqlite_connection');
+const db = require('./sqlite_connection');
 
-var BadgesDAO = function() {
+class BadgesDAO {
     // Insérer un Badge
-    this.insert = function(values, callback) {
-        const query = 'INSERT INTO Badges (titleBadge, descriptionBadge) VALUES (?, ?)';
-        db.run(query, values, function(err) {
-            if (err) {
-                return callback(err);
-            }
-            callback(null, this.lastID); // Retourne l'ID du nouvel Badge
+    insert(values) {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO Badges (titleBadge, descriptionBadge) VALUES (?, ?)';
+            db.run(query, values, function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(this.lastID); // Retourne l'ID du nouvel Badge
+                }
+            });
         });
-    };
+    }
 
     // Mettre à jour un Badge
-    this.update = function(key, values, callback) {
-        const query = 'UPDATE Badges SET titleBadge = ?, descriptionBadge = ? WHERE idBadges = ?';
-        values.push(key); // Ajouter la clé à la fin du tableau de valeurs
-        console.log(values);
-        db.run(query, values, function(err) {
-            if (err) {
-                console.error('SQL Error:', this.sql);
-                console.error('Error Message:', err.message);
-            }
-            callback(err);
+    update(key, values) {
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE Badges SET titleBadge = ?, descriptionBadge = ? WHERE idBadges = ?';
+            values.push(key); // Ajouter la clé à la fin du tableau de valeurs
+            db.run(query, values, function (err) {
+                if (err) {
+                    console.error('SQL Error:', this.sql);
+                    console.error('Error Message:', err.message);
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
-    };
+    }
 
     // Supprimer un Badge
-    this.delete = function(key, callback) {
-        const query = 'DELETE FROM Badges WHERE idBadges = ?';
-        db.run(query, [key], function(err) {
-            callback(err);
+    delete(key) {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM Badges WHERE idBadges = ?';
+            db.run(query, [key], function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
-    };
+    }
 
     // Récupérer tous les Badges
-    this.findAll = function(callback) {
-        const query = 'SELECT * FROM Badges';
-        db.all(query, function(err, rows) {
-            callback(err, rows);
+    findAll() {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Badges';
+            db.all(query, function (err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
         });
-    };
-    //Trouver un Badge par son id
-    this.findByID = function(key, callback) {
-        const query = 'SELECT * FROM Badges WHERE idBadges = ?';
-        db.get(query, [key], function(err, row) {
-            callback(err, row);
-        });
-    };
-    //Trouver un Badge par son title
-    this.findByBadgesname = function(key, callback) {
-        const query = 'SELECT * FROM Badges WHERE titleBadge = ?';
-        db.get(query, [key], function(err, row) {
-            callback(err, row);
-        });
-    };
-};
+    }
 
-var dao = new BadgesDAO();
+    // Trouver un Badge par son id
+    findByID(key) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Badges WHERE idBadges = ?';
+            db.get(query, [key], function (err, row) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    }
+
+    // Trouver un Badge par son titre
+    findByBadgesname(key) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Badges WHERE titleBadge = ?';
+            db.get(query, [key], function (err, row) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    }
+}
+
+const dao = new BadgesDAO();
 module.exports = dao;

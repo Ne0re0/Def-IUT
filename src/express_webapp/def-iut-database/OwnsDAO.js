@@ -1,55 +1,79 @@
-var db = require('./sqlite_connection');
+const db = require('./sqlite_connection');
 
-var OwnsDAO = function() {
+class OwnsDAO {
     // Insérer une association badge user
-    this.insert = function(values, callback) {
-        const query = 'INSERT INTO Owns (aUser, aBadge, obtentionDate) VALUES (?, ?, ?)';
-        db.run(query, values, function(err) {
-            if (err) {
-                return callback(err);
-            }
-            
+    insert(values) {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO Owns (aUser, aBadge, obtentionDate) VALUES (?, ?, ?)';
+            db.run(query, values, function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(this.lastID); // Retourne l'ID du nouvel Owns
+                }
+            });
         });
-    };
+    }
 
     // Mettre à jour une association badge user
-    this.update = function(keys,values, callback) {
-        const query = 'UPDATE Owns SET aUser =?, aBadge = ? obtentionDate = ? WHERE aUser = ? AND aBadge = ?';
-        values.push(keys);
-         // Ajouter la clé à la fin du tableau de valeurs
-        db.run(query, values, function(err) {
-            if (err) {
-                console.error('SQL Error:', this.sql);
-                console.error('Error Message:', err.message);
-            }
-            callback(err);
+    update(keys, values) {
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE Owns SET aUser =?, aBadge = ?, obtentionDate = ? WHERE aUser = ? AND aBadge = ?';
+            values.push(keys);
+            db.run(query, values, function(err) {
+                if (err) {
+                    console.error('SQL Error:', this.sql);
+                    console.error('Error Message:', err.message);
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
-    };
+    }
 
     // Supprimer une association badge user
-    this.delete = function(key, callback) {
-        const query = 'DELETE FROM Owns WHERE aUser = ? AND aBadge = ?';
-        db.run(query, [key], function(err) {
-            callback(err);
+    delete(key) {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM Owns WHERE aUser = ? AND aBadge = ?';
+            db.run(query, [key], function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
-    };
+    }
 
     // Récupérer tous les Owns
-    this.findAll = function(callback) {
-        const query = 'SELECT * FROM Owns';
-        db.all(query, function(err, rows) {
-            callback(err, rows);
+    findAll() {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Owns';
+            db.all(query, function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
         });
-    };
-    //Trouver une association badge user par son user et son badge
-    this.findByID = function(key, callback) {
-        const query = 'SELECT * FROM Owns WHERE aUser = ? AND aBadge = ?';
-        db.get(query, [key], function(err, row) {
-            callback(err, row);
-        });
-    };
-    
-};
+    }
 
-var dao = new OwnsDAO();
+    // Trouver une association badge user par son user et son badge
+    findByID(key) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Owns WHERE aUser = ? AND aBadge = ?';
+            db.get(query, [key], function(err, row) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    }
+}
+
+const dao = new OwnsDAO();
 module.exports = dao;

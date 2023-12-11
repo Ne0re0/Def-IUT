@@ -1,54 +1,79 @@
-var db = require('./sqlite_connection');
+const db = require('./sqlite_connection');
 
-var DockersDAO = function() {
+class DockersDAO {
     // Insérer un Docker
-    this.insert = function(values, callback) {
-        const query = 'INSERT INTO Dockers (exposed, itsChallenge) VALUES (?, ?)';
-        db.run(query, values, function(err) {
-            if (err) {
-                return callback(err);
-            }
-            callback(null, this.lastID); // Retourne l'ID du nouvel Docker
+    insert(values) {
+        return new Promise((resolve, reject) => {
+            const query = 'INSERT INTO Dockers (exposed, itsChallenge) VALUES (?, ?)';
+            db.run(query, values, function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(this.lastID); // Retourne l'ID du nouvel Docker
+                }
+            });
         });
-    };
+    }
 
     // Mettre à jour un Docker
-    this.update = function(key, values, callback) {
-        const query = 'UPDATE Dockers SET exposed = ?, itsChallenge = ? WHERE idDocker = ?';
-        values.push(key); // Ajouter la clé à la fin du tableau de valeurs
-        console.log(values);
-        db.run(query, values, function(err) {
-            if (err) {
-                console.error('SQL Error:', this.sql);
-                console.error('Error Message:', err.message);
-            }
-            callback(err);
+    update(key, values) {
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE Dockers SET exposed = ?, itsChallenge = ? WHERE idDocker = ?';
+            values.push(key); // Ajouter la clé à la fin du tableau de valeurs
+            db.run(query, values, function(err) {
+                if (err) {
+                    console.error('SQL Error:', this.sql);
+                    console.error('Error Message:', err.message);
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
-    };
+    }
 
     // Supprimer un Docker
-    this.delete = function(key, callback) {
-        const query = 'DELETE FROM Dockers WHERE idDocker = ?';
-        db.run(query, [key], function(err) {
-            callback(err);
+    delete(key) {
+        return new Promise((resolve, reject) => {
+            const query = 'DELETE FROM Dockers WHERE idDocker = ?';
+            db.run(query, [key], function(err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
         });
-    };
+    }
 
     // Récupérer tous les Dockers
-    this.findAll = function(callback) {
-        const query = 'SELECT * FROM Dockers';
-        db.all(query, function(err, rows) {
-            callback(err, rows);
+    findAll() {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Dockers';
+            db.all(query, function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
         });
-    };
-    //Trouver un Docker par son id
-    this.findByID = function(key, callback) {
-        const query = 'SELECT * FROM Dockers WHERE idDocker = ?';
-        db.get(query, [key], function(err, row) {
-            callback(err, row);
-        });
-    };
-};
+    }
 
-var dao = new DockersDAO();
+    // Trouver un Docker par son id
+    findByID(key) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM Dockers WHERE idDocker = ?';
+            db.get(query, [key], function(err, row) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    }
+}
+
+const dao = new DockersDAO();
 module.exports = dao;

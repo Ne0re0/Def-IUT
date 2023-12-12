@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var fullyDistinguishedUsersDAO = require('def-iut-database').fullyDistinguishedUsersDAO;
 var usersDAO = require('def-iut-database').usersDAO;
+
 
 /* GET */
 router.get('/', function(req, res, next) {
@@ -12,20 +14,34 @@ router.get('/', function(req, res, next) {
       !isNaN(req.query['id'])
   ){
     // Fetching from database
-    usersDAO.findByID(req.query['id'])
-      .then((success) => {
-        console.log(success)
+    fullyDistinguishedUsersDAO.findByID(req.query['id'])
+      .then((user) => {
+        console.log(user)
         // User exists
-        res.render('user', { title: success.username });
+        if (undefined !== user){
+          usersDAO.getHistory(req.query['id'])
+          .then((history) => {
+            console.log(user);
+            console.log(history);
+            res.render('user', {user:user , history:history});
+          })
+          .catch((error) => {
+            console.log(error)
+            res.render('usernotfound')
+          })
+        } else {
+          res.render('usernotfound',{title:"Utilisateur inexistant"});
+        }
       })
       .catch((error) => {
         // User does not exists
-        res.render('user', { title: 'User Not Found' });
+        console.log(error)
+        res.render('usernotfound',{title:"Utilisateur inexistant"});
       })
     
   } else {
     // ID contains invalid characters
-    res.render('user', { title: 'ID is invalid' });
+    res.render('usernotfound',{title:"Aucun utilisateur spécifié"});
   }
   
 });

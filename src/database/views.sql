@@ -27,14 +27,19 @@ GROUP BY
 
 
 -- Delete view if exists
-DROP VIEW IF EXISTS Scoreboard;
+DROP VIEW IF EXISTS FullyDistinguishedUsers;
 -- Create view
-CREATE VIEW Scoreboard AS
+CREATE VIEW FullyDistinguishedUsers AS
 SELECT
+    idUser,
+    mail,
+    accountVerified,
+    username,
+    password,
+    isAdmin,
     ROW_NUMBER() OVER (ORDER BY score DESC, challengeCount DESC) AS rank,
     score,
-    idUser,
     challengeCount
 FROM
     DistinguishedUsers
-ORDER BY score DESC, challengeCount DESC;
+ORDER BY rank;

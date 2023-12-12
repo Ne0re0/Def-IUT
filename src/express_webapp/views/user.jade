@@ -1,5 +1,31 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  if error
+    h1= error 
+  else
+    h1= user.username 
+    
+    table
+      tr
+        th Rang
+        th Score
+        th Challenges validés
+      tr
+        td= user.rank
+        td= user.score
+        td= user.challengeCount
+
+    table
+      tr
+        th Titre
+        th Categorie
+        th Récompense
+        th Date
+
+      each line in history
+        tr
+          td= line.titleChallenge
+          td= line.itsCategory
+          td= line.reward
+          td= line.flagged

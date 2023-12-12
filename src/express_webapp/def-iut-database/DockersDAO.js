@@ -1,8 +1,13 @@
 const db = require('./sqlite_connection');
 
 class DockersDAO {
-    // Insérer un Docker
-    insert(values) {
+
+    /**
+     * Insert a docker
+     * @param {*} values 
+     * @returns 
+     */
+    async insert(values) {
         return new Promise((resolve, reject) => {
             const query = 'INSERT INTO Dockers (exposed, itsChallenge) VALUES (?, ?)';
             db.run(query, values, function(err) {
@@ -15,7 +20,12 @@ class DockersDAO {
         });
     }
 
-    // Mettre à jour un Docker
+    /**
+     * Update a docker
+     * @param {*} key 
+     * @param {*} values 
+     * @returns 
+     */
     update(key, values) {
         return new Promise((resolve, reject) => {
             const query = 'UPDATE Dockers SET exposed = ?, itsChallenge = ? WHERE idDocker = ?';
@@ -32,7 +42,11 @@ class DockersDAO {
         });
     }
 
-    // Supprimer un Docker
+    /**
+     * Delete a docker
+     * @param {*} key 
+     * @returns 
+     */
     delete(key) {
         return new Promise((resolve, reject) => {
             const query = 'DELETE FROM Dockers WHERE idDocker = ?';
@@ -46,7 +60,10 @@ class DockersDAO {
         });
     }
 
-    // Récupérer tous les Dockers
+    /**
+     * Returns all dockers
+     * @returns 
+     */
     findAll() {
         return new Promise((resolve, reject) => {
             const query = 'SELECT * FROM Dockers';
@@ -60,7 +77,11 @@ class DockersDAO {
         });
     }
 
-    // Trouver un Docker par son id
+    /**
+     * Returns a docker from its id
+     * @param {*} key 
+     * @returns 
+     */
     findByID(key) {
         return new Promise((resolve, reject) => {
             const query = 'SELECT * FROM Dockers WHERE idDocker = ?';

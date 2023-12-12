@@ -79,7 +79,7 @@ class OwnsDAO {
     // Trouver une association badge user par son user et son badge
     getOwnedBadges(idUser) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT aBadge as idBadge FROM Owns WHERE aUser = ?;';
+            const query = 'SELECT idBadge,titleBadge,obtentionDate,descriptionBadge FROM Owns JOIN Badges ON aBadge = idBadge WHERE aUser = ?;';
             db.all(query, [idUser], function(err, rows) {
                 if (err) {
                     reject(err);
@@ -92,7 +92,7 @@ class OwnsDAO {
 
     getNotOwnedBadges(idUser) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT idBadge FROM Badges EXCEPT SELECT aBadge as idBadge FROM Owns WHERE aUser = ?;';
+            const query = 'SELECT idBadge,titleBadge,descriptionBadge FROM Badges EXCEPT SELECT idBadge,titleBadge,descriptionBadge FROM Owns JOIN Badges ON aBadge = idBadge WHERE aUser = ?;';
             db.all(query, [idUser], function(err, rows) {
                 if (err) {
                     reject(err);

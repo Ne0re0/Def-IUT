@@ -1,8 +1,36 @@
+/* Basic styling for the body */
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+/* Styling for hyperlinks */
 a {
-  color: #00B7FF;
+  color: #92466D;
+  text-decoration: none;
+}
+
+/* Styling for the podium - 1st place */
+tr#podium-1 {
+  background-color: gold;
+}
+
+/* Styling for the podium - 2nd place */
+tr#podium-2 {
+  background-color: silver;
+}
+
+/* Styling for the podium - 3rd place */
+tr#podium-3 {
+  background-color: #cd7f32; /* bronze color */
+}
+
+/* Styling for odd rows after the podium */
+tr#scoreboard-odd:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Styling for even rows after the podium */
+tr#scoreboard-even:nth-child(even) {
+  background-color: #f2f2f2; /* Or any other color you prefer for even rows */
 }

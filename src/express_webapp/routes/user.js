@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
                 ownsDAO.getNotOwnedBadges(req.query['id'])
                 .then((otherBadges) => {
                   console.log(otherBadges);
-                  res.render('user', {user:user , history:history, chart:chart, ownedBadges:ownedBadges, otherBadges,otherBadges});
+                  res.render('user', {title:"Utilisateur",user:user , history:history, chart:chart, ownedBadges:ownedBadges, otherBadges,otherBadges});
                 })
                 .catch((error) => {
                   console.log(error)
@@ -59,6 +59,7 @@ router.get('/', function(req, res, next) {
             res.render('usernotfound')
           })
         } else {
+          console.log(error)
           res.render('usernotfound',{title:"Utilisateur inexistant"});
         }
       })

@@ -10,7 +10,7 @@ SELECT
     Users.password,
     Users.isAdmin,
     COALESCE(COUNT(Challenges.reward), 0) AS challengeCount,
-    COALESCE(SUM(Challenges.reward), 0) AS score
+    COALESCE(SUM(CASE WHEN flagged IS NULL THEN 0 ELSE reward END), 0) AS score
 FROM
     Users
 LEFT JOIN
@@ -24,6 +24,7 @@ GROUP BY
     Users.username,
     Users.password,
     Users.isAdmin;
+
 
 
 -- Delete view if exists

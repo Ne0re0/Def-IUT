@@ -60,6 +60,24 @@ class HasTriedDAO {
         });
     }
 
+    /**
+     * Returns challenges that have been flagged by a specific user
+     * 
+     */
+    getFlagged(idUser) {
+        return new Promise((resolve, reject) => {
+            console.log("debug")
+            const query = 'SELECT flagged,reward FROM HasTried JOIN Challenges ON aChallenge = idChallenge WHERE aUser = ? ORDER BY flagged DESC';
+            db.all(query, [idUser],function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     // Trouver un HasTried par son user et challenge associé
     findByID(key) {
         return new Promise((resolve, reject) => {

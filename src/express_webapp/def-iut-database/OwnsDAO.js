@@ -60,6 +60,8 @@ class OwnsDAO {
         });
     }
 
+
+
     // Trouver une association badge user par son user et son badge
     findByID(key) {
         return new Promise((resolve, reject) => {
@@ -69,6 +71,33 @@ class OwnsDAO {
                     reject(err);
                 } else {
                     resolve(row);
+                }
+            });
+        });
+    }
+
+    // Trouver une association badge user par son user et son badge
+    getOwnedBadges(idUser) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT aBadge as idBadge FROM Owns WHERE aUser = ?;';
+            db.all(query, [idUser], function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
+    getNotOwnedBadges(idUser) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT idBadge FROM Badges EXCEPT SELECT aBadge as idBadge FROM Owns WHERE aUser = ?;';
+            db.all(query, [idUser], function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
                 }
             });
         });

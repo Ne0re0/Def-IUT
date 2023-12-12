@@ -8,7 +8,8 @@ block content
     
     table
       tr
-        th Rang
+        th 
+          a(href='/scoreboard') Rang
         th Score
         th Challenges validés
       tr
@@ -16,6 +17,10 @@ block content
         td= user.score
         td= user.challengeCount
 
+    h1 Statistiques
+    canvas#myChart(style="width:100%;max-width:700px")
+
+    h1 Historique des défis
     table
       tr
         th Titre
@@ -25,7 +30,52 @@ block content
 
       each line in history
         tr
-          td= line.titleChallenge
+          td
+            a(href='/challenge?id=' + line.idChallenge)= line.titleChallenge
           td= line.itsCategory
           td= line.reward
           td= line.flagged
+
+    h1 Badges
+    each line in ownedBadges
+      img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;")
+    each line in otherBadges
+      img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);")
+
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
+
+    script.
+      var x = [];
+      var y = [];
+      var i = !{JSON.stringify(chart)};
+      var sum = 0;
+
+      i.reverse().forEach((element) => { 
+        x.push(element.flagged);
+        sum += element.reward;
+        y.push(sum);
+      });
+
+      console.log(x);
+      console.log(y);
+
+      new Chart("myChart", {
+        type: "line",
+        data: {
+          labels: x,
+          datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,0,255,0.1)",
+            data: y
+          }]
+        },
+        options: {
+          legend: {display: false},
+          scales: {
+            yAxes: [{ticks: {min: 0, max: sum}}],
+          }
+        }
+      });

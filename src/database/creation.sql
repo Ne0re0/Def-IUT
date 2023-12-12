@@ -31,7 +31,7 @@ CREATE TABLE Users (
 -- Badges
 CREATE TABLE Badges (
     idBadge INTEGER 
-        CONSTRAINT pk_Badges PRIMARY KEY AUTOINCREMENT,
+        CONSTRAINT pk_Badges PRIMARY KEY    ,
     titleBadge TEXT
         CONSTRAINT nn_titleBadge NOT NULL
         CONSTRAINT uq_titleBadge UNIQUE,

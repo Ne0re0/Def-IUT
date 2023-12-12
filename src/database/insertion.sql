@@ -19,15 +19,15 @@ INSERT INTO Categories VALUES ('Réseau');
 INSERT INTO Categories VALUES ('Autre');
 
 -- Badges
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Bienvenue','Valider son premier défi');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('First try','Valider un défi du premier coup');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('First blood','Être le premier utilisateur de la plateforme à valider un défi');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Happy hour','Valider un défi un jeudi entre 17 et 19 heures');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Persévérant','Réaliser au moins 10 tentatives erronées avant de valider un défi');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Explorateur','Valider un défi de chaque catégorie');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Completionniste','Valider tous les défis de la plateforme');
-INSERT INTO Badges(titleBadge,descriptionBadge) VALUES('Hackerman','Obtenir tous les badges');
+INSERT INTO Badges(idBadge,titleBadge,descriptionBadge) VALUES(1,'Bienvenue','Valider son premier défi');
+INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(2,'First try','Valider un défi du premier coup');
+INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(3,'First blood','Être le premier utilisateur de la plateforme à valider un défi');
+INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(4,'Happy hour','Valider un défi un jeudi entre 17 et 19 heures');
+INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(5,'Persévérant','Réaliser au moins 10 tentatives erronées avant de valider un défi');
+INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(6,'Explorateur','Valider un défi de chaque catégorie');
+INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(7,'Completionniste','Valider tous les défis de la plateforme');
+INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(8,'Hackerman','Obtenir tous les badges');
 
 -- Users
 -- admin:admin
-INSERT INTO Users(mail,accountVerified,username,password,isAdmin) VALUES ('admin@univ-ubs.fr',1,'admin','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);
+INSERT INTO Users(idUser, mail,accountVerified,username,password,isAdmin) VALUES (1,'admin@univ-ubs.fr',1,'admin','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);

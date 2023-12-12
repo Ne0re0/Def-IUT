@@ -6,6 +6,7 @@ const categoriesDAO = require('./CategoriesDAO');
 const dockersDAO = require('./DockersDAO');
 const challengesDAO = require('./ChallengesDAO');
 const filesDAO = require('./FilesDAO');
+const hasTriedDAO = require('./HasTriedDAO');
 const fullyDistinguishedUsersDAO = require("./FullyDistinguishedUsersDAO.js")
 
 
@@ -18,5 +19,6 @@ module.exports = {
   dockersDAO : dockersDAO,
   challengesDAO : challengesDAO,
   filesDAO : filesDAO,
+  hasTriedDAO : hasTriedDAO,
   fullyDistinguishedUsersDAO : fullyDistinguishedUsersDAO
 };

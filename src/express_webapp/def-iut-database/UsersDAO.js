@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 class UserDAO {
 
     constructor(database) {
@@ -57,6 +59,31 @@ class UserDAO {
             });
         });
     }
+
+    connect(usernameOrMail, clearPassword) {
+        return new Promise((resolve, reject) => {
+          // Retrieve possible valid user
+          var query = "SELECT * FROM Users WHERE mail = ? UNION SELECT * FROM Users WHERE username = ?;";
+          this.db.get(query, [usernameOrMail, usernameOrMail], (err, row) => {
+            if (err) {
+              reject("Erreur lors de la réception de l'utilisateur");
+            } else if (!row) {
+              reject("Utilisateur non trouvé");
+            } else {
+              bcrypt.compare(clearPassword, row.password, (err, valid) => {
+                if (err) {
+                  reject("Erreur lors du chiffrement du mot de passe");
+                } else if (valid) {
+                  resolve(row);
+                } else {
+                  reject("Courriel/Nom d'utilisateur - Mot de passe invalides");
+                }
+              });
+            }
+          });
+        });
+      }
+      
 
     // Retrieve all users
     findAll() {

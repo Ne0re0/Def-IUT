@@ -76,7 +76,7 @@ class UserDAO {
                 } else if (valid) {
                   resolve(row);
                 } else {
-                  reject("Courriel/Nom d'utilisateur - Mot de passe invalides");
+                  reject("Nom d'utilisateur/Mot de passe invalides");
                 }
               });
             }

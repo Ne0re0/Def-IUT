@@ -1,36 +1,157 @@
-/* Basic styling for the body */
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+*{
+    padding:0;
+    margin:0;
 }
 
+body{
+    background-color:#890596;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+.login-form{
+    width:350px;
+    background-color:#fff;
+    height:400px;
+    border-radius:10px;
+    padding:10px;
+    overflow:hidden;
+}
+
+.inputs-container{
+  margin-top: 60px;
+}
+.inputs{
+    margin-bottom:10px;
+}
+
+.text-center{
+    display:flex;
+    justify-content:center;
+    margin-bottom:10px;
+}
+
+.headings{
+    display:flex;
+    justify-content:center;
+    margin-top:10px;
+    margin-bottom:5px;
+    font-size:25px;
+}
+
+.mb-5{
+    margin-bottom:30px;
+}
+
+.password-input{
+    position:relative;
+    
+}
+
+.password-input i{
+    position:absolute;
+    top:15px;
+    right:17px;
+    cursor:pointer;
+    z-index:10;
+    color:#AAAAAA;
+    transition:all 0.5s;
+}
+
+.password-input i:hover{
+    color:#000;
+}
+
+.login-form .inputs input{
+    height:43px;
+    width:335px;
+    padding-left:10px;
+    border:2px solid #eee;
+    border-radius:5px;
+    transition:all 4s;
+}
+
+.green-color{
+    color:green !important;
+}
+.login-form .inputs input:focus{
+    border:2px solid #890596;
+}
+.strength-list{
+    margin-left:5px;
+    list-style:none;
+}
+.list-group i{
+    font-size:12px;
+    color:#aaa;
+}
+
+.list-group span{
+    font-size:13px;
+    color:#aaa;
+}
+
+.login-button{
+    height:45px;
+    width:347px;
+    margin-top:20px;
+    color:#fff;
+    font-size:14px;
+    cursor:pointer;
+    border:none;
+    border-radius:4px;
+    background-color:#890596;
+    transition:all 0.5s;
+}
+.mt-5{
+    margin-top:5px;
+}
+.login-button:hover{
+    background-color:#A51CA9;
+}
+
+.a-tag{
+    text-decoration:none;
+    color:#890596;
+    margin-left:6px;
+}
+
+/* Basic styling for the body */
+/*body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}*/
+
 /* Styling for hyperlinks */
-a {
+/*a {
   color: #92466D;
   text-decoration: none;
 }
-
+*/
 /* Styling for the podium - 1st place */
-tr#podium-1 {
+/*tr#podium-1 {
   background-color: gold;
-}
+}*/
 
 /* Styling for the podium - 2nd place */
-tr#podium-2 {
+/*tr#podium-2 {
   background-color: silver;
-}
+}*/
 
 /* Styling for the podium - 3rd place */
-tr#podium-3 {
+/*tr#podium-3 {
   background-color: #cd7f32; /* bronze color */
-}
+}*/
 
 /* Styling for odd rows after the podium */
-tr#scoreboard-odd:nth-child(odd) {
+/*tr#scoreboard-odd:nth-child(odd) {
   background-color: #ffffff;
-}
+}*/
 
-/* Styling for even rows after the podium */
-tr#scoreboard-even:nth-child(even) {
-  background-color: #f2f2f2; /* Or any other color you prefer for even rows */
+/* Styling for even rows after the podium*/
+/*tr#scoreboard-even:nth-child(even) {
+  background-color: #f2f2f2; /* Or any other color you prefer for even rows 
 }
+*/

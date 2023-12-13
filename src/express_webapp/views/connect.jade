@@ -1,17 +1,30 @@
 extends layout
 
 block content
-  h1= title
 
-  form(action="/connect", method="post")
-    div
-      label(for="email") Courriel/Nom d'utilisateur:
-      input(type="text", id="email", name="email")
-    div
-      label(for="password") Mot de passe:
-      input(type="password", id="password", name="password")
-    div
-      input(type="submit", value="Se connecter")
+  .container
+    .login-form
+      .headings
+        h3 Bienvenue
+      .text-center.mb-5
+        p Nous vous avons préparé du café
 
-  if failed 
-    p= failed
+      form(id="loginForm", action="/connect", method="post")
+        .inputs-container
+          .inputs
+            input(autocomplete='chrome-off', class='input-group', type='text', placeholder='Nom d\'utilisateur', name='username')
+          
+          .inputs.password-input
+            input(autocomplete='chrome-off', class='input-group', id='password_input', type='password', placeholder='Mot de passe', name='password')
+            i.fa.fa-eye(id='password_eye')
+          
+          button.login-button(type='submit') Se connecter
+          
+          span.text-center.mt-5
+            | Vous n'avez pas de compte ? 
+            a.a-tag(href='/register') Créer un compte
+          if failed
+            .text-center.mb-5
+              p= failed
+
+  script(src='/javascripts/password.js')

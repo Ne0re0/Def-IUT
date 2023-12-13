@@ -11,18 +11,44 @@ class UserDAO {
      * @param {*} values 
      * @returns user ID if successfull
      */
-    insert(values) {
+    insert(mail, accountVerified, username, password, isAdmin) {
+        console.log(mail);
+        console.log(accountVerified);
+        console.log(username);
+        console.log(password);
+        console.log(isAdmin);
         return new Promise((resolve, reject) => {
-            const query = 'INSERT INTO Users (mail, accountVerified, username, password, isAdmin) VALUES (?, ?, ? ,? ,?)';
-            this.db.run(query, values, function(err) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(this.lastID); 
-                }
+          const query = 'INSERT INTO Users (mail, accountVerified, username, password, isAdmin) VALUES (?, ?, ? ,? ,?)';
+      
+          bcrypt.genSalt(10)
+            .then((salt) => {
+              bcrypt.hash(password, salt)
+                .then((hash) => {
+                  console.log(hash)
+                  this.db.run(query, [mail, accountVerified, username, hash, isAdmin], function(err) {
+                    if (err) {
+                      console.log("Insertion échouée " + err)
+                      reject(err);
+                    } else {
+                      console.log("Insertion réussie")
+                      resolve(this.lastID);
+                    }
+                  });
+                })
+                .catch((err) => {
+                  console.log("Erreur lors du hachage du mot de passe " + err);
+                  reject(err);
+                });
+            })
+            .catch((err) => {
+              console.log("Erreur lors de la génération du sel " + err);
+              reject(err);
             });
         });
-    }
+      }
+      
+      
+      
 
     /**
      * Update user

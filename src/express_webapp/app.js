@@ -7,13 +7,15 @@ var logger = require('morgan');
 
 // Create routes
 const indexRouter = require('./routes/index');            // Challenges (list)
-const connectRouter = require('./routes/connect');        // Login and Signup
+const connectRouter = require('./routes/connect');        // Login 
+const registerRouter = require('./routes/register');      // Sign up
 const disconnectRouter = require('./routes/disconnect');  // Disconnect
 const myprofileRouter = require('./routes/myprofile');    // User's profile editor
 const scoreboardRouter = require('./routes/scoreboard');  // Global scoreboard
 const challengeRouter = require('./routes/challenge');    // Challenge's details   
 const userRouter = require('./routes/user');              // User's details 
-const adminRouter = require('./routes/admin');              // User's details 
+const adminRouter = require('./routes/admin');            // Admin panel
+ 
 
 
 // Generate application instance
@@ -32,12 +34,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Assign routers
 app.use('/', indexRouter);
 app.use('/connect', connectRouter);
+app.use('/register', registerRouter);
 app.use('/disconnect', disconnectRouter);
 app.use('/myprofile', myprofileRouter);
 app.use('/scoreboard', scoreboardRouter);
 app.use('/challenge',  challengeRouter);
 app.use('/user', userRouter);
-app.use('/admin', userRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

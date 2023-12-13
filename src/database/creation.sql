@@ -16,7 +16,7 @@ CREATE TABLE Users (
     mail TEXT 
         CONSTRAINT nn_mail NOT NULL
         CONSTRAINT uq_mail UNIQUE
-        CONSTRAINT ck_mail CHECK (mail REGEXP '^[^@]+@*univ-ubs\.fr$'),
+        CONSTRAINT ck_mail CHECK (mail LIKE '%.@%univ-ubs.fr'),
     accountVerified INTEGER
         CONSTRAINT ck_accountVerified CHECK (accountVerified IN (0,1)),
     username TEXT

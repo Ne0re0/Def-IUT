@@ -1,5 +1,9 @@
 const password_input = document.querySelector("#password_input");
 const password_eye = document.querySelector("#password_eye");
+
+const password_input_confirmation = document.querySelector("#password_input_confirmation");
+const password_eye_confirmation = document.querySelector("#password_eye_confirmation");
+
 let loweruppercase = document.querySelector(".loweruppercase i");
 let loweruppercasetext = document.querySelector(".loweruppercase span");
 
@@ -11,34 +15,46 @@ let specialcasetext = document.querySelector(".specialcase span");
 let numcharacter = document.querySelector(".numcharacter i");
 let numcharactertext = document.querySelector(".numcharacter span");
 
+let passwordConfirmation = document.querySelector(".passwordconfirmationvalid i");
+let passwordConfirmationText = document.querySelector(".passwordconfirmationvalid span");
+
 
 password_eye.addEventListener('click',()=>{
-if(password_input.type=="password"){
-    password_input.type="text";
-    password_eye.classList.add("fa-eye");
-    password_eye.classList.remove("fa-eye-slash");
+    
+    if(password_input.type=="password"){
+        password_input.type="text";
+        password_eye.classList.add("fa-eye");
+        password_eye.classList.remove("fa-eye-slash");
 
-}else if(password_input.type=="text"){
-password_input.type="password";
-password_eye.classList.add("fa-eye-slash");
-password_eye.classList.remove("fa-eye");
-}
+    }else if(password_input.type=="text"){
+        password_input.type="password";
+        password_eye.classList.add("fa-eye-slash");
+        password_eye.classList.remove("fa-eye");
+    }
 
 });
 
 password_input.addEventListener('keyup',function(){
     let pass = document.getElementById("password_input").value;
-    passStrength(pass);
+    let confirmation = document.getElementById("password_input_confirmation").value;
+    passStrength(pass,confirmation);
 });
 
-function passStrength(pass){
-   
+password_input_confirmation.addEventListener('keyup',function(){
+    let pass = document.getElementById("password_input").value;
+    let confirmation = document.getElementById("password_input_confirmation").value;
+    passStrength(pass,confirmation);
+});
+
+function passStrength(pass,confirmation){
+    let count = 0;
     if(pass.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)){
     
         loweruppercase.classList.remove("fa-circle");
         loweruppercase.classList.add("fa-check");
         loweruppercase.classList.add("green-color");
         loweruppercasetext.classList.add("green-color");
+        count += 1;
     }else{
         
         loweruppercase.classList.remove("fa-check");
@@ -54,6 +70,7 @@ function passStrength(pass){
         numbercase.classList.add("fa-check");
         numbercase.classList.add("green-color");
         numbercasetext.classList.add("green-color");
+        count += 1;
     }else{
         
         numbercase.classList.remove("fa-check");
@@ -69,6 +86,7 @@ function passStrength(pass){
         specialcase.classList.add("fa-check");
         specialcase.classList.add("green-color");
         specialcasetext.classList.add("green-color");
+        count += 1;
     }else{
         
         specialcase.classList.remove("fa-check");
@@ -83,6 +101,7 @@ function passStrength(pass){
         numcharacter.classList.add("fa-check");
         numcharacter.classList.add("green-color");
         numcharactertext.classList.add("green-color");
+        count += 1;
     }else{
         
         numcharacter.classList.remove("fa-check");
@@ -90,7 +109,39 @@ function passStrength(pass){
         numcharacter.classList.remove("green-color");
         numcharactertext.classList.remove("green-color");
     }
+
+    if(count === 4 && pass === confirmation){
+        
+        passwordConfirmation.classList.remove("fa-circle");
+        passwordConfirmation.classList.add("fa-check");
+        passwordConfirmation.classList.add("green-color");
+        passwordConfirmationText.classList.add("green-color");
+    }else{
+        passwordConfirmation.classList.remove("fa-check");
+        passwordConfirmation.classList.add("fa-circle");
+        passwordConfirmation.classList.remove("green-color");
+        passwordConfirmationText.classList.remove("green-color");
+    }
     
     
     
 }
+
+const email_input = document.querySelector("#email_input");
+let emailvalid = document.querySelector(".emailvalid i");
+let emailvalidtext = document.querySelector(".emailvalid span");
+
+email_input.addEventListener('keyup', () => {
+    let email = document.getElementById("email_input").value;
+    if (email.match(/^[A-Za-z0-9._%+-]+@.*univ-ubs\.fr$/)) {
+        emailvalid.classList.remove("fa-circle");
+        emailvalid.classList.add("fa-check");
+        emailvalid.classList.add("green-color");
+        emailvalidtext.classList.add("green-color");
+    } else {
+        emailvalid.classList.remove("fa-check");
+        emailvalid.classList.add("fa-circle");
+        emailvalid.classList.remove("green-color");
+        emailvalidtext.classList.remove("green-color");
+    }
+});

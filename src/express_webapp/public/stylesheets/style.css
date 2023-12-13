@@ -11,6 +11,7 @@ body{
     align-items:center;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
 .login-form{
     width:350px;
     background-color:#fff;
@@ -20,8 +21,21 @@ body{
     overflow:hidden;
 }
 
-.inputs-container{
+.register-form{
+    width:350px;
+    background-color:#fff;
+    height:630px;
+    border-radius:10px;
+    padding:10px;
+    overflow:hidden;
+}
+
+.login-form .inputs-container{
   margin-top: 60px;
+}
+
+.register-form .inputs-container{
+  margin-top: 40px;
 }
 .inputs{
     margin-bottom:10px;
@@ -72,6 +86,14 @@ body{
     border-radius:5px;
     transition:all 4s;
 }
+.register-form .inputs input{
+    height:43px;
+    width:335px;
+    padding-left:10px;
+    border:2px solid #eee;
+    border-radius:5px;
+    transition:all 4s;
+}
 
 .green-color{
     color:green !important;
@@ -79,8 +101,12 @@ body{
 .login-form .inputs input:focus{
     border:2px solid #890596;
 }
+.register-form .inputs input:focus{
+    border:2px solid #890596;
+}
 .strength-list{
-    margin-left:5px;
+    margin-bottom: 10px;
+    margin-left:10px;
     list-style:none;
 }
 .list-group i{
@@ -89,6 +115,7 @@ body{
 }
 
 .list-group span{
+    margin-left: 10px;
     font-size:13px;
     color:#aaa;
 }

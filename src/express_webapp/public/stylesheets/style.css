@@ -144,6 +144,23 @@ body{
     color:#890596;
     margin-left:6px;
 }
+/* Admin panel part */
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.user-info label {
+    flex: 1;
+    text-align: right;
+    margin-right: 10px;
+}
+.user-info input[type="text"],
+.user-info input[type="number"] {
+    flex: 2;
+    width: calc(100% - 10px); /* Ajustement pour le padding/margin des champs */
+}
 
 /* Basic styling for the body */
 /*body {

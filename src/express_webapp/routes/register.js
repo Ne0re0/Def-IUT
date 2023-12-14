@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
   // Tests passed
   usersDAO.insert(req.body.email,0,req.body.username,req.body.password,0)
     .then((user) => {
-      res.redirect("/connect");
+      res.render('register', { title: 'Créer un compte', body:req.body, success:"Compte créé avec succès, veuillez vous connecter" });
     })
     .catch((err) => {
       res.render('register', { title: 'Créer un compte', body:req.body, error:err });

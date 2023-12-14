@@ -4,11 +4,11 @@ DELETE FROM Badges;
 DELETE FROM Users;
 
 -- Difficulties
-INSERT INTO Difficulties VALUES ('Débutant');
-INSERT INTO Difficulties VALUES ('Facile');
-INSERT INTO Difficulties VALUES ('Moyen');
-INSERT INTO Difficulties VALUES ('Difficile');
-INSERT INTO Difficulties VALUES ('Très difficile');
+INSERT INTO Difficulties(idDifficulty,difficultyString) VALUES (1,'Débutant');
+INSERT INTO Difficulties(idDifficulty,difficultyString) VALUES (2,'Facile');
+INSERT INTO Difficulties(idDifficulty,difficultyString) VALUES (3,'Moyen');
+INSERT INTO Difficulties(idDifficulty,difficultyString) VALUES (4,'Difficile');
+INSERT INTO Difficulties(idDifficulty,difficultyString) VALUES (5,'Très difficile');
 
 -- Categories
 INSERT INTO Categories VALUES ('Web');

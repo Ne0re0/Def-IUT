@@ -4,7 +4,7 @@ class ChallengesDAO {
     // Insérer un Challenge
     insert(values) {
         return new Promise((resolve, reject) => {
-            const query = 'INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty, reward) VALUES (?, ?, ?, ?, ?, ?)';
+            const query = 'INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty) VALUES (?, ?, ?, ?, ?, ?)';
             db.run(query, values, function(err) {
                 if (err) {
                     reject(err);
@@ -18,7 +18,7 @@ class ChallengesDAO {
     // Mettre à jour un Challenge
     update(key, values) {
         return new Promise((resolve, reject) => {
-            const query = 'UPDATE Challenges SET titleChallenge = ?, itsCategory = ? , descriptionChallenge = ?, flag = ?, itsDifficulty = ?, reward = ? WHERE idChallenge = ?';
+            const query = 'UPDATE Challenges SET titleChallenge = ?, itsCategory = ? , descriptionChallenge = ?, flag = ?, itsDifficulty = ? WHERE idChallenge = ?';
             values.push(key); // Ajouter la clé à la fin du tableau de valeurs
             db.run(query, values, function(err) {
                 if (err) {
@@ -49,7 +49,7 @@ class ChallengesDAO {
     // Récupérer tous les Challenges
     findAll() {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM Challenges';
+            const query = 'SELECT * FROM DistinguishedChallenges';
             db.all(query, function(err, rows) {
                 if (err) {
                     reject(err);
@@ -63,7 +63,7 @@ class ChallengesDAO {
     // Trouver un Challenge par son id
     findByID(key) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM Challenges WHERE idChallenge = ?';
+            const query = 'SELECT * FROM DistinguishedChallenges WHERE idChallenge = ?';
             db.get(query, [key], function(err, row) {
                 if (err) {
                     reject(err);
@@ -77,7 +77,7 @@ class ChallengesDAO {
     // Trouver un Challenge par son title
     findByChallengeTitle(key) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM Challenges WHERE titleChallenge = ?';
+            const query = 'SELECT * FROM DistinguishedChallenges WHERE titleChallenge = ?';
             db.get(query, [key], function(err, row) {
                 if (err) {
                     reject(err);

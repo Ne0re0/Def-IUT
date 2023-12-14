@@ -16,7 +16,7 @@ CREATE TABLE Users (
     mail TEXT 
         CONSTRAINT nn_mail NOT NULL
         CONSTRAINT uq_mail UNIQUE
-        CONSTRAINT ck_mail CHECK (mail LIKE '%.@%univ-ubs.fr'),
+        CONSTRAINT ck_mail CHECK (mail LIKE '%univ-ubs.fr'),
     accountVerified INTEGER
         CONSTRAINT ck_accountVerified CHECK (accountVerified IN (0,1)),
     username TEXT
@@ -41,8 +41,9 @@ CREATE TABLE Badges (
 
 -- Difficulty
 CREATE TABLE Difficulties (
-    idDifficulty TEXT 
-        CONSTRAINT pk_Difficulties PRIMARY KEY
+    idDifficulty INTEGER
+        CONSTRAINT pk_Difficulties PRIMARY KEY,
+    difficultyString TEXT 
 );
 
 -- Categories
@@ -78,10 +79,7 @@ CREATE TABLE Challenges (
         CONSTRAINT nn_flag NOT NULL,
     itsDifficulty TEXT 
         CONSTRAINT nn_itsDifficulty NOT NULL 
-        CONSTRAINT fk_Challenges_Difficulties REFERENCES Difficulties(idDifficulty),
-    reward INTEGER 
-        CONSTRAINT nn_rewardNOT NULL 
-        CONSTRAINT ck_reward CHECK (reward >= 0)
+        CONSTRAINT fk_Challenges_Difficulties REFERENCES Difficulties(idDifficulty)
 );
 
 -- HasTried

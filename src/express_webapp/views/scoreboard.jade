@@ -1,31 +1,36 @@
-extends layout
+doctype html
+html
+  head
+    title= title
 
-block content
-  h1 Tableau des scores
 
-  table
-    tr
-      th Classement
-      th Utilisateur
-      th Points
+  body
+    block content
+      h1 Tableau des scores
 
-    each user, index in users
-      if index < 3
-        tr(id='podium-' + (index + 1))
-          td= user.rank
-          td
-            a(href='/user?id=' + user.idUser)= user.username
-          td= user.score
-      else
-        if user.rank %2 == 0
-          tr(id='scoreboard-odd')
-            td= user.rank
-            td
-              a(href='/user?id=' + user.idUser)= user.username
-            td= user.score
-        else 
-          tr(id='scoreboard-even')
-            td= user.rank
-            td
-              a(href='/user?id=' + user.idUser)= user.username
-            td= user.score
+      table
+        tr
+          th Classement
+          th Utilisateur
+          th Points
+
+        each user, index in users
+          if index < 3
+            tr(id='podium-' + (index + 1))
+              td= user.rank
+              td
+                a(href='/user?id=' + user.idUser)= user.username
+              td= user.score
+          else
+            if user.rank %2 == 0
+              tr(id='scoreboard-odd')
+                td= user.rank
+                td
+                  a(href='/user?id=' + user.idUser)= user.username
+                td= user.score
+            else 
+              tr(id='scoreboard-even')
+                td= user.rank
+                td
+                  a(href='/user?id=' + user.idUser)= user.username
+                td= user.score

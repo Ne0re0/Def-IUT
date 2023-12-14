@@ -1,96 +1,101 @@
-extends layout
-
-block content
-  if error
-    h1= error 
-  else
-    h1= user.username 
-    
-    table
-      tr
-        th 
-          a(href='/scoreboard') Rang
-        th Score
-        th Challenges validés
-      tr
-        td= user.rank
-        td= user.score
-        td= user.challengeCount
-
-    h1 Statistiques
-    canvas#myChart(style="width:100%;max-width:700px")
-
-    h1 Historique des défis
-    table
-      tr
-        th Titre
-        th Categorie
-        th Récompense
-        th Date
-
-      each line in history
-        tr
-          td
-            a(href='/challenge?id=' + line.idChallenge)= line.titleChallenge
-          td= line.itsCategory
-          td= line.reward
-          td= line.flagged
+doctype html
+html
+  head
+    title= title
 
 
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
+  body
+    block content
+      if error
+        h1= error 
+      else
+        h1= user.username 
+        
+        table
+          tr
+            th 
+              a(href='/scoreboard') Rang
+            th Score
+            th Challenges validés
+          tr
+            td= user.rank
+            td= user.score
+            td= user.challengeCount
 
-    script.
-      var x = [];
-      var y = [];
-      var i = !{JSON.stringify(chart)};
-      var sum = 0;
+        h1 Statistiques
+        canvas#myChart(style="width:100%;max-width:700px")
 
-      i.reverse().forEach((element) => { 
-        x.push(element.flagged);
-        sum += element.reward;
-        y.push(sum);
-      });
+        h1 Historique des défis
+        table
+          tr
+            th Titre
+            th Categorie
+            th Récompense
+            th Date
 
-      console.log(x);
-      console.log(y);
+          each line in history
+            tr
+              td
+                a(href='/challenge?id=' + line.idChallenge)= line.titleChallenge
+              td= line.itsCategory
+              td= line.reward
+              td= line.flagged
 
-      new Chart("myChart", {
-        type: "line",
-        data: {
-          labels: x,
-          datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
-            data: y
-          }]
-        },
-        options: {
-          legend: {display: false},
-          scales: {
-            yAxes: [{ticks: {min: 0, max: sum}}],
-          }
-        }
-      });
 
-    h1 Badges
-    h2 Obtenus
-    ul(style="list-style-type: none; padding-left: 0;")
-      each line in ownedBadges
-        li(style="display: inline-block; margin-right: 20px;") 
-          p= line.titleBadge
-          ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
-            li(style="display: inline-block; margin-right: 10px;") 
-              img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;", title=line.descriptionBadge)
-            li
-              p= line.obtentionDate
-              
-    h2 Non obtenus
-    ul(style="list-style-type: none; padding-left: 0; margin-top: 20px;")
-      each line in otherBadges
-        li(style="display: inline-block; margin-right: 20px;")
-          p= line.titleBadge
-          ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
-            li(style="display: inline-block; margin-right: 10px;")
-              img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);" title=line.descriptionBadge)
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
+
+        script.
+          var x = [];
+          var y = [];
+          var i = !{JSON.stringify(chart)};
+          var sum = 0;
+
+          i.reverse().forEach((element) => { 
+            x.push(element.flagged);
+            sum += element.reward;
+            y.push(sum);
+          });
+
+          console.log(x);
+          console.log(y);
+
+          new Chart("myChart", {
+            type: "line",
+            data: {
+              labels: x,
+              datasets: [{
+                fill: false,
+                lineTension: 0,
+                backgroundColor: "rgba(0,0,255,1.0)",
+                borderColor: "rgba(0,0,255,0.1)",
+                data: y
+              }]
+            },
+            options: {
+              legend: {display: false},
+              scales: {
+                yAxes: [{ticks: {min: 0, max: sum}}],
+              }
+            }
+          });
+
+        h1 Badges
+        h2 Obtenus
+        ul(style="list-style-type: none; padding-left: 0;")
+          each line in ownedBadges
+            li(style="display: inline-block; margin-right: 20px;") 
+              p= line.titleBadge
+              ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                li(style="display: inline-block; margin-right: 10px;") 
+                  img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;", title=line.descriptionBadge)
+                li
+                  p= line.obtentionDate
+                  
+        h2 Non obtenus
+        ul(style="list-style-type: none; padding-left: 0; margin-top: 20px;")
+          each line in otherBadges
+            li(style="display: inline-block; margin-right: 20px;")
+              p= line.titleBadge
+              ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                li(style="display: inline-block; margin-right: 10px;")
+                  img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);" title=line.descriptionBadge)

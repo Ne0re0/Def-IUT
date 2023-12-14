@@ -18,12 +18,11 @@ router.get('/', function(req, res, next) {
     // Fetching from database
     fullyDistinguishedUsersDAO.findByID(req.query['id'])
       .then((user) => {
-        console.log(user)
         // User exists
         if (undefined !== user){
+          console.log(user);
           usersDAO.getHistory(req.query['id'])
           .then((history) => {
-            console.log(user);
             console.log(history);
             hasTriedDAO.getFlagged(req.query['id'])
             .then((chart) => {
@@ -41,25 +40,24 @@ router.get('/', function(req, res, next) {
                 })
                 .catch((error) => {
                   console.log(error)
-                  res.render('usernotfound')
+                  res.render('usernotfound',{title:"Erreur interne"})
                 })
               })
               .catch((error) => {
                 console.log(error)
-                res.render('usernotfound')
+                res.render('usernotfound',{title:"Erreur interne"})
               })
             })
             .catch((error) => {
               console.log(error)
-              res.render('usernotfound')
+              res.render('usernotfound',{title:"Erreur interne"})
             })
           })
           .catch((error) => {
             console.log(error)
-            res.render('usernotfound')
+            res.render('usernotfound',{title:"Erreur interne"})
           })
         } else {
-          console.log(error)
           res.render('usernotfound',{title:"Utilisateur inexistant"});
         }
       })

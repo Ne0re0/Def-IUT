@@ -163,6 +163,10 @@ padding: 10px; /* Ajuste la valeur selon ton besoin de marge interne */
 border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
 }
 
+.vertical-space {
+    margin-bottom: 10px; /* Ajuste la valeur selon tes préférences */
+}
+
 /* Basic styling for the body */
 /*body {
   padding: 50px;

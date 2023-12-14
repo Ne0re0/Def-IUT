@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
     if (!challengeDetails) {
       return res.status(404).send('Challenge not found');
     }
-
     // Render the challenge page with challenge details
     res.render('challenge', { challenge: challengeDetails });
   });

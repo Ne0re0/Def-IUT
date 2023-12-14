@@ -75,11 +75,13 @@ class UserDAO {
     // Delete users
     delete(key) {
         return new Promise((resolve, reject) => {
+            console.log(key);
             const query = 'DELETE FROM Users WHERE idUser = ?';
             this.db.run(query, [key], function(err) {
                 if (err) {
                     reject(err);
                 } else {
+                    console.log('Utilisateur supprimé');
                     resolve();
                 }
             });

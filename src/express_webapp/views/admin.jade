@@ -39,7 +39,7 @@ html(lang='en')
             td #{user.username}
             td #{user.isAdmin}
 
-    form(id='userForm')
+    form(id='userForm', action='/admin', method='POST')
       fieldset
         legend Informations Utilisateur
         div(class='user-info')

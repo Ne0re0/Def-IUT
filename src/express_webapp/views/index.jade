@@ -1,9 +1,16 @@
-doctype html
-html
-  head
-    title= title
+extends layout
 
-  body
-    block content
-      h1= title
-      p Welcome to #{title}
+block content
+  h1 Liste des Challenges
+
+  each challenge in challenges
+    div.challenge
+      h2
+        a(href='/challenge/#{challenge.idChallenge}')= challenge.titleChallenge
+      p Catégorie: #{challenge.itsCategory}
+      p Difficulté: #{challenge.itsDifficulty}
+      p Description: #{challenge.descriptionChallenge}
+      p Flag: #{challenge.flag}
+
+  if challenges.length === 0
+    p Aucun challenge n'est disponible pour le moment.

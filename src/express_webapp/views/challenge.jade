@@ -1,9 +1,19 @@
-doctype html
-html
-  head
-    title= title
+extends layout
 
-  body
-    block content
-      h1= title
-      p Welcome to #{title}
+block content
+  h2= challenge.titleChallenge
+
+  // Afficher les informations du challenge
+  div
+    p Category: #{challenge.itsCategory}
+    p Difficulty: #{challenge.itsDifficulty}
+    p Description: #{challenge.descriptionChallenge}
+
+  // Lien pour télécharger le fichier du drapeau
+  a(href=`/challenges/${challenge.idChallenge}/downloadFlag`, download='flag.txt') Download Flag File
+
+  // Formulaire pour soumettre le flag
+  form(action=`/challenges/${challenge.idChallenge}/submitFlag`, method='post')
+    label(for='flagInput') Enter Flag:
+    input(type='text', name='flagInput', id='flagInput', required)
+    button(type='submit') Submit Flag

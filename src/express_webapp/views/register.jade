@@ -19,10 +19,16 @@ html
           form(id="registerForm", action="/register", method="post")
             .inputs-container
               .inputs
-                input(autocomplete='chrome-off', class='input-group', type='text', placeholder='Nom d\'utilisateur', name='username')
+                if body && body.username
+                  input(autocomplete='chrome-off', class='input-group', type='text', placeholder='Nom d\'utilisateur', name='username', value=body.username required)
+                else
+                  input(autocomplete='chrome-off', class='input-group', type='text', placeholder='Nom d\'utilisateur', name='username', required)
 
               .inputs
-                input(autocomplete='chrome-off', class='input-group', id='email_input', type='mail', placeholder='Adresse e-mail', name='email')
+                if body && body.email
+                  input(autocomplete='chrome-off', class='input-group', id='email_input', type='mail', placeholder='Adresse e-mail', name='email', value=body.email, required)
+                else
+                  input(autocomplete='chrome-off', class='input-group', id='email_input', type='mail', placeholder='Adresse e-mail', name='email', required)
               ul.strength-list
                 li
                   span.emailvalid.list-group
@@ -30,7 +36,7 @@ html
                     span Adresse e-mail valide (*univ-ubs.fr)
               
               .inputs.password-input
-                input(autocomplete='chrome-off', class='input-group', id='password_input', type='password', placeholder='Mot de passe', name='password')
+                input(autocomplete='chrome-off', class='input-group', id='password_input', type='password', placeholder='Mot de passe', name='password', required)
                 i.fa.fa-eye-slash(id='password_eye')
 
               ul.strength-list
@@ -52,7 +58,7 @@ html
                     span 8 Caractères
 
               .inputs.password-input
-                input(autocomplete='chrome-off', class='input-group', id='password_input_confirmation', type='password', placeholder='Confirmation du mot de passe', name='password-confirmation')
+                input(autocomplete='chrome-off', class='input-group', id='password_input_confirmation', type='password', placeholder='Confirmation du mot de passe', name='password-confirmation', required)
               ul.strength-list
                 li
                   span.passwordconfirmationvalid.list-group

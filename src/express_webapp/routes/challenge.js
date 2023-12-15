@@ -23,7 +23,7 @@ router.get('/:idChallenge', function(req, res, next) {
 router.post('/:idChallenge', function(req, res, next) {
   const challengeId = req.params.idChallenge;
   const submittedFlag = req.body.flagInput;
-
+  console.log("Submitted");
   challengesDAO.findByID(challengeId)
     .then(challengeDetails => {
       if (!challengeDetails) {
@@ -32,11 +32,11 @@ router.post('/:idChallenge', function(req, res, next) {
 
       // Comparison
       if (submittedFlag === challengeDetails.flag) {
-        // Success: pop-up badges ?
+        // Success: pop-up badges todo
         console.log("success")
         res.render('challenge', { challenge: challengeDetails });
       } else {
-        // Failure: pop-up ?
+        // Failure: pop-up todo
         console.log("failure")
         res.render('challenge', { challenge: challengeDetails });
       }

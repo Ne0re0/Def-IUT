@@ -15,7 +15,7 @@ const scoreboardRouter = require('./routes/scoreboard');  // Global scoreboard
 const challengeRouter = require('./routes/challenge');    // Challenge's details   
 const userRouter = require('./routes/user');              // User's details 
 const adminRouter = require('./routes/admin');            // Admin panel
- 
+
 
 
 // Generate application instance

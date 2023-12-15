@@ -20,7 +20,7 @@ body
       a.vertical-space(href='/challenges/' + challenge.idChallenge + '/flag.txt', download='flag.txt') Download Flag File
 
       // Formulaire pour soumettre le flag
-      form.vertical-space(action='/challenges/#{challenge.idChallenge}/submitFlag', method='post')
+      form.vertical-space(action='/challenge/#{challenge.idChallenge}', method='post')
         label(for='flagInput') Enter Flag:
         input(type='text', name='flagInput', id='flagInput', required)
         button(type='submit') Submit Flag

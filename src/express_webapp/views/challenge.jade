@@ -4,23 +4,54 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css')
+    script.
+      // JavaScript for modal box
+      function showResultModal() {
+        var modal = document.getElementById('resultModal');
+        modal.style.display = 'block';
 
-body
-  block content
-    div.challenges-container
-      h1.vertical-space= challenge.titleChallenge
+        var resultMessage = document.getElementById('resultMessage');
+        // Le résultat réel dépend du contenu de la balise avec l'ID 'successMessage'
+        var successMessage = document.getElementById('successMessage').textContent;
+        resultMessage.innerHTML = successMessage;
+      }
 
-      // Niveau de difficulté
-      p.vertical-space Difficulté: #{challenge.itsDifficulty}
+      function closeResultModal() {
+        var modal = document.getElementById('resultModal');
+        modal.style.display = 'none';
+      }
 
-      // Description
-      p.vertical-space Description: #{challenge.descriptionChallenge}
+      // Close the modal box
+      window.onclick = function(event) {
+        var modal = document.getElementById('resultModal');
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      };
 
-      // Lien pour télécharger le fichier du drapeau
-      a.vertical-space(href='/challenges/' + challenge.idChallenge + '/flag.txt', download='flag.txt') Download Flag File
+  body
+    block content
+      div.challenges-container
+        h1.vertical-space= challenge.titleChallenge
 
-      // Formulaire pour soumettre le flag
-      form.vertical-space(action='/challenge/#{challenge.idChallenge}', method='post')
-        label(for='flagInput') Enter Flag:
-        input(type='text', name='flagInput', id='flagInput', required)
-        button(type='submit') Submit Flag
+        // Niveau de difficulté
+        p.vertical-space Difficulté: #{challenge.itsDifficulty}
+
+        // Description
+        p.vertical-space Description: #{challenge.descriptionChallenge}
+
+        // Lien pour télécharger le fichier du drapeau
+        a.vertical-space(href='/challenges/' + challenge.idChallenge + '/flag.txt', download='flag.txt') Download Flag File
+
+        // Formulaire pour soumettre le flag
+        form.vertical-space(action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
+          label(for='flagInput') Enter Flag:
+          input(type='text', name='flagInput', id='flagInput', required)
+          button(type='submit') Submit Flag
+
+        // Boîte modale pour afficher le résultat
+        #resultModal.modal
+          .modal-content
+            span.close(onclick='closeResultModal()') &times;
+            div#resultMessage
+              span#successMessage #{success}

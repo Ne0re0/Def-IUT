@@ -23,7 +23,7 @@ router.get('/:idChallenge', function(req, res, next) {
 router.post('/:idChallenge', function(req, res, next) {
   const challengeId = req.params.idChallenge;
   const submittedFlag = req.body.flagInput;
-  console.log("Submitted");
+
   challengesDAO.findByID(challengeId)
     .then(challengeDetails => {
       if (!challengeDetails) {
@@ -31,15 +31,18 @@ router.post('/:idChallenge', function(req, res, next) {
       }
 
       // Comparison
+      let success = "";
       if (submittedFlag === challengeDetails.flag) {
-        // Success: pop-up badges todo
-        console.log("success")
-        res.render('challenge', { challenge: challengeDetails });
-      } else {
-        // Failure: pop-up todo
-        console.log("failure")
-        res.render('challenge', { challenge: challengeDetails });
+        success = "Bienjoué! Vous avez réussi ce challenge!";
       }
+      else {
+        success = "Bien tenté! Mais ce n'est pas le bon flag!";
+      }
+      
+      // Render the page with the flag validation result
+      res.render('challenge', {
+        challenge: challengeDetails, success,
+      });
     })
     .catch(error => {
       console.error(error);

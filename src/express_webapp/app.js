@@ -14,7 +14,7 @@ const myprofileRouter = require('./routes/myprofile');    // User's profile edit
 const scoreboardRouter = require('./routes/scoreboard');  // Global scoreboard
 const challengeRouter = require('./routes/challenge');    // Challenge's details   
 const userRouter = require('./routes/user');              // User's details 
-const adminRouterUsers = require('./routes/adminUsers');            // Admin panel
+const adminRouterUsers = require('./routes/adminUsers');            // Admin Users panel
 const adminRouterChallenges = require('./routes/adminChallenges');    // Admin Challenges panel
 
 

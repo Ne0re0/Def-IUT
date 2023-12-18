@@ -79,7 +79,8 @@ CREATE TABLE Challenges (
         CONSTRAINT nn_flag NOT NULL,
     itsDifficulty TEXT 
         CONSTRAINT nn_itsDifficulty NOT NULL 
-        CONSTRAINT fk_Challenges_Difficulties REFERENCES Difficulties(idDifficulty)
+        CONSTRAINT fk_Challenges_Difficulties REFERENCES Difficulties(idDifficulty),
+    url TEXT
 );
 
 -- HasTried
@@ -95,17 +96,6 @@ CREATE TABLE HasTried (
     CONSTRAINT fk_HasTried_Challenges FOREIGN KEY (aChallenge) REFERENCES Challenges(idChallenge)
 );
 
--- Dockers
-CREATE TABLE Dockers (
-    idDocker INTEGER CONSTRAINT pk_Dockers PRIMARY KEY AUTOINCREMENT,
-    exposed INTEGER 
-        CONSTRAINT nn_exposed NOT NULL
-        CONSTRAINT ck_port CHECK (exposed > 0 AND exposed <= 65535),
-    itsChallenge INTEGER 
-        CONSTRAINT uk_Docker_itsChallenge UNIQUE
-        CONSTRAINT nn_Docker_itsChallenge NOT NULL,
-    CONSTRAINT fk_Docker_Challenge FOREIGN KEY (itsChallenge) REFERENCES Challenges(idChallenge)
-);
 
 -- Files
 CREATE TABLE Files (

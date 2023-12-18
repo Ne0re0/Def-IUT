@@ -14,8 +14,8 @@ const myprofileRouter = require('./routes/myprofile');    // User's profile edit
 const scoreboardRouter = require('./routes/scoreboard');  // Global scoreboard
 const challengeRouter = require('./routes/challenge');    // Challenge's details   
 const userRouter = require('./routes/user');              // User's details 
-const adminRouter = require('./routes/admin');            // Admin panel
- 
+const adminRouterUsers = require('./routes/adminUsers');            // Admin panel
+const adminRouterChallenges = require('./routes/adminChallenges');    // Admin Challenges panel
 
 
 // Generate application instance
@@ -41,8 +41,8 @@ app.use('/myprofile', myprofileRouter);
 app.use('/scoreboard', scoreboardRouter);
 app.use('/challenge',  challengeRouter);
 app.use('/user', userRouter);
-app.use('/admin', adminRouter);
-
+app.use('/adminUsers', adminRouterUsers);
+app.use('/adminChallenges', adminRouterChallenges);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

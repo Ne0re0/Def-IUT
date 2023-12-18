@@ -13,7 +13,7 @@ html(lang='en')
           username: user.username,
           isAdmin: user.isAdmin
         };
-
+        document.getElementById('idUser').value = filteredUser.idUser;
         document.getElementById('userMail').value = filteredUser.mail;
         document.getElementById('userVerified').value = filteredUser.accountVerified;
         document.getElementById('userName').value = filteredUser.username;
@@ -42,18 +42,19 @@ html(lang='en')
     form(id='userForm', action='/admin', method='POST')
       fieldset
         legend Informations Utilisateur
+          input(type='hidden', id='idUser', name='userId')       
         div(class='user-info')
           label(for='userMail') Email
-          input(type='text', id='userMail', placeholder='Email')
+          input(type='text', id='userMail', name ='userMail', placeholder='Email')
         div(class='user-info')
           label(for='userVerified') Account Verified
-          input(type='number', id='userVerified', placeholder='Account Verified')
+          input(type='number', id='userVerified', name='userVerified' placeholder='Account Verified')
         div(class='user-info')
           label(for='userName') Username
-          input(type='text', id='userName', placeholder='Username')
+          input(type='text', id='userName', name = 'userName', placeholder='Username')
         div(class='user-info')
           label(for='userIsAdmin') Is Admin
-          input(type='number', id='userIsAdmin', placeholder='Is Admin')
+          input(type='number', id='userIsAdmin', name ='userIsAdmin' placeholder='Is Admin')
         div(class='user-info')
               button(type='submit', name='action', value='update') Modifier
               button(type='submit', name='action', value='delete') Supprimer

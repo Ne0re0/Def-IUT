@@ -144,7 +144,9 @@ body{
     color:#890596;
     margin-left:6px;
 }
+
 /* Admin panel part */
+/* Users part */
 .user-info {
     display: flex;
     justify-content: space-between;
@@ -162,7 +164,7 @@ body{
     width: calc(100% - 10px); /* Ajustement pour le padding/margin des champs */
 }
 
-/* Challenges */
+/* Challenges part */
 .challenges-container {
     background-color:#fff;
     border-radius:10px;
@@ -180,9 +182,6 @@ padding: 10px; /* Ajuste la valeur selon ton besoin de marge interne */
 border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
 }
 
-.vertical-space {
-    margin-bottom: 10px; /* Ajuste la valeur selon tes préférences */
-}
 
 /* Basic styling for the body */
 /*body {

@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 var challengesDAO = require('def-iut-database').challengesDAO;
 
+
 /* GET home page. */
 router.get('/', async function(req, res, next) {
+
   try {
     const challenges = await challengesDAO.findAll();
 
@@ -18,6 +20,7 @@ router.get('/', async function(req, res, next) {
     res.status(500).send('Erreur interne du serveur');
   }
 });
+
 
 // Limit the length of description 
 function truncateDescription(description, maxLength) {

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var challengesDAO = require('def-iut-database').challengesDAO;
+var hasTriedDAO = require('def-iut-database').hasTriedDAO;
 
 /* GET challenge details and download flag file. */
 router.get('/:idChallenge', function(req, res, next) {
@@ -21,6 +22,7 @@ router.get('/:idChallenge', function(req, res, next) {
 
 /* POST for flag verification. */
 router.post('/:idChallenge', function(req, res, next) {
+
   const challengeId = req.params.idChallenge;
   const submittedFlag = req.body.flagInput;
 
@@ -49,5 +51,40 @@ router.post('/:idChallenge', function(req, res, next) {
       res.status(500).send('Internal Server Error');
     });
 });
+
+
+// Add a try
+const addTry = async (userId, challengeId) => {
+  try {
+    const hasTriedEntry = await hasTriedDAO.findByID({ aUser: userId, aChallenge: challengeId });
+
+    if (hasTriedEntry) {
+      // Si l'utilisateur a déjà essayé ce challenge, mettez à jour le nombre d'essais
+      const newRetryCount = hasTriedEntry.retryNb + 1;
+      await hasTriedDAO.update({ aUser: userId, aChallenge: challengeId }, { retryNB: newRetryCount });
+    } else {
+      // Si c'est la première tentative, insérez une nouvelle entrée
+      await hasTriedDAO.insert({ aUser: userId, aChallenge: challengeId, retryNB: 1 });
+    }
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+
+// Verif how much tries
+const howMuchTries = async (userId, challengeId) => {
+  try {
+    const retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
+    return retryCount;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+};
+
 
 module.exports = router;

@@ -91,6 +91,20 @@ class HasTriedDAO {
             });
         });
     }
+
+    // Obtenir le nombre d'essais pour un utilisateur et un challenge spécifiques
+    getRetryCount(userId, challengeId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT retryNb FROM HasTried WHERE aUser = ? AND aChallenge = ?';
+            db.get(query, [userId, challengeId], function(err, row) {
+                if (err) {
+                reject(err);
+                } else {
+                resolve(row ? row.retryNb : 0);
+                }
+            });
+        });
+    }
 }
 
 const dao = new HasTriedDAO();

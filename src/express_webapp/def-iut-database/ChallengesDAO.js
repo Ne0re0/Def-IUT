@@ -2,10 +2,10 @@ const db = require('./sqlite_connection');
 
 class ChallengesDAO {
     // Insérer un Challenge
-    insert(idChallenge,titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection) {
+    insert(titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection) {
         return new Promise((resolve, reject) => {
             const query = 'INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty) VALUES (?, ?, ?, ?, ?, ?)';
-            db.run(query, [idChallenge,titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection], function(err) {
+            db.run(query, [titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection], function(err) {
                 if (err) {
                     reject(err);
                 } else {

@@ -1,8 +1,14 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
+const readline = require('readline');
 
-const challengesDAO = require('def-iut-database').ChallengesDAO;
+const challengesDAO = require('def-iut-database').challengesDAO;
 const challengesFile = "../../conf/challenges.yml";
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 console.log("Lecture du fichier conf/challenges.yml...")
 try {
@@ -38,17 +44,36 @@ try {
   console.log("Vérification de l'existence des challenges");
   challenges.forEach((challenge, index) => {
   	challengesDAO.findByChallengeTitle(challenge.title)
-  	.then((challenge) => {
-  		console.log("'" + challenge.title + "' existe");
-  		console.log("Voulez vous l'écraser ? (y/n)");
-
-  		// USER INPUT
-
-
+  	.then((success) => {
+  		console.log(success)
+  		if (success !== undefined){
+  			console.log("'" + challenge.title + "' existe");
+  			rl.question("Voulez vous l'écraser ? (y/n) : ", (userInput) => {
+			  if (userInput === 'y'){
+			  	console.log("Suppression du challenge " + challenge.title);
+			  	challengesDAO.delete(success.idChallenge)
+			  	.then((output) => {
+			  		console.log("Challenge supprimé avec succès")
+			  	})
+			  	.catch((err) => {
+			  		console.error("Erreur lors de la suppression du challenge : " + err)
+			  	})
+			  } else {
+			  	console.log("Challenge non modifié")
+			  }
+			  rl.close();
+			});
+  		} else {
+  			// EDIT HERE
+  			challengesDAO.insert(titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection)
+  		}
 
   	})
+  	.catch((err) => {
+  		console.log("Une erreur est survenue lors de la récupération du challenge "+ challenge.title)
+  	})
 
-  }
+  })
 
 
 } catch (err) {

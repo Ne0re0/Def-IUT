@@ -1,9 +1,8 @@
 # CHALLENGES CONFIGURATION FILE
 # Each challenge is defined by its title, category, difficulty, description, flag and connection infos
 
-
 # The title of the challenge
-- title: "La belle et la bête"
+- title: "Premier challenge"
   # The category of the challenge (Programmation, Reverse, Web,...)
   # Accepts strings
   category: "Reverse"

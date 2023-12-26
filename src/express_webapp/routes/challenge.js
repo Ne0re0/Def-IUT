@@ -35,7 +35,7 @@ router.post('/:idChallenge', function(req, res, next) {
       // Comparison
       let success = "";
       if (submittedFlag === challengeDetails.flag) {
-        success = "Bienjoué! Vous avez réussi ce challenge!";
+        success = "Bien joué! Vous avez réussi ce challenge!";
       }
       else {
         success = "Bien tenté! Mais ce n'est pas le bon flag!";

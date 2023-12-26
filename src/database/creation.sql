@@ -80,7 +80,7 @@ CREATE TABLE Challenges (
     itsDifficulty TEXT 
         CONSTRAINT nn_itsDifficulty NOT NULL 
         CONSTRAINT fk_Challenges_Difficulties REFERENCES Difficulties(idDifficulty),
-    url TEXT
+    connection TEXT
 );
 
 -- HasTried

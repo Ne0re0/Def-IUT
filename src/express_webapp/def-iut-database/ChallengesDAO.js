@@ -2,10 +2,10 @@ const db = require('./sqlite_connection');
 
 class ChallengesDAO {
     // Insérer un Challenge
-    insert(values) {
+    insert(idChallenge,titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection) {
         return new Promise((resolve, reject) => {
             const query = 'INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty) VALUES (?, ?, ?, ?, ?, ?)';
-            db.run(query, values, function(err) {
+            db.run(query, [idChallenge,titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection], function(err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -49,7 +49,7 @@ class ChallengesDAO {
     // Récupérer tous les Challenges
     findAll() {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM DistinguishedChallenges';
+            const query = 'SELECT * FROM Challenges;';
             db.all(query, function(err, rows) {
                 if (err) {
                     reject(err);

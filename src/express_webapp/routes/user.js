@@ -7,33 +7,36 @@ var ownsDAO = require('def-iut-database').ownsDAO;
 
 
 /* GET */
-router.get('/', function(req, res, next) {
+router.get('/:idUser', function(req, res, next) {
 
   // Checking ID value
-  if (
-      req.query['id'] !== undefined && 
-      req.query['id'] !== "" &&
-      !isNaN(req.query['id'])
-  ){
+  console.log(req.params)
+  if (req.params.idUser === undefined ||
+      req.params.idUser === ""){
+      res.render('usernotfound',{title:"Aucun utilisateur spécifié"});
+
+  }
+  const idUser = req.params.idUser
+  
     // Fetching from database
-    fullyDistinguishedUsersDAO.findByID(req.query['id'])
+    fullyDistinguishedUsersDAO.findByID(idUser)
       .then((user) => {
         // User exists
         if (undefined !== user){
           console.log(user);
-          usersDAO.getHistory(req.query['id'])
+          usersDAO.getHistory(idUser)
           .then((history) => {
             console.log(history);
-            hasTriedDAO.getFlagged(req.query['id'])
+            hasTriedDAO.getFlagged(idUser)
             .then((chart) => {
               if (undefined === chart){
                 chart = {flagged:[],reward:[]}
               } 
               console.log(chart)
-              ownsDAO.getOwnedBadges(req.query['id'])
+              ownsDAO.getOwnedBadges(idUser)
               .then((ownedBadges) => {
                 console.log("Badges : " + ownedBadges)
-                ownsDAO.getNotOwnedBadges(req.query['id'])
+                ownsDAO.getNotOwnedBadges(idUser)
                 .then((otherBadges) => {
                   console.log(otherBadges);
                   res.render('user', {title:"Utilisateur",user:user , history:history, chart:chart, ownedBadges:ownedBadges, otherBadges,otherBadges});
@@ -66,11 +69,6 @@ router.get('/', function(req, res, next) {
         console.log(error)
         res.render('usernotfound',{title:"Utilisateur inexistant"});
       })
-    
-  } else {
-    // ID contains invalid characters
-    res.render('usernotfound',{title:"Aucun utilisateur spécifié"});
-  }
   
 });
 

@@ -58,6 +58,7 @@ SELECT
     flag,
     itsDifficulty,
     difficultyString AS itsDifficultyString,
+    connection,
     (100 + itsDifficulty*100) AS reward
 FROM
     Challenges JOIN Difficulties ON itsDifficulty = idDifficulty

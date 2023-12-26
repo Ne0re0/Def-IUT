@@ -1,0 +1,35 @@
+# CHALLENGES CONFIGURATION FILE
+# Each challenge is defined by its title, category, difficulty, description, flag and connection infos
+
+
+# The title of the challenge
+- title: "La belle et la bête"
+  # The category of the challenge (Programmation, Reverse, Web,...)
+  # Accepts strings
+  category: "Reverse"
+  # The difficulty of the challenge
+  # Accepts integer between from 1 to 5, 5 is the hardest difficulty
+  difficulty: 4
+  # The description of the challenge
+  # Accepts strings
+  description: "The best description"
+  # The validation flag for your challenge
+  # Accepts strings
+  flag: "p@$$w0rd"
+  # The connexion information about how to connect to the challenge
+  # Accepts strings
+  connection: "http://example.com/"
+
+- title: "La belle et la bête 2"
+  category: "Reverse"
+  difficulty: 4
+  description: "The best description 2"
+  flag: "p@$$w0rd2"
+  connection: "http://example.com/2"
+
+- title: "La belle et la bête 3"
+  category: "Programmation"
+  difficulty: 5
+  description: "The best description 3"
+  flag: "p@$$w0rd3"
+  connection: "http://example.com/3"

@@ -33,7 +33,3 @@ INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(8,'Hackerman','Ob
 -- admin:admin
 INSERT INTO Users(idUser, mail,accountVerified,username,password,isAdmin) VALUES (1,'admin@univ-ubs.fr',1,'admin','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);
 
--- Challenges
-INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty) VALUES ("Premier challenge","Autre","Pour ce challenge, vous devrez entrer DEF{flag}","DEF{flag}",1);
-INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty) VALUES ("Deuxième challenge","Autre","Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}","DEF{8}",2);
-INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty) VALUES ("Troisième challenge","Programmation","Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}","DEF{8}",3);

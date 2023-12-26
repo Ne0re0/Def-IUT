@@ -8,7 +8,7 @@ router.get('/', async function(req, res, next) {
 
   try {
     const challenges = await challengesDAO.findAll();
-
+    console.log(challenges)
     // Limit the descriptions
     challenges.forEach(challenge => {
       challenge.truncatedDescription = truncateDescription(challenge.descriptionChallenge, 100); // Remplace 100 par la longueur maximale que tu veux afficher

@@ -19,18 +19,18 @@ html
             tr(id='podium-' + (index + 1))
               td= user.rank
               td
-                a(href='/user?id=' + user.idUser)= user.username
+                a(href='/user/' + user.idUser)= user.username
               td= user.score
           else
             if user.rank %2 == 0
               tr(id='scoreboard-odd')
                 td= user.rank
                 td
-                  a(href='/user?id=' + user.idUser)= user.username
+                  a(href='/user/' + user.idUser)= user.username
                 td= user.score
             else 
               tr(id='scoreboard-even')
                 td= user.rank
                 td
-                  a(href='/user?id=' + user.idUser)= user.username
+                  a(href='/user/' + user.idUser)= user.username
                 td= user.score

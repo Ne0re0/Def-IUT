@@ -58,19 +58,43 @@ class UserDAO {
      */
     update(key, values) {
         return new Promise((resolve, reject) => {
-            const query = 'UPDATE Users SET mail = ?, accountVerified = ?, username = ?, password = ?, isAdmin = ? WHERE idUser = ?';
-            values.push(key); // Ajouter la clé à la fin du tableau de valeurs
-            this.db.run(query, values, function(err) {
-                if (err) {
-                    console.error('SQL Error:', this.sql);
-                    console.error('Error Message:', err.message);
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
+            if (values.password && !bcrypt.getRounds(values.password)) {
+                bcrypt.genSalt(10)
+                    .then((salt) => {
+                        bcrypt.hash(values.password, salt)
+                            .then((hash) => {
+                                values.password = hash;
+                                this.performUpdate(key, values, resolve, reject);
+                            })
+                            .catch((err) => {
+                                console.error('Error hashing password:', err);
+                                reject(err);
+                            });
+                    })
+                    .catch((err) => {
+                        console.error('Error generating salt:', err);
+                        reject(err);
+                    });
+            } else {
+                this.performUpdate(key, values, resolve, reject);
+            }
         });
     }
+
+    performUpdate(key, values, resolve, reject) {
+        const query = 'UPDATE Users SET mail = ?, accountVerified = ?, username = ?, password = ?, isAdmin = ? WHERE idUser = ?';
+        values.push(key); // Ajouter la clé à la fin du tableau de valeurs
+        this.db.run(query, values, function(err) {
+            if (err) {
+                console.error('SQL Error:', this.sql);
+                console.error('Error Message:', err.message);
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    }
+
 
     // Delete users
     delete(key) {

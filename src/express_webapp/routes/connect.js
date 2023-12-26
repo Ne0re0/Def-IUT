@@ -28,6 +28,7 @@ router.post('/', function(req, res, next) {
       .then((connected) => {
         console.log(connected);
         session.user = connected;
+        console.log("Session user :",session.user);
         res.redirect("/");
       })
       .catch((err) => {

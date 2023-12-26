@@ -2,8 +2,36 @@ doctype html
 html
   head
     title= title
-
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    
   body
     block content
-      h1= title
-      p Welcome to #{title}
+    
+      h2 Bienvenue sur votre profil, #{user.username}!
+
+      if message
+        p= message
+
+      // Formulaire de modification des informations
+      form(action='/myprofile', method='post', class='profile-form')
+        label(for='newUsername') Nom d'utilisateur :
+        input(type='text', id='newUsername', name='newUsername', value=user.username, class='form-control')
+        br
+
+        label(for='newEmail') Email :
+        input(type='email', id='newEmail', name='newEmail', value=user.mail, class='form-control')
+        br
+
+        label(for='oldPassword') Ancien mot de passe :
+        input(type='password', id='oldPassword', name='oldPassword', class='form-control')
+        br
+
+        label(for='newPassword') Nouveau mot de passe :
+        input(type='password', id='newPassword', name='newPassword', class='form-control')
+        br
+
+        label(for='confirmNewPassword') Confirmer le nouveau mot de passe :
+        input(type='password', id='confirmNewPassword', name='confirmNewPassword', class='form-control')
+        br
+
+        input(type='submit', value='Mettre à jour', class='btn-submit')

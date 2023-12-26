@@ -182,7 +182,74 @@ padding: 10px; /* Ajuste la valeur selon ton besoin de marge interne */
 border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
 }
 
+/* My Profil part */
+/* Styles pour la page de profil */
 
+/* En-tête du profil */
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #890596;
+  }
+  
+  /* Formulaire de profil */
+  .form-profile {
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Groupes de formulaire */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #890596;
+  }
+  
+  /* Contrôles du formulaire */
+  .form-control {
+    width: calc(100% - 20px);
+    height: 40px;
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    transition: border-color 0.3s;
+    font-size: 14px;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #890596;
+  }
+  
+  /* Bouton de soumission */
+  .btn-submit {
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background-color: #890596;
+    transition: background-color 0.5s;
+  }
+  
+  .btn-submit:hover {
+    background-color: #a51ca9;
+  }
+  
 /* Basic styling for the body */
 /*body {
   padding: 50px;

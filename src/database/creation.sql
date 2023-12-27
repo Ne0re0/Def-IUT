@@ -77,7 +77,7 @@ CREATE TABLE Challenges (
         CONSTRAINT nn_descriptionChallenge NOT NULL,
     flag TEXT 
         CONSTRAINT nn_flag NOT NULL,
-    itsDifficulty TEXT 
+    itsDifficulty INTEGER
         CONSTRAINT nn_itsDifficulty NOT NULL 
         CONSTRAINT fk_Challenges_Difficulties REFERENCES Difficulties(idDifficulty),
     connection TEXT

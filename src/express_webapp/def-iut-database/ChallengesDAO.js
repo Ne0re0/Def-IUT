@@ -4,7 +4,7 @@ class ChallengesDAO {
     // Insérer un Challenge
     insert(titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection) {
         return new Promise((resolve, reject) => {
-            const query = 'INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty) VALUES (?, ?, ?, ?, ?, ?)';
+            const query = 'INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty, connection) VALUES (?, ?, ?, ?, ?, ?)';
             db.run(query, [titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection], function(err) {
                 if (err) {
                     reject(err);
@@ -16,11 +16,10 @@ class ChallengesDAO {
     }
 
     // Mettre à jour un Challenge
-    update(key, values) {
+    update(idChallenge, title, category,description,flag,difficulty,connection) {
         return new Promise((resolve, reject) => {
-            const query = 'UPDATE Challenges SET titleChallenge = ?, itsCategory = ? , descriptionChallenge = ?, flag = ?, itsDifficulty = ? WHERE idChallenge = ?';
-            values.push(key); // Ajouter la clé à la fin du tableau de valeurs
-            db.run(query, values, function(err) {
+            const query = 'UPDATE Challenges SET titleChallenge = ?, itsCategory = ? , descriptionChallenge = ?, flag = ?, itsDifficulty = ?, connection = ? WHERE idChallenge = ?';
+            db.run(query, [title, category,description,flag,difficulty,connection, idChallenge], function(err) {
                 if (err) {
                     console.error('SQL Error:', this.sql);
                     console.error('Error Message:', err.message);

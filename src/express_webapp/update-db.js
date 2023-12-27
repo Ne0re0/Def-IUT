@@ -17,64 +17,114 @@ try {
   const challenges = yaml.load(challengesFileContent);
   console.log("Vérification de la syntaxe...")
 
+  if (!challenges || !Array.isArray(challenges) || challenges.length === 0) {
+    console.error("Le fichier de défis est vide ou au mauvais format");
+    process.exit(1); // Exiting the process due to invalid data
+  }
 
-  // Step 1 : Verify user input
-  if (Array.isArray(challenges)) {
-    challenges.forEach((challenge, index) => {
-      if (
-        typeof challenge.title !== "string" ||
-        typeof challenge.category !== "string" ||
-        typeof challenge.difficulty !== "number" || 
-        challenge.difficulty <= 0 || challenge.difficulty > 5 ||
-        typeof challenge.description !== "string" ||
-        typeof challenge.flag !== "string" || 
-        (challenge.connection && typeof challenge.connection !== "string")
-      ) {
-        console.error("Syntaxe invalide pour le challenge à l'index " + index);
-    	console.error("Arrêt...");
-    	exit();
-      }
-    });
-  } else {
-    console.error("Les données attendues ne sont pas sous le bon format");
+  let syntaxError = false;
+
+  // Step 1: Verify user input
+  challenges.forEach((challenge, index) => {
+    if (
+      typeof challenge.title !== "string" ||
+      typeof challenge.category !== "string" ||
+      typeof challenge.difficulty !== "number" || 
+      challenge.difficulty <= 0 || challenge.difficulty > 5 ||
+      typeof challenge.description !== "string" ||
+      typeof challenge.flag !== "string" || 
+      (challenge.connection && typeof challenge.connection !== "string")
+    ) {
+      console.error("Syntaxe invalide pour le challenge à l'index " + index);
+      console.error("Arrêt...");
+      syntaxError = true;
+    }
+  });
+
+  if (syntaxError) {
+    process.exit(1); // Exiting the process due to syntax errors
   }
 
   console.log("Tous les formats sont valides");
-  // Step 2 : Verify that the challenges does not already exists
+  // Step 2: Verify that the challenges do not already exist
   console.log("Vérification de l'existence des challenges");
-  challenges.forEach((challenge, index) => {
-  	challengesDAO.findByChallengeTitle(challenge.title)
-  	.then((success) => {
-  		console.log(success)
-  		if (success !== undefined){
-  			console.log("'" + challenge.title + "' existe");
-  			rl.question("Voulez vous l'écraser ? (y/n) : ", (userInput) => {
-			  if (userInput === 'y'){
-			  	console.log("Suppression du challenge " + challenge.title);
-			  	challengesDAO.delete(success.idChallenge)
-			  	.then((output) => {
-			  		console.log("Challenge supprimé avec succès")
-			  	})
-			  	.catch((err) => {
-			  		console.error("Erreur lors de la suppression du challenge : " + err)
-			  	})
-			  } else {
-			  	console.log("Challenge non modifié")
-			  }
-			  rl.close();
-			});
-  		} else {
-  			// EDIT HERE
-  			challengesDAO.insert(titleChallenge,itsCategory,descriptionChallenge,flag,itsDifficulty,connection)
-  		}
 
-  	})
-  	.catch((err) => {
-  		console.log("Une erreur est survenue lors de la récupération du challenge "+ challenge.title)
-  	})
+  // Function to process challenges
+  const processChallenges = (index) => {
+    if (index === challenges.length) {
+      rl.close();
+      return;
+    }
 
-  })
+    const challenge = challenges[index];
 
+    challengesDAO.findByChallengeTitle(challenge.title)
+      .then((success) => {
+
+        // Challenges exists
+        if (success !== undefined) {
+          console.log("'" + challenge.title + "' existe");
+
+          
+          // Verify that update is necessary
+          if (challenge.connection === undefined){
+            challenge.connection = null;
+          }
+          if (success.titleChallenge === challenge.title &&
+              success.descriptionChallenge === challenge.description &&
+              success.itsCategory === challenge.category &&
+              success.flag === challenge.flag &&
+              success.itsDifficulty === challenge.difficulty &&
+              success.connection === challenge.connection
+            ) {
+              console.log("La mise à jour n'est pas nécessaire")
+              processChallenges(index + 1);
+            } else {
+              console.log("Challenge courant : ")
+              console.log(success)
+              console.log("Nouveau challenge : ")
+              console.log(challenge)
+
+              rl.question("Voulez vous mettre a jour le challenge courant ? (y/n) : ", (userInput) => {
+                if (userInput === 'y') {
+                  console.log("Mise a jour du challenge " + challenge.title);
+                  challengesDAO.update(success.idChallenge, challenge.title, challenge.category, challenge.description, challenge.flag, challenge.difficulty, challenge.connection)
+                    .then(() => {
+                      console.log("Mise a jour du challenge réussie");
+                      processChallenges(index + 1);
+                    })
+                    .catch((err) => {
+                      console.error("Erreur lors de la mise a jour du challenge " + challenge.title + " " + err);
+                      processChallenges(index + 1);
+                    });
+                } else {
+                  console.log("Challenge non modifié");
+                  processChallenges(index + 1);
+                }
+              });
+            }
+
+        } else {
+          console.log("Ajout du challenge : " + challenge.title);
+          challengesDAO.insert(challenge.title, challenge.category, challenge.description, challenge.flag, challenge.difficulty, challenge.connection)
+            .then((insertSuccess) => {
+              console.log("Insertion réussie, identifiant : " + insertSuccess);
+              processChallenges(index + 1);
+            })
+            .catch((err) => {
+              console.error("Erreur lors de l'insertion du challenge " + challenge.title + " " + err);
+              processChallenges(index + 1);
+            });
+        }
+      })
+      .catch((err) => {
+        console.error("Une erreur est survenue lors de la récupération du challenge " + challenge.title + " " + err);
+        processChallenges(index + 1);
+      });
+  };
+
+  // Initiating processing of challenges
+  processChallenges(0);
 
 } catch (err) {
   console.error('Erreur lors de la lecture du fichier:', err);

@@ -7,7 +7,7 @@
   # Accepts strings
   category: "Reverse"
   # The difficulty of the challenge
-  # Accepts integer between from 1 to 5, 5 is the hardest difficulty
+  # Accepts integer from 1 to 5, 5 is the hardest difficulty
   difficulty: 4
   # The description of the challenge
   # Accepts strings
@@ -17,6 +17,7 @@
   flag: "p@$$w0rd"
   # The connexion information about how to connect to the challenge
   # Accepts strings
+  # Comment if not necessary
   connection: "http://example.com/"
 
 - title: "La belle et la bête 2"
@@ -24,7 +25,7 @@
   difficulty: 4
   description: "The best description 2"
   flag: "p@$$w0rd2"
-  connection: "http://example.com/2"
+  connection: "ssh bob@10.5.25.236 -p 52366"
 
 - title: "La belle et la bête 3"
   category: "Programmation"

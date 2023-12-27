@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var fullyDistinguishedUsersDAO = require('def-iut-database').fullyDistinguishedUsersDAO;
+const { isConnected } = require('./middlewares/isConnected'); // For connection state control
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', isConnected, function(req, res, next) {
   fullyDistinguishedUsersDAO.findAll()
     .then((users) => {
       console.log(users);

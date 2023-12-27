@@ -4,6 +4,23 @@ html
     title Page non trouvée
     link(rel='stylesheet', href='/stylesheets/style.css') 
   body
+    nav.navbar
+        // Left
+        a.logo(href='/') Site's logo
+
+        // Right
+        ul.nav-links
+          li
+            a(href='/connect') Connection
+          li
+            a(href='/challenges') Challenges
+          li
+            a(href='/scoreboard') ScoreBoard
+          li
+            a(href='/myprofile') My Profile
+          li
+            a(href='/disconnect') Disconnection
+            
     div.container-error
       h1 Erreur 404 : Page non trouvée
       p La page que vous recherchez a peut-être été supprimée, a changé de nom ou est temporairement indisponible.

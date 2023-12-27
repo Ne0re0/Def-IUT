@@ -5,6 +5,23 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     
   body
+    nav.navbar
+        // Left
+        a.logo(href='/') Site's logo
+
+        // Right
+        ul.nav-links
+          li
+            a(href='/connect') Connection
+          li
+            a(href='/challenges') Challenges
+          li
+            a(href='/scoreboard') ScoreBoard
+          li
+            a(href='/myprofile') My Profile
+          li
+            a(href='/disconnect') Disconnection
+            
     block content
     
       h2 Bienvenue sur votre profil, #{user.username}!

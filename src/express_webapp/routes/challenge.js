@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 var challengesDAO = require('def-iut-database').challengesDAO;
 var hasTriedDAO = require('def-iut-database').hasTriedDAO;
+const { isConnected } = require('./middlewares/isConnected'); // For connection state control
 
 /* GET challenge details and download flag file. */
-router.get('/:idChallenge', function(req, res, next) {
+router.get('/:idChallenge', isConnected, function(req, res, next) {
   const challengeId = req.params.idChallenge;
   challengesDAO.findByID(challengeId)
     .then(challengeDetails => {
@@ -21,7 +22,7 @@ router.get('/:idChallenge', function(req, res, next) {
 });
 
 /* POST for flag verification. */
-router.post('/:idChallenge', function(req, res, next) {
+router.post('/:idChallenge', isConnected, function(req, res, next) {
 
   const challengeId = req.params.idChallenge;
   const submittedFlag = req.body.flagInput;

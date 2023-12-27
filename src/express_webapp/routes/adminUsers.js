@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var usersDAO = require('def-iut-database').usersDAO;
+const { isConnected } = require('./middlewares/isConnected'); // For connection state control
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', isConnected, function(req, res, next) {
   // Verification de la session 
   //console.log("Session admin " +session.user.isAdmin); 
   if (session.user.isAdmin == 1){
@@ -23,7 +24,7 @@ router.get('/', function(req, res, next) {
   
   
 });
-router.post('/', function(req, res, next) {
+router.post('/', isConnected, function(req, res, next) {
   if (req.body.action == 'update') {
     // Récupérer les valeurs du formulaire pour la modification
     const userId = req.body.userId; // Récupérer l'ID de l'utilisateur à modifier

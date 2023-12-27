@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var challengesDAO = require('def-iut-database').challengesDAO;
-
+const { isConnected } = require('./middlewares/isConnected'); // For connection state control
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-
+router.get('/', isConnected, async function(req, res, next) {
+  
   try {
     const challenges = await challengesDAO.findAll();
     console.log(challenges)

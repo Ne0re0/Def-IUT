@@ -2,9 +2,10 @@ var express = require('express');
 const session = require('express-session');
 var router = express.Router();
 var usersDAO = require('def-iut-database').usersDAO;
+const { isConnected } = require('./middlewares/isConnected'); // For connection state control
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', isConnected, function(req, res, next) {
   
   if (!session || session.user === undefined) {
     res.redirect("/connect");
@@ -15,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', isConnected, function(req, res, next) {
   console.log("first", req.body);
   if (
     req.body.newUsername === undefined ||

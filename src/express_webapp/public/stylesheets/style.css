@@ -3,6 +3,39 @@
     margin:0;
 }
 
+/* NavBar */
+.navbar {
+  background-color: #a51ca9;
+  padding: 10px; 
+  color: white; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nav-links li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
 body{
     background-color:#890596;
     height:100vh;

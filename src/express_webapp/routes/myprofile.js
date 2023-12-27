@@ -67,6 +67,7 @@ router.post('/', function(req, res, next) {
       delete user.idUser;
 
       // Mettre à jour l'utilisateur
+      console.log(user)
       usersDAO.update(userId, Object.values(user))
         .then((utilisateur) => {
           console.log("Profil mis à jour avec succès");

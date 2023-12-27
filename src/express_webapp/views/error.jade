@@ -1,10 +1,10 @@
 doctype html
 html
   head
-    title= title
-
+    title Page non trouvée
+    link(rel='stylesheet', href='/stylesheets/style.css') 
   body
-    block content
-      h1= message
-      h2= error.status
-      pre #{error.stack}
+    div.container-error
+      h1 Erreur 404 : Page non trouvée
+      p La page que vous recherchez a peut-être été supprimée, a changé de nom ou est temporairement indisponible.
+      button(type='button', onclick="location.href='/'", class='error-button') Retourner à la liste des challenges

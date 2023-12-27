@@ -274,8 +274,7 @@ border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
 
 /* Styling for the podium - 3rd place */
 /*tr#podium-3 {
-  background-color: #cd7f32; /* bronze color */
-}*/
+  background-color: #cd7f32; /* bronze color }*/
 
 /* Styling for odd rows after the podium */
 /*tr#scoreboard-odd:nth-child(odd) {
@@ -287,3 +286,28 @@ border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
   background-color: #f2f2f2; /* Or any other color you prefer for even rows 
 }
 */
+
+.container-error {
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.error-button{
+    height:45px;
+    width:347px;
+    margin-top:20px;
+    color:#fff;
+    font-size:14px;
+    cursor:pointer;
+    border:none;
+    border-radius:4px;
+    background-color:#890596;
+    transition:all 0.5s;
+}
+
+.error-button:hover{
+    background-color:#A51CA9;
+}

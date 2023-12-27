@@ -5,15 +5,13 @@ var usersDAO = require('def-iut-database').usersDAO;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  /*
+  
   if (!session || session.user === undefined) {
-    console.log("tata");
-    res.render('error', { title: 'Erreur', message: 'Vous ne pouvez pas accéder à la page profil sans être authentifié', error: { status: 500, stack: 'Vous ne pouvez pas accéder à la page profil sans être authentifié' } });
-  } else {*/
+    res.redirect("/connect");
+  } else {
   console.log("User session",session.user);
-    console.log("toto");
-    res.render('myprofile', { title: 'My Profile', user: session.user });
-  //}
+    res.render('myprofile', { title: 'My Profile', user: session.user })
+  };
 });
 
 
@@ -72,8 +70,14 @@ router.post('/', function(req, res, next) {
       usersDAO.update(userId, Object.values(user))
         .then((utilisateur) => {
           console.log("Profil mis à jour avec succès");
-          session.user = utilisateur;
-          res.render('myprofile', { title: 'My Profile', body:req.body, success:"Profil mis à jour avec succès", user: session.user });
+          usersDAO.findByID(userId)
+          .then((user) => {
+            session.user = user;
+            res.render('myprofile', { title: 'My Profile', body:req.body, success:"Profil mis à jour avec succès", user: session.user });
+          })
+          .catch((err) => {
+            res.render('myprofile', { title: 'My Profile', body:req.body, error:"Profile mis à jour avec succès, utilisateur non retrouvé", user: session.user });
+          })
         })
         .catch(err => {
           console.error("Erreur lors de la mise à jour de l'utilisateur :", err);

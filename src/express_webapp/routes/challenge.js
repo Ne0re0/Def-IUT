@@ -7,13 +7,16 @@ const { isConnected } = require('./middlewares/isConnected'); // For connection 
 /* GET challenge details and download flag file. */
 router.get('/:idChallenge', isConnected, function(req, res, next) {
   const challengeId = req.params.idChallenge;
+  var successUsers = hasTriedDAO.getSuccessfulUsers(challengeId);
+  console.log("getSuccessfulUsers = OK");
   challengesDAO.findByID(challengeId)
     .then(challengeDetails => {
       if (!challengeDetails) {
         return res.status(404).send('Challenge not found');
       }
       // Render the challenge page with challenge details
-      res.render('challenge', { challenge: challengeDetails });
+      console.log("Rendering...");
+      res.render('challenge', { challenge: challengeDetails, successUsers});
     })
     .catch(error => {
       console.error(error);
@@ -32,6 +35,7 @@ router.post('/:idChallenge', isConnected, function(req, res, next) {
       if (!challengeDetails) {
         return res.status(404).send('Challenge not found');
       }
+      console.log("finding challenge's data = OK");
 
       // Comparison
       let success = "";
@@ -42,9 +46,11 @@ router.post('/:idChallenge', isConnected, function(req, res, next) {
         success = "Bien tenté! Mais ce n'est pas le bon flag!";
       }
       
+      var successUsers = hasTriedDAO.getSuccessfulUsers(challengeId);
       // Render the page with the flag validation result
+      console.log("rendering");
       res.render('challenge', {
-        challenge: challengeDetails, success,
+        challenge: challengeDetails, success, successUsers
       });
     })
     .catch(error => {

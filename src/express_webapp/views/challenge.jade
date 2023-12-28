@@ -1,3 +1,5 @@
+// challenge.pug
+
 doctype html
 html
   head
@@ -45,31 +47,46 @@ html
             a(href='/disconnect') Disconnection
             
     block content
-    #background-element
-      div.challenges-container
-        h1.vertical-space= challenge.titleChallenge
+      #background-element
+        div.challenges-container
+          h1.vertical-space= challenge.titleChallenge
 
-        // Niveau de difficulté
-        p.vertical-space Difficulté: #{challenge.itsDifficulty}
+          // Niveau de difficulté
+          p.vertical-space Difficulté: #{challenge.itsDifficulty}
 
-        // Description
-        p.vertical-space Description: #{challenge.descriptionChallenge}
+          // Description
+          p.vertical-space Description: #{challenge.descriptionChallenge}
 
-        // Lien pour télécharger le fichier du drapeau
-        a.vertical-space(href='/challenges/' + challenge.idChallenge + '/flag.txt', download='flag.txt') Download Flag File
+          // Lien pour télécharger le fichier du drapeau
+          a.vertical-space(href='/challenges/' + challenge.idChallenge + '/flag.txt', download='flag.txt') Download Flag File
 
-        // Formulaire pour soumettre le flag
-        form.vertical-space(action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
-          label(for='flagInput') Enter Flag:
-          input(type='text', name='flagInput', id='flagInput', required)
-          button(type='submit') Submit Flag
+          // Formulaire pour soumettre le flag
+          form.vertical-space(action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
+            label(for='flagInput') Enter Flag:
+            input(type='text', name='flagInput', id='flagInput', required)
+            button(type='submit') Submit Flag
 
-        // Boîte modale pour afficher le résultat
-        #resultModal.modal
-          .modal-content
-            span.close(onclick='closeResultModal()') &times;
-            div#resultMessage
-              span#successMessage #{success}
-  script(src="/javascripts/vantaThree.js")
-  script(src="/javascripts/vantaNet.js")
-  script(src="/javascripts/background-element.js")
+          // Boîte modale pour afficher le résultat
+          #resultModal.modal
+            .modal-content
+              span.close(onclick='closeResultModal()') &times;
+              div#resultMessage
+                span#successMessage #{success}
+              
+          // Tableau des utilisateurs réussis
+          if (successUsers.length > 0)
+            table.table-successful-users
+              thead
+                tr
+                  th Utilisateur
+
+              tbody
+                each user in successUsers
+                  tr
+                    td= user.aUser
+          else
+            p Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
+
+    script(src="/javascripts/vantaThree.js")
+    script(src="/javascripts/vantaNet.js")
+    script(src="/javascripts/background-element.js")

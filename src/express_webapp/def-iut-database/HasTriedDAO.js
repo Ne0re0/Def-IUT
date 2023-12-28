@@ -78,6 +78,24 @@ class HasTriedDAO {
         });
     }
 
+    /**
+     * Returns users that have flagged ordered by ascendant dates
+     * 
+     */
+    getSuccessfulUsers(challengeId) {
+        return new Promise((resolve, reject) => {
+            const query = `
+                SELECT DISTINCT aUser FROM HasTried WHERE aChallenge = ? AND flagged IS NULL ORDER BY flagged ASC`;
+            db.all(query, [challengeId], function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     // Trouver un HasTried par son user et challenge associé
     findByID(key) {
         return new Promise((resolve, reject) => {

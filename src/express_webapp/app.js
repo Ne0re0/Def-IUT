@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 // Create routes
 const indexRouter = require('./routes/index');            // Challenges (list)
@@ -31,6 +32,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/challenges', express.static(path.join(__dirname, 'public', 'challenges')));
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Assign routers
 app.use('/', indexRouter);

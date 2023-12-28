@@ -23,6 +23,7 @@ html
             a(href='/disconnect') Disconnection
             
     block content
+    #background-element
       if error
         h1= error 
       else
@@ -116,3 +117,7 @@ html
               ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
                 li(style="display: inline-block; margin-right: 10px;")
                   img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);" title=line.descriptionBadge)
+
+  script(src="/javascripts/vantaThree.js")
+  script(src="/javascripts/vantaNet.js")
+  script(src="/javascripts/background-element.js")

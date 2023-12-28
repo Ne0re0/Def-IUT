@@ -8,41 +8,42 @@ html
 body
   nav.navbar
         // Left
-        a.logo(href='/') Site's logo
+        a.logo(href='/')
+            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
 
         // Right
         ul.nav-links
-          li
-            a(href='/connect') Connection
-          li
-            a(href='/challenges') Challenges
           li
             a(href='/scoreboard') ScoreBoard
           li
             a(href='/myprofile') My Profile
           li
-            a(href='/disconnect') Disconnection
+            a(href='/disconnect') Disconnect
             
   block content
-    div.challenges-container
-      h1 Liste des Challenges
+    #background-element
+      div.challenges-container
+        h1 Liste des Challenges
 
-      if challenges.length > 0
-        table.table-challenges
-          thead
-            tr
-              th Titre
-              th Catégorie
-              th Difficulté
-              th Description
-
-          tbody
-            each challenge in challenges
+        if challenges.length > 0
+          table.table-challenges
+            thead
               tr
-                td
-                  a(href='/challenge/#{challenge.idChallenge}')= challenge.titleChallenge
-                td= challenge.itsCategory
-                td= challenge.itsDifficulty
-                td= challenge.descriptionChallenge
-      else
-        p Aucun challenge n'est disponible pour le moment.
+                th Titre
+                th Catégorie
+                th Difficulté
+                th Description
+
+            tbody
+              each challenge in challenges
+                tr
+                  td
+                    a(href='/challenge/#{challenge.idChallenge}')= challenge.titleChallenge
+                  td= challenge.itsCategory
+                  td= challenge.itsDifficulty
+                  td= challenge.descriptionChallenge
+        else
+          p Aucun challenge n'est disponible pour le moment.
+  script(src="/javascripts/vantaThree.js")
+  script(src="/javascripts/vantaNet.js")
+  script(src="/javascripts/background-element.js")

@@ -5,7 +5,7 @@
 
 /* NavBar */
 .navbar {
-  background-color: #a51ca9;
+  
   padding: 10px; 
   color: white; 
   display: flex; 
@@ -18,6 +18,7 @@
 }
 
 .logo {
+  padding-left: 1%;
   color: white;
   text-decoration: none;
   font-size: 20px;
@@ -34,6 +35,13 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 16px;
+  transition: font-size 0.5s, text-decoration-color 0.5s; /* Transition de taille de police et de couleur de soulignement */
+  cursor: pointer;
+}
+.nav-links a:hover {
+  font-size: 20px;
+  text-decoration: underline; /* Soulignement au survol */
+  text-decoration-color: transparent;
 }
 
 body{
@@ -44,9 +52,10 @@ body{
     align-items:center;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+/* CSS for the animated background */
 #background-element {
   width: 100%;
-  height: 100vh; /* ou toute autre valeur désirée pour la hauteur */
+  height: 100%;
   display: flex;
   justify-content: center; /* Centrer horizontalement */
   align-items: center; /* Centrer verticalement */
@@ -57,11 +66,13 @@ body{
 }
 .login-form{
     width:350px;
-    background-color:#fff;
     height:400px;
-    border-radius:10px;
     padding:10px;
     overflow:hidden;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #ffffff, #dddddc);
+    box-shadow:  8px 8px 16px #000000,
+             -8px -8px 16px #7c7880;
 }
 
 .register-form{
@@ -71,6 +82,9 @@ body{
     border-radius:10px;
     padding:10px;
     overflow:hidden;
+    background: linear-gradient(145deg, #ffffff, #dddddc);
+    box-shadow:  8px 8px 16px #000000,
+             -8px -8px 16px #7c7880;
 }
 
 .login-form .inputs-container{
@@ -172,7 +186,7 @@ body{
     cursor:pointer;
     border:none;
     border-radius:4px;
-    background-color:#890596;
+    background-color:#92466D;
     transition:all 0.5s;
 }
 .mt-5{

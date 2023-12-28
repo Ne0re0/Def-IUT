@@ -32,14 +32,11 @@ html
   body
     nav.navbar
         // Left
-        a.logo(href='/') Site's logo
+        a.logo(href='/')
+            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
 
         // Right
         ul.nav-links
-          li
-            a(href='/connect') Connection
-          li
-            a(href='/challenges') Challenges
           li
             a(href='/scoreboard') ScoreBoard
           li
@@ -48,6 +45,7 @@ html
             a(href='/disconnect') Disconnection
             
     block content
+    #background-element
       div.challenges-container
         h1.vertical-space= challenge.titleChallenge
 
@@ -72,3 +70,6 @@ html
             span.close(onclick='closeResultModal()') &times;
             div#resultMessage
               span#successMessage #{success}
+  script(src="/javascripts/vantaThree.js")
+  script(src="/javascripts/vantaNet.js")
+  script(src="/javascripts/background-element.js")

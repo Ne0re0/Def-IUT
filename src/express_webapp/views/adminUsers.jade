@@ -22,12 +22,11 @@ html(lang='en')
   body
     nav.navbar
         // Left
-        a.logo(href='/') Site's logo
+        a.logo(href='/')
+            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
 
         // Right
         ul.nav-links
-          li
-            a(href='/connect') Connection
           li
             a(href='/challenges') Challenges
           li
@@ -36,42 +35,45 @@ html(lang='en')
             a(href='/myprofile') My Profile
           li
             a(href='/disconnect') Disconnection
-            
-    h1 Liste des Utilisateurs
+    #background-element 
+      h1 Liste des Utilisateurs
 
-    table
-      thead
-        tr
-          th ID
-          th Email
-          th Account Verified
-          th Username
-          th Is Admin
-      tbody
-        each user in users
-          tr(onclick='fillForm(#{JSON.stringify(user)})')
-            td #{user.idUser}
-            td #{user.mail}
-            td #{user.accountVerified}
-            td #{user.username}
-            td #{user.isAdmin}
+      table
+        thead
+          tr
+            th ID
+            th Email
+            th Account Verified
+            th Username
+            th Is Admin
+        tbody
+          each user in users
+            tr(onclick='fillForm(#{JSON.stringify(user)})')
+              td #{user.idUser}
+              td #{user.mail}
+              td #{user.accountVerified}
+              td #{user.username}
+              td #{user.isAdmin}
 
-    form(id='userForm', action='/admin', method='POST')
-      fieldset
-        legend Informations Utilisateur
-          input(type='hidden', id='idUser', name='userId')       
-        div(class='user-info')
-          label(for='userMail') Email
-          input(type='text', id='userMail', name ='userMail', placeholder='Email')
-        div(class='user-info')
-          label(for='userVerified') Account Verified
-          input(type='number', id='userVerified', name='userVerified' placeholder='Account Verified')
-        div(class='user-info')
-          label(for='userName') Username
-          input(type='text', id='userName', name = 'userName', placeholder='Username')
-        div(class='user-info')
-          label(for='userIsAdmin') Is Admin
-          input(type='number', id='userIsAdmin', name ='userIsAdmin' placeholder='Is Admin')
-        div(class='user-info')
-              button(type='submit', name='action', value='update') Modifier
-              button(type='submit', name='action', value='delete') Supprimer
+      form(id='userForm', action='/admin', method='POST')
+        fieldset
+          legend Informations Utilisateur
+            input(type='hidden', id='idUser', name='userId')       
+          div(class='user-info')
+            label(for='userMail') Email
+            input(type='text', id='userMail', name ='userMail', placeholder='Email')
+          div(class='user-info')
+            label(for='userVerified') Account Verified
+            input(type='number', id='userVerified', name='userVerified' placeholder='Account Verified')
+          div(class='user-info')
+            label(for='userName') Username
+            input(type='text', id='userName', name = 'userName', placeholder='Username')
+          div(class='user-info')
+            label(for='userIsAdmin') Is Admin
+            input(type='number', id='userIsAdmin', name ='userIsAdmin' placeholder='Is Admin')
+          div(class='user-info')
+                button(type='submit', name='action', value='update') Modifier
+                button(type='submit', name='action', value='delete') Supprimer
+  script(src="/javascripts/vantaThree.js")
+  script(src="/javascripts/vantaNet.js")
+  script(src="/javascripts/background-element.js")

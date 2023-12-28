@@ -7,12 +7,11 @@ html(lang='en')
   body
     nav.navbar
         // Left
-        a.logo(href='/') Site's logo
+        a.logo(href='/')
+            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
 
         // Right
         ul.nav-links
-          li
-            a(href='/connect') Connection
           li
             a(href='/challenges') Challenges
           li
@@ -21,27 +20,31 @@ html(lang='en')
             a(href='/myprofile') My Profile
           li
             a(href='/disconnect') Disconnection
-            
-    h1 Liste des Challenges
+    #background-element  
+      h1 Liste des Challenges
 
-    table
-      thead
-        tr
-          th ID
-          th Title
-          th Category
-          th Description
-          th Flag
-          th Difficulty
-          th URL
-      tbody
-        each challenge in challenges
-          tr(onclick='fillForm(#{JSON.stringify(challenge)})')
-            td #{challenge.idChallenge}
-            td #{challenge.titleChallenge}
-            td #{challenge.itsCategory}
-            td #{challenge.descriptionChallenge}
-            td #{challenge.flag}
-            td #{challenge.itsDifficulty}
-            td #{challenge.URL}
+      table
+        thead
+          tr
+            th ID
+            th Title
+            th Category
+            th Description
+            th Flag
+            th Difficulty
+            th URL
+        tbody
+          each challenge in challenges
+            tr(onclick='fillForm(#{JSON.stringify(challenge)})')
+              td #{challenge.idChallenge}
+              td #{challenge.titleChallenge}
+              td #{challenge.itsCategory}
+              td #{challenge.descriptionChallenge}
+              td #{challenge.flag}
+              td #{challenge.itsDifficulty}
+              td #{challenge.URL}
+  script(src="/javascripts/vantaThree.js")
+  script(src="/javascripts/vantaNet.js")
+  script(src="/javascripts/background-element.js")
+
 

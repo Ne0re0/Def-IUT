@@ -42,7 +42,6 @@ router.post('/', isConnected, function(req, res, next) {
         user.isVerified = 0;
       }
       user.mail = req.body.newEmail;
-
       // Supprimer l'attribut idUser de l'objet user avant la mise à jour
       delete user.idUser;
 

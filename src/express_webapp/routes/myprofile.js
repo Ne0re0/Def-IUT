@@ -43,27 +43,6 @@ router.post('/', isConnected, function(req, res, next) {
       }
       user.mail = req.body.newEmail;
 
-      // Vérification si les champs de mot de passe sont remplis
-      if (
-        req.body.oldPassword !== undefined && req.body.oldPassword !== '' &&
-        req.body.newPassword !== undefined && req.body.newPassword !== '' &&
-        req.body.confirmNewPassword !== undefined && req.body.confirmNewPassword !== ''
-      ) {
-        if (
-          !req.body.newPassword.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/) ||
-          !req.body.newPassword.match(".*\\d.*") ||
-          !req.body.newPassword.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) ||
-          req.body.newPassword.length <= 7 ||
-          req.body.newPassword !== req.body.confirmNewPassword
-        ){
-          res.render('myprofile', { title: 'My Profile', body:req.body, error:"Le mot de passe ne respecte pas les conditions ou ne correspond pas à la confirmation", user: session.user });
-          return;
-        }
-        
-        // Si les conditions de mot de passe sont respectées
-        user.password = req.body.newPassword;
-      }
-
       // Supprimer l'attribut idUser de l'objet user avant la mise à jour
       delete user.idUser;
 

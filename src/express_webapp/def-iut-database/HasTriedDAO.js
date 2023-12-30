@@ -2,10 +2,10 @@ const db = require('./sqlite_connection');
 
 class HasTriedDAO {
     // Insérer un HasTried
-    insert(values) {
+    insert(aUser, aChallenge, flagged, retryNB) {
         return new Promise((resolve, reject) => {
             const query = 'INSERT INTO HasTried (aUser, aChallenge, flagged , retryNB) VALUES (?, ?, ?, ?)';
-            db.run(query, values, function(err) {
+            db.run(query, [aUser, aChallenge, flagged, retryNB], function(err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -19,7 +19,6 @@ class HasTriedDAO {
     update(key, values) {
         return new Promise((resolve, reject) => {
             const query = 'UPDATE HasTried SET aUser = ?, aChallenge = ?, flagged = ?, retryNB = ? WHERE aUser = ? AND aChallenge = ?';
-            values.push(key); // Ajouter la clé à la fin du tableau de valeurs
             db.run(query, values, function(err) {
                 if (err) {
                     console.error('SQL Error:', this.sql);
@@ -73,6 +72,23 @@ class HasTriedDAO {
                     reject(err);
                 } else {
                     resolve(rows);
+                }
+            });
+        });
+    }
+
+    /**
+     * Return true if the challenge have been flagged by a specific user
+     * 
+     */
+    isFlagged(idUser, idChallenge) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT COUNT(*) AS count FROM HasTried WHERE aUser = ? AND aChallenge = ? AND flagged = 1';
+            db.get(query, [idUser, idChallenge], function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows.count);
                 }
             });
         });

@@ -72,20 +72,23 @@ html
               span.close(onclick='closeResultModal()') &times;
               div#resultMessage
                 span#successMessage #{success}
-              
-          // Tableau des utilisateurs réussis
-          if (successUsers.length > 0)
-            table.table-successful-users
-              thead
-                tr
-                  th Utilisateur
 
-              tbody
-                each user in successUsers
-                  tr
-                    td= user.aUser
-          else
-            p Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
+          div.challenges-container
+            h1.vertical-space= "Tableau des Flaggers"
+              // Tableau des réussites
+              block successUsers
+                if (successUsers.length > 0)
+                  table.table-successful-users
+                    thead
+                      tr
+                        th Utilisateur
+
+                    tbody
+                      each user in successUsers
+                        tr
+                          td= user.aUser
+                else
+                  p.vertical-space Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
 
     script(src="/javascripts/vantaThree.js")
     script(src="/javascripts/vantaNet.js")

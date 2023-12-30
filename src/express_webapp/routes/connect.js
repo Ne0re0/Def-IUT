@@ -10,8 +10,8 @@ const CryptoJS = require('crypto-js');
 const transporter = nodemailer.createTransport({
   host: 'smtp.elasticemail.com',
   auth: {
-    user: 'no-reply@defiut.fr', 
-    pass: 'BE2BDB370982841238391AB0D16AC4285A32'
+    user: 'noreply@defiut.fr', 
+    pass: '679DC955B585DB021B569AC890725BD30DF8'
   },
   port : 2525
 });
@@ -65,6 +65,7 @@ router.post('/', function(req, res, next) {
           transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
               console.log("Erreur lors de l'envoie de l\'e-mail")
+              console.log(error)
               res.render('connect', { title: 'Connect', failed: "Erreur lors de l'envoie du mail de vérification, veuillez vous reconnecter" });
 
             } else {

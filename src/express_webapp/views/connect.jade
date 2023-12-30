@@ -35,9 +35,12 @@ html
                 span.text-center.mt-5
                   | Vous n'avez pas de compte ? 
                   a.a-tag(href='/register') Créer un compte
-                if failed
-                  .text-center.mb-5
-                    p= failed
+          
+            if failed
+              .login-error-form
+                .text-center.mb-5
+                  p= failed
+
                  
   script(src="/javascripts/vantaThree.js")
   script(src="/javascripts/vantaNet.js")

@@ -81,6 +81,21 @@ class UserDAO {
         });
     }
 
+    verifyAccount(mail) {
+        return new Promise((resolve, reject) => {
+            const query = 'UPDATE Users SET accountVerified = 1 WHERE mail = ?';
+            this.db.run(query, [mail], function(err) {
+                if (err) {
+                    console.error('SQL Error:', this.sql);
+                    console.error('Error Message:', err.message);
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    }
+
     performUpdate(key, values, resolve, reject) {
         const query = 'UPDATE Users SET mail = ?, accountVerified = ?, username = ?, password = ?, isAdmin = ? WHERE idUser = ?';
         values.push(key); // Ajouter la clé à la fin du tableau de valeurs

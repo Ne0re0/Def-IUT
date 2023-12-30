@@ -54,7 +54,7 @@ html
           each line in history
             tr
               td
-                a(href='/challenge?id=' + line.idChallenge)= line.titleChallenge
+                a(href='/challenge/' + line.idChallenge)= line.titleChallenge
               td= line.itsCategory
               td= line.reward
               td= line.flagged

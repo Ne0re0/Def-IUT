@@ -96,6 +96,39 @@ class UserDAO {
         });
     }
 
+    updatePassword(mail,password) {
+        const query = 'UPDATE Users SET password = ? WHERE mail = ?';
+
+        return new Promise((resolve, reject) => {
+            bcrypt.genSalt(10)
+                .then((salt) => {
+                    bcrypt.hash(password, salt)
+                        .then((hash) => {
+                            console.log(mail,hash)
+                            console.log(typeof mail, typeof hash)
+                            this.db.run(query, [hash.toString(),mail.toString()], function(err) {
+                                if (err) {
+                                    console.error('SQL Error:', this.sql);
+                                    console.error('Error Message:', err.message);
+                                    reject(err);
+                                } else {
+                                    console.log("Password updated")
+                                    resolve();
+                                }
+                            });
+                        })
+                        .catch((err) => {
+                            console.error('Error hashing password:', err);
+                            reject(err);
+                        });
+                })
+                .catch((err) => {
+                    console.error('Error generating salt:', err);
+                    reject(err);
+                });
+        });
+    }
+
     performUpdate(key, values, resolve, reject) {
         const query = 'UPDATE Users SET mail = ?, accountVerified = ?, username = ?, password = ?, isAdmin = ? WHERE idUser = ?';
         values.push(key); // Ajouter la clé à la fin du tableau de valeurs

@@ -4,3 +4,7 @@ push.sh
 # Email verification files
 src/emails_check/*
 !src/emails_check/README.md
+
+# Password reset files
+src/password_recovery/*
+!src/password_recovery/README.md

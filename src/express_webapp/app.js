@@ -20,7 +20,7 @@ const adminRouterUsers = require('./routes/adminUsers');            // Admin Use
 const adminRouterChallenges = require('./routes/adminChallenges');    // Admin Challenges panel
 */
 const verifyRouter = require('./routes/verify');          // Verify email addresses
-
+const recoverRouter = require('./routes/recover');
 
 // Generate application instance
 var app = express();
@@ -51,6 +51,7 @@ app.use('/scoreboard', scoreboardRouter);
 app.use('/challenge',  challengeRouter);
 app.use('/user', userRouter);
 app.use('/verify', verifyRouter);
+app.use('/recover', recoverRouter);
 /*
 app.use('/adminUsers', adminRouterUsers);
 app.use('/adminChallenges', adminRouterChallenges);

@@ -17,6 +17,7 @@ router.get('/:idChallenge', isConnected, function(req, res, next) {
       }
       // Render the challenge page with challenge details
       console.log("Rendering...");
+      console.log(session.user.idUser);
       res.render('challenge', { challenge: challengeDetails, successUsers});
     })
     .catch(error => {
@@ -47,34 +48,34 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
     console.log("alreadySucceeded = " + alreadySucceeded);
 
     if (!alreadySucceeded) {
+      if (!challengeDetails) {
+        return res.status(404).send('Challenge not found');
+      }
+  
+      // Comparison
+      if (submittedFlag === challengeDetails.flag) {
+        console.log("Flag = True");
+        // If the submitted flag is correct, add a successful try
+        const addedSuccessfulTry = await addSuccessfulTry(userId, challengeId);
+  
+        if (addedSuccessfulTry) {
+          success = "Bien joué! Vous avez réussi ce challenge!";
+        } else {
+          success = "Vous avez déjà réussi ce challenge!";
+        }
+      } else {
+        console.log("Flag = False");
+        // If the submitted flag is incorrect, add a regular try
+        await addTry(userId, challengeId);
+        success = "Bien tenté! Mais ce n'est pas le bon flag!";
+      }
+    }
+    else {
       console.log("Flag = Already Flagged");
       // If the user has already succeeded, redirect to the challenge page with a message
       success = "Vous avez déjà réussi ce challenge!";
-      res.render('challenge', { challenge: challengeDetails, success, successUsers });
     }
     
-    if (!challengeDetails) {
-      return res.status(404).send('Challenge not found');
-    }
-
-    // Comparison
-    if (submittedFlag === challengeDetails.flag) {
-      console.log("Flag = True");
-      // If the submitted flag is correct, add a successful try
-      const addedSuccessfulTry = await addSuccessfulTry(userId, challengeId);
-
-      if (addedSuccessfulTry) {
-        success = "Bien joué! Vous avez réussi ce challenge!";
-      } else {
-        success = "Vous avez déjà réussi ce challenge!";
-      }
-    } else {
-      console.log("Flag = False");
-      // If the submitted flag is incorrect, add a regular try
-      await addTry(userId, challengeId);
-      success = "Bien tenté! Mais ce n'est pas le bon flag!";
-    }
-
     // Render the page with the flag validation result
     res.render('challenge', { challenge: challengeDetails, success, successUsers });
   } catch (error) {
@@ -113,12 +114,11 @@ const addTry = async (userId, challengeId) => {
       const newRetryCount = nbRetry + 1;
       await hasTriedDAO.update(
         { aUser: userId, aChallenge: challengeId },
-        { retryNB: newRetryCount, aUser: userId, aChallenge: challengeId }
+        { aUser: userId, aChallenge: challengeId, flagged: null, retryNB: newRetryCount }
       );
     } else {
-      console.log("aUser: " + userId + " aChallenge: " + challengeId);
       // Si c'est la première tentative, insérez une nouvelle entrée
-      await hasTriedDAO.insert(userId, challengeId, 0, 1);
+      await hasTriedDAO.insert(userId, challengeId, null, 1);
     }
 
     return true;
@@ -131,13 +131,16 @@ const addTry = async (userId, challengeId) => {
 // Valid the challenge
 const addSuccessfulTry = async (userId, challengeId) => {
   try {
+    var date = new Date();
+    dateStr = date.getDate() + "-" + (parseInt(date.getMonth()) + 1) +  "-" + date.getFullYear();
 
-    if (!alreadyFlagged(userId, challengeId)) {
-      // Si l'utilisateur a déjà réussi ce challenge, ne rien faire
-      return false;
+    const nbTry = howMuchTries(userId, challengeId);
+    if (nbTry !== 0) {
+      await hasTriedDAO.update(userId, challengeId, dateStr, nbTry + 1);
+      return true;
     } else {
       // Si c'est la première réussite, insérez une nouvelle entrée avec le drapeau réussi
-      await hasTriedDAO.insert(userId, challengeId, 1, 1);
+      await hasTriedDAO.insert(userId, challengeId, dateStr, 1);
       return true;
     }
   } catch (error) {

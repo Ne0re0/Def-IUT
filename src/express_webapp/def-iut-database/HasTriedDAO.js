@@ -83,7 +83,7 @@ class HasTriedDAO {
      */
     isFlagged(idUser, idChallenge) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT COUNT(*) AS count FROM HasTried WHERE aUser = ? AND aChallenge = ? AND flagged = 1';
+            const query = 'SELECT COUNT(*) AS count FROM HasTried WHERE aUser = ? AND aChallenge = ? AND flagged IS NOT NULL';
             db.get(query, [idUser, idChallenge], function(err, rows) {
                 if (err) {
                     reject(err);
@@ -101,7 +101,7 @@ class HasTriedDAO {
     getSuccessfulUsers(challengeId) {
         return new Promise((resolve, reject) => {
             const query = `
-                SELECT DISTINCT aUser FROM HasTried WHERE aChallenge = ? AND flagged IS NULL ORDER BY flagged ASC`;
+                SELECT DISTINCT aUser FROM HasTried WHERE aChallenge = ? AND flagged IS NOT NULL ORDER BY flagged ASC`;
             db.all(query, [challengeId], function(err, rows) {
                 if (err) {
                     reject(err);

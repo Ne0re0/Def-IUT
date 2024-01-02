@@ -112,10 +112,7 @@ const addTry = async (userId, challengeId) => {
     if (nbRetry > 0) {
       // Si l'utilisateur a déjà essayé ce challenge, mettez à jour le nombre d'essais
       const newRetryCount = nbRetry + 1;
-      await hasTriedDAO.update(
-        { aUser: userId, aChallenge: challengeId },
-        { aUser: userId, aChallenge: challengeId, flagged: null, retryNB: newRetryCount }
-      );
+      await hasTriedDAO.update(userId, challengeId, null, newRetryCount);
     } else {
       // Si c'est la première tentative, insérez une nouvelle entrée
       await hasTriedDAO.insert(userId, challengeId, null, 1);
@@ -132,7 +129,7 @@ const addTry = async (userId, challengeId) => {
 const addSuccessfulTry = async (userId, challengeId) => {
   try {
     var date = new Date();
-    dateStr = date.getDate() + "-" + (parseInt(date.getMonth()) + 1) +  "-" + date.getFullYear();
+    dateStr = date.getDate() + "-" + (parseInt(date.getMonth()) + 1) +  "-" + date.getFullYear(); // Date format : jj-mm-yyyy
 
     const nbTry = howMuchTries(userId, challengeId);
     if (nbTry !== 0) {

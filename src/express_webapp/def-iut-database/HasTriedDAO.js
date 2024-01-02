@@ -16,10 +16,10 @@ class HasTriedDAO {
     }
 
     // Mettre à jour un HasTried
-    update(key, values) {
+    update(aUser, aChallenge, flagged, retryNB) {
         return new Promise((resolve, reject) => {
             const query = 'UPDATE HasTried SET aUser = ?, aChallenge = ?, flagged = ?, retryNB = ? WHERE aUser = ? AND aChallenge = ?';
-            db.run(query, values, function(err) {
+            db.run(query, [aUser, aChallenge, flagged, retryNB, aUser, aChallenge], function(err) {
                 if (err) {
                     console.error('SQL Error:', this.sql);
                     console.error('Error Message:', err.message);

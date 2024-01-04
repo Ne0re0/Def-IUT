@@ -45,7 +45,7 @@
 }
 
 body{
-    background-color:#890596;
+    background-color:#B690A5;
     height:100vh;
     display:flex;
     justify-content:center;
@@ -59,8 +59,8 @@ body{
   display: flex;
   justify-content: center; /* Centrer horizontalement */
   align-items: center; /* Centrer verticalement */
-  
 }
+
 .container{
   text-align: center;
 }
@@ -201,7 +201,7 @@ body{
 
 .a-tag{
     text-decoration:none;
-    color:#890596;
+    color:#92466D;
     margin-left:6px;
 }
 
@@ -241,7 +241,7 @@ body{
 .table-challenges th,
 .table-challenges td {
 padding: 10px; /* Ajuste la valeur selon ton besoin de marge interne */
-border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
+border: 1px solid #92466D; /* Ajoute une bordure pour délimiter les cellules */
 }
 
 /* My Profil part */
@@ -252,7 +252,7 @@ border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
-    color: #890596;
+    color: #92466D;
   }
   
   /* Formulaire de profil */
@@ -275,7 +275,7 @@ border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #890596;
+    color: #92466D;
   }
   
   /* Contrôles du formulaire */
@@ -291,7 +291,7 @@ border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
   
   .form-control:focus {
     outline: none;
-    border-color: #890596;
+    border-color: #92466D;
   }
   
   /* Bouton de soumission */
@@ -354,12 +354,12 @@ border: 1px solid #890596; /* Ajoute une bordure pour délimiter les cellules */
     cursor:pointer;
     border:none;
     border-radius:4px;
-    background-color:#890596;
+    background-color:#92466D;
     transition:all 0.5s;
 }
 
 .error-button:hover{
-    background-color:#A51CA9;
+    background-color:#92466D;
 }
 
 

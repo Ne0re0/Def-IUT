@@ -94,6 +94,20 @@ class HasTriedDAO {
         });
     }
 
+    getFlagDate(idUser, idChallenge) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT flagged FROM HasTried WHERE aUser = ? AND aChallenge = ? AND flagged IS NOT NULL';
+            db.get(query, [idUser, idChallenge], function(err, row) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row);
+                }
+            });
+        });
+    }
+
+
     /**
      * Returns users that have flagged ordered by ascendant dates
      */

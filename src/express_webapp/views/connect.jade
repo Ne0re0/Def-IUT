@@ -5,52 +5,52 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css')
   body
-    nav.navbar
-        // Left
-        a.logo(href='/')
-          img(src='/logos/Full_Logo_Horizontal.png',width='310', height='75')
-        ul.nav-links
-          li
-            a(href='/') Challenges
-          li
-            a(href='/scoreboard') Scoreboard
-          li
-            a(href='/myprofile') Mon compte
-          li
-            a(href='/disconnect') Déconnexion
+    #background-element
+      nav.navbar
+          // Left
+          a.logo(href='/')
+            img(src='/logos/Full_Logo_Horizontal.png',width='310', height='75')
+          ul.nav-links
+            li
+              a(href='/') Challenges
+            li
+              a(href='/scoreboard') Scoreboard
+            li
+              a(href='/myprofile') Mon compte
+            li
+              a(href='/disconnect') Déconnexion
 
-    block content
-      #background-element
-        .container
-          .login-form
+      block content
+          .container
+            .login-form
+              
+              .headings
+                h3 Bienvenue
+              .text-center.mb-5
+                p Veuillez vous authentifier
+
+              form(id="loginForm", action="/connect", method="post")
+                .inputs-container
+                  .inputs
+                    input(autocomplete='chrome-off', class='input-group', type='text', placeholder='Nom d\'utilisateur', name='username')
+                  
+                  .inputs.password-input
+                    input(autocomplete='chrome-off', class='input-group', id='password_input', type='password', placeholder='Mot de passe', name='password')
+                    i.fa.fa-eye-slash(id='password_eye')
+                  
+                  button.login-button(type='submit') Se connecter
+                  
+                  span.text-center.mt-5
+                    | Vous n'avez pas de compte ? 
+                    a.a-tag(href='/register') Créer un compte
+                  span.text-center.mt-5
+                    | Vous avez oublié votre mot de passe ? 
+                    a.a-tag(href='/recover') Le réinitialiser
             
-            .headings
-              h3 Bienvenue
-            .text-center.mb-5
-              p Veuillez vous authentifier
-
-            form(id="loginForm", action="/connect", method="post")
-              .inputs-container
-                .inputs
-                  input(autocomplete='chrome-off', class='input-group', type='text', placeholder='Nom d\'utilisateur', name='username')
-                
-                .inputs.password-input
-                  input(autocomplete='chrome-off', class='input-group', id='password_input', type='password', placeholder='Mot de passe', name='password')
-                  i.fa.fa-eye-slash(id='password_eye')
-                
-                button.login-button(type='submit') Se connecter
-                
-                span.text-center.mt-5
-                  | Vous n'avez pas de compte ? 
-                  a.a-tag(href='/register') Créer un compte
-                span.text-center.mt-5
-                  | Vous avez oublié votre mot de passe ? 
-                  a.a-tag(href='/recover') Le réinitialiser
-          
-              if failed
-                div.div-connect-error
-                  .text-center.mb-5
-                    p= failed
+                if failed
+                  div.div-connect-error
+                    .text-center.mb-5
+                      p= failed
 
 
                  

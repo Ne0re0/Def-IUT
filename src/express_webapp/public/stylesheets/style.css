@@ -51,6 +51,8 @@ body{
     justify-content:center;
     align-items:center;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-attachment: fixed;
+
 }
 /* CSS for the animated background */
 #background-element {
@@ -61,9 +63,14 @@ body{
   align-items: center; /* Centrer verticalement */
 }
 
+.vanta-canvas {
+    position: fixed !important;
+}
+
 .container{
   text-align: center;
 }
+
 .login-form{
     width:350px;
     padding:10px;

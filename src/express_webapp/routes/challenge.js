@@ -11,7 +11,8 @@ router.get('/:idChallenge', isConnected, async function(req, res, next) {
     const challengeId = req.params.idChallenge;
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
     const retryCount = await hasTriedDAO.getRetryCount(session.user.idUser, challengeId);
-
+    const isFlagged = await hasTriedDAO.getFlagDate(session.user.idUser, challengeId);
+    console.log(isFlagged);
     console.log("getSuccessfulUsers = OK");
     console.log(successUsers);
 
@@ -19,10 +20,11 @@ router.get('/:idChallenge', isConnected, async function(req, res, next) {
     if (!challengeDetails) {
       return res.status(404).send('Challenge not found');
     }
+    console.log(challengeDetails)
 
     console.log("Rendering...");
     console.log(session.user.idUser);
-    res.render('challenge', { challenge: challengeDetails, successUsers, retryCount });
+    res.render('challenge', { challenge: challengeDetails, successUsers, retryCount, isFlagged });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -112,20 +114,40 @@ const addTry = async (userId, challengeId) => {
 
 // Valid the challenge
 const addSuccessfulTry = async (userId, challengeId) => {
-  try {
     const date = new Date();
-    const dateStr = date.getDate() + "-" + (parseInt(date.getMonth()) + 1) + "-" + date.getFullYear(); // Date format : jj-mm-yyyy
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
 
-    const nbTry = await howMuchTries(userId, challengeId);
-    if (nbTry !== 0) {
-      await hasTriedDAO.update(userId, challengeId, dateStr, nbTry + 1);
-    } else {
-      await hasTriedDAO.insert(userId, challengeId, dateStr, 1);
-    }
-  } catch (error) {
-    console.error(error);
-    throw new Error('Internal Server Error');
-  }
+    const dateStr = `${year}-${month}-${day}`;
+
+    howMuchTries(userId, challengeId)
+      .then((nbTry) => {
+        if (nbTry !== 0) {
+          hasTriedDAO.update(userId, challengeId, dateStr, nbTry + 1)
+            .then(() => {
+              console.log("Update succeed")
+            })
+            .catch((err) => {
+              console.log("Update failed")
+            })
+        } else {
+          hasTriedDAO.insert(userId, challengeId, dateStr, 1)
+            .then(() => {
+              console.log("Update succeed")
+            })
+            .catch((err) => {
+              console.log("Update failed")
+            })
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    .catch((err) => {
+      console.log(err);
+    })
 };
 
 // Verif how much tries
@@ -136,7 +158,7 @@ const howMuchTries = async (userId, challengeId) => {
   } catch (err) {
     console.error(err);
     throw new Error('Internal Server Error');
-  }
+  } 
 };
 
 module.exports = router;

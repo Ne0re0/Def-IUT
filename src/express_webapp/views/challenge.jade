@@ -64,8 +64,16 @@ html
                 td
                   a(href=challenge.connection) #{challenge.connection}
             tr
+              td Récompense :
+              td #{challenge.reward}
+            tr
               td Nombre d'essais :
               td #{retryCount}
+            if isFlagged
+              tr
+                td Résolu le :
+                td #{isFlagged.flagged}
+
 
 
           // Formulaire pour soumettre le flag

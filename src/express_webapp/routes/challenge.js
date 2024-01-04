@@ -3,7 +3,8 @@ const session = require('express-session');
 const router = express.Router();
 const challengesDAO = require('def-iut-database').challengesDAO;
 const hasTriedDAO = require('def-iut-database').hasTriedDAO;
-const { isConnected } = require('./middlewares/isConnected'); // For connection state control
+const { isConnected } = require('./middlewares/isConnected'); 
+// For connection state control
 
 /* GET challenge details and download flag file. */
 router.get('/:idChallenge', isConnected, async function(req, res, next) {
@@ -39,19 +40,16 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
   let success = "";
 
 
-  console.log("Verif1");
   try {
     const challengeDetails = await challengesDAO.findByID(challengeId);
     if (!challengeDetails) {
       return res.render('error');
     }
 
-    console.log("Verif2");
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
     const retryCount = await hasTriedDAO.getRetryCount(session.user.idUser, challengeId);
 
     console.log(successUsers);
-    console.log("Verif3");
 
     const isFlagged = await alreadyFlagged(userId, challengeId);
     if (!isFlagged) {

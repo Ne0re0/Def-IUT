@@ -9,7 +9,15 @@ html
         // Left
         a.logo(href='/')
           img(src='/logos/Full_Logo_Horizontal.png',width='310', height='75')
-        
+        ul.nav-links
+          li
+            a(href='/') Challenges
+          li
+            a(href='/scoreboard') Scoreboard
+          li
+            a(href='/myprofile') Mon compte
+          li
+            a(href='/disconnect') Déconnexion
 
     block content
       #background-element
@@ -39,12 +47,10 @@ html
                   | Vous avez oublié votre mot de passe ? 
                   a.a-tag(href='/recover') Le réinitialiser
           
-            if failed
-              .text-center.mb-5
-                p= failed
-            if success
-              .text-center.mb-5
-                p= success
+              if failed
+                div.div-connect-error
+                  .text-center.mb-5
+                    p= failed
 
 
                  

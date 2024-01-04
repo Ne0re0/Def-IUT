@@ -47,6 +47,8 @@ router.post('/', isConnected, function(req, res, next) {
 
       // Mettre à jour l'utilisateur
       console.log(user)
+      delete user.isVerified;
+      user.accountVerified = 0;
       usersDAO.update(userId, Object.values(user))
         .then((utilisateur) => {
           console.log("Profil mis à jour avec succès");
@@ -61,12 +63,20 @@ router.post('/', isConnected, function(req, res, next) {
         })
         .catch(err => {
           console.error("Erreur lors de la mise à jour de l'utilisateur :", err);
-          res.render('myprofile', { title: 'My Profile', body:req.body, error:"Erreur lors de la mise à jour du profil", user: session.user });
+          if (err.toString().includes('mail')){
+            res.render('myprofile', { title: 'My Profile', body:req.body, error:"Adresse e-mail existante", user: session.user });
+          } else {
+            res.render('myprofile', { title: 'My Profile', body:req.body, error:"Pseudonyme existant", user: session.user });
+          }
         });
     })
     .catch(err => {
       console.error("Erreur lors de la recherche de l'utilisateur :", err);
-      res.render('myprofile', { title: 'My Profile', body:req.body, error:"Erreur lors de la recherche de l'utilisateur", user: session.user });
+      if (err.toString().includes('mail')){
+        res.render('myprofile', { title: 'My Profile', body:req.body, error:"Adresse e-mail existante", user: session.user });
+      } else {
+        res.render('myprofile', { title: 'My Profile', body:req.body, error:"Pseudonyme existant", user: session.user });
+      }
     });
 });
 

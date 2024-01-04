@@ -8,9 +8,19 @@ html
 
   body
     nav.navbar
-        // Left
-        a.logo(href='/')
-            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
+      // Left
+      a.logo(href='/')
+        img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
+        
+      ul.nav-links
+        li
+          a(href='/') Challenges
+        li
+          a(href='/scoreboard') Scoreboard
+        li
+          a(href='/myprofile') Mon compte
+        li
+          a(href='/disconnect') Déconnexion
 
         
             
@@ -79,11 +89,13 @@ html
                   | Vous avez déjà un compte ? 
                   a.a-tag(href='/connect') Se connecter
                 if error
-                  .text-center.mb-5
-                    p= error
+                  div.div-register-error
+                    .text-center.mb-5
+                      p= error
                 if success
-                  .text-center.mb-5
-                    p= success
+                  div.div-register-success
+                    .text-center.mb-5
+                      p= success
 
       script(src='/javascripts/register.js')
   script(src="/javascripts/vantaThree.js")

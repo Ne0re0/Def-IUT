@@ -2,122 +2,125 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
 
 
   body
     nav.navbar
-        // Left
-        a.logo(href='/') Site's logo
+      // Left
+      a.logo(href='/')
+          img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
 
-        // Right
-        ul.nav-links
-          li
-            a(href='/connect') Connection
-          li
-            a(href='/challenges') Challenges
-          li
-            a(href='/scoreboard') ScoreBoard
-          li
-            a(href='/myprofile') My Profile
-          li
-            a(href='/disconnect') Disconnection
+      // Right
+      ul.nav-links
+        li
+          a(href='/') Challenges
+        li
+          a(href='/scoreboard') Scoreboard
+        li
+          a(href='/myprofile') Mon compte
+        li
+          a(href='/disconnect') Déconnexion
             
     block content
-    #background-element
-      if error
-        h1= error 
-      else
-        h1= user.username 
-        
-        table
-          tr
-            th 
-              a(href='/scoreboard') Rang
-            th Score
-            th Challenges validés
-          tr
-            td= user.rank
-            td= user.score
-            td= user.challengeCount
+      #background-element
+        div.user-container
+          if error
+            h1= error 
+          else
+            h1.user-username= user.username 
+            div.div-user-status
+              table.table-user-status
+                tr
+                  th Rang
+                  th Score
+                  th Challenges validés
+                tr
+                  td= user.rank
+                  td= user.score
+                  td= user.challengeCount
 
-        h1 Statistiques
-        canvas#myChart(style="width:100%;max-width:700px")
+            h2 Statistiques
+            div.div-user-graph
+              canvas#myChart(style="width:100%;max-width:700px")
 
-        h1 Historique des défis
-        table
-          tr
-            th Titre
-            th Categorie
-            th Récompense
-            th Date
+            h2 Historique des défis
+            div.div-user-history
+              table.table-user-history
+                tr
+                  th Titre
+                  th Catégorie
+                  th Récompense
+                  th Date
 
-          each line in history
-            tr
-              td
-                a(href='/challenge/' + line.idChallenge)= line.titleChallenge
-              td= line.itsCategory
-              td= line.reward
-              td= line.flagged
+                each line in history
+                  tr
+                    td
+                      a(href='/challenge/' + line.idChallenge)= line.titleChallenge
+                    td= line.itsCategory
+                    td= line.reward
+                    td= line.flagged
 
 
-        script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
+            script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
 
-        script.
-          var x = [];
-          var y = [];
-          var i = !{JSON.stringify(chart)};
-          var sum = 0;
+            script.
+              var x = [];
+              var y = [];
+              var i = !{JSON.stringify(chart)};
+              var sum = 0;
 
-          i.reverse().forEach((element) => { 
-            x.push(element.flagged);
-            sum += element.reward;
-            y.push(sum);
-          });
+              i.reverse().forEach((element) => { 
+                x.push(element.flagged);
+                sum += element.reward;
+                y.push(sum);
+              });
 
-          console.log(x);
-          console.log(y);
+              console.log(x);
+              console.log(y);
 
-          new Chart("myChart", {
-            type: "line",
-            data: {
-              labels: x,
-              datasets: [{
-                fill: false,
-                lineTension: 0,
-                backgroundColor: "rgba(0,0,255,1.0)",
-                borderColor: "rgba(0,0,255,0.1)",
-                data: y
-              }]
-            },
-            options: {
-              legend: {display: false},
-              scales: {
-                yAxes: [{ticks: {min: 0, max: sum}}],
-              }
-            }
-          });
+              new Chart("myChart", {
+                type: "line",
+                data: {
+                  labels: x,
+                  datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: y
+                  }]
+                },
+                options: {
+                  legend: {display: false},
+                  scales: {
+                    yAxes: [{ticks: {min: 0, max: sum}}],
+                  }
+                }
+              });
 
-        h1 Badges
-        h2 Obtenus
-        ul(style="list-style-type: none; padding-left: 0;")
-          each line in ownedBadges
-            li(style="display: inline-block; margin-right: 20px;") 
-              p= line.titleBadge
-              ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
-                li(style="display: inline-block; margin-right: 10px;") 
-                  img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;", title=line.descriptionBadge)
-                li
-                  p= line.obtentionDate
-                  
-        h2 Non obtenus
-        ul(style="list-style-type: none; padding-left: 0; margin-top: 20px;")
-          each line in otherBadges
-            li(style="display: inline-block; margin-right: 20px;")
-              p= line.titleBadge
-              ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
-                li(style="display: inline-block; margin-right: 10px;")
-                  img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);" title=line.descriptionBadge)
+            h2 Badges
+            if ownedBadges.length > 0
+              h4 Obtenus 
+              ul(style="list-style-type: none; padding-left: 0;")
+                each line in ownedBadges
+                  li(style="display: inline-block; margin-right: 20px;") 
+                    p= line.titleBadge
+                    ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                      li(style="display: inline-block; margin-right: 10px;") 
+                        img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;", title=line.descriptionBadge)
+                      li
+                        p= line.obtentionDate
+            if otherBadges.length > 0
+              h4 Non obtenus
+              ul(style="list-style-type: none; padding-left: 0; margin-top: 20px;")
+                each line in otherBadges
+                  li(style="display: inline-block; margin-right: 20px;")
+                    p= line.titleBadge
+                    ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                      li(style="display: inline-block; margin-right: 10px;")
+                        img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);" title=line.descriptionBadge)
 
-  script(src="/javascripts/vantaThree.js")
-  script(src="/javascripts/vantaNet.js")
-  script(src="/javascripts/background-element.js")
+      script(src="/javascripts/vantaThree.js")
+      script(src="/javascripts/vantaNet.js")
+      script(src="/javascripts/background-element.js")

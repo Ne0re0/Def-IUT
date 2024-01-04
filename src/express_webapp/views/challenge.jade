@@ -40,11 +40,13 @@ html
         // Right
         ul.nav-links
           li
-            a(href='/scoreboard') ScoreBoard
+            a(href='/') Challenges
           li
-            a(href='/myprofile') My Profile
+            a(href='/scoreboard') Scoreboard
           li
-            a(href='/disconnect') Disconnection
+            a(href='/myprofile') Mon compte
+          li
+            a(href='/disconnect') Déconnexion
             
     block content
       #background-element
@@ -52,19 +54,18 @@ html
           h1.vertical-space= challenge.titleChallenge
 
           // Niveau de difficulté
-          p.vertical-space Difficulté: #{challenge.itsDifficulty}
+          p.vertical-space Difficulté:  #{challenge.itsDifficultyString}
 
           // Description
-          p.vertical-space Description: #{challenge.descriptionChallenge}
+          p.vertical-space #{challenge.descriptionChallenge}
 
-          // Lien pour télécharger le fichier du drapeau
-          a.vertical-space(href='/challenges/' + challenge.idChallenge + '/flag.txt', download='flag.txt') Download Flag File
+          p.vertical-space Nombre d'essais : #{retryCount}
 
           // Formulaire pour soumettre le flag
           form.vertical-space(action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
-            label(for='flagInput') Enter Flag:
+            label(for='flagInput') 
             input(type='text', name='flagInput', id='flagInput', required)
-            button(type='submit') Submit Flag
+            button(type='submit') Valider
 
           // Boîte modale pour afficher le résultat
           #resultModal.modal
@@ -74,21 +75,26 @@ html
                 span#successMessage #{success}
 
           div.challenges-container
-            h1.vertical-space= "Tableau des Flaggers"
-              // Tableau des réussites
-              block successUsers
-                if (successUsers.length > 0)
-                  table.table-successful-users
-                    thead
-                      tr
-                        th Utilisateur
+            h3 Résultats du challenge
+            // Tableau des réussites
+            block successUsers
+              if (successUsers.length > 0)
+                table.table-successful-users
+                  thead
+                    tr
+                      th Utilisateur
+                      th Rang
+                      th Date
 
-                    tbody
-                      each user in successUsers
-                        tr
-                          td= user.aUser
-                else
-                  p.vertical-space Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
+                  tbody
+                    each user in successUsers
+                      tr
+                        td
+                          a(href=`/user/${user.idUser}`)= user.username
+                        td= user.rank
+                        td= user.flagged
+              else
+                p.vertical-space Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
 
     script(src="/javascripts/vantaThree.js")
     script(src="/javascripts/vantaNet.js")

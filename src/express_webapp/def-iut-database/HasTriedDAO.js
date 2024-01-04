@@ -96,12 +96,11 @@ class HasTriedDAO {
 
     /**
      * Returns users that have flagged ordered by ascendant dates
-     * 
      */
     getSuccessfulUsers(challengeId) {
         return new Promise((resolve, reject) => {
             const query = `
-                SELECT DISTINCT aUser FROM HasTried WHERE aChallenge = ? AND flagged IS NOT NULL ORDER BY flagged ASC`;
+                SELECT * FROM HasTried JOIN FullyDistinguishedUsers ON aUser = idUser WHERE aChallenge = ? AND flagged IS NOT NULL ORDER BY flagged ASC`;
             db.all(query, [challengeId], function(err, rows) {
                 if (err) {
                     reject(err);

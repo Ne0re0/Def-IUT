@@ -48,7 +48,7 @@ router.post('/', function(req, res, next) {
     !req.body.password.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) ||
     !req.body.password.length>7
   ){
-    res.render('register', { title: 'Créer un compte', body:req.body, error:"Le mot de passe ne respecte pas les conditions" });
+    res.render('register', { title: 'Créer un compte', body:req.body, error:"Mot de passe invalide" });
     return;
   }
   console.log(req.body)
@@ -56,7 +56,7 @@ router.post('/', function(req, res, next) {
   // Check confirmation
 
   if (req.body.password !== req.body['password-confirmation']){
-    res.render('register', { title: 'Créer un compte', body:req.body, error:"Mot de passe et confirmation différents" });
+    res.render('register', { title: 'Créer un compte', body:req.body, error:"Confirmation invalide" });
     return;
   }
 
@@ -66,10 +66,14 @@ router.post('/', function(req, res, next) {
   // Tests passed
   usersDAO.insert(req.body.email,0,req.body.username,req.body.password,0)
     .then((user) => {
-      res.render('register', { title: 'Créer un compte', body:req.body, success:"Compte créé avec succès, veuillez vous connecter" });
+      res.render('register', { title: 'Créer un compte', body:req.body, success:"Se connecter" });
     })
     .catch((err) => {
-      res.render('register', { title: 'Créer un compte', body:req.body, error:err });
+      if (err.toString().includes('mail')){
+        res.render('register', { title: 'Créer un compte', body:req.body, error:"Adresse mail existante" });
+      } else {
+        res.render('register', { title: 'Créer un compte', body:req.body, error:"Pseudonyme existant" });
+      }
       return;
     })
   // res.redirect("/");

@@ -48,7 +48,7 @@ class ChallengesDAO {
     // Récupérer tous les Challenges
     findAll() {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM Challenges;';
+            const query = 'SELECT * FROM DistinguishedChallenges;';
             db.all(query, function(err, rows) {
                 if (err) {
                     reject(err);

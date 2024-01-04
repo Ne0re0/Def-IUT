@@ -29,10 +29,10 @@ router.get('/:token', function(req, res, next) {
 router.post('/', function(req, res, next) {
 
   if (req.body === undefined || req.body.mail === undefined || req.body.mail === ''){
-    res.render('recover', { title: 'Mot de passe oublié', failed :"L'adresse e-mail n'a pas été précisée"});
+    res.render('recover', { title: 'Mot de passe oublié', error :"L'adresse e-mail n'a pas été précisée"});
 
   } else if (!req.body.mail.match(/^[A-Za-z0-9._%+-]+@.*univ-ubs\.fr$/)) {
-    res.render('recover', { title: 'Mot de passe oublié', failed :"L'adresse e-mail doit être une adresse UBS valide"});
+    res.render('recover', { title: 'Mot de passe oublié', error :"L'adresse e-mail doit être une adresse UBS valide"});
 
   } else {
     // Write password recovery file
@@ -60,11 +60,11 @@ router.post('/', function(req, res, next) {
       if (error) {
         console.log("Erreur lors de l'envoie de l\'e-mail")
         console.log(error)
-        res.render('recover', { title: 'Mot de passe oublié', failed: "Erreur lors de l'envoie du mail de vérification, veuillez vous réessayer ultérieurement" });
+        res.render('recover', { title: 'Mot de passe oublié', error: "Erreur lors de l'envoie du mail de vérification, veuillez vous réessayer ultérieurement" });
 
       } else {
         console.log('Email envoyé :', info.response);
-        res.render('recover', { title: 'Mot de passe oublié', failed: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé" });
+        res.render('recover', { title: 'Mot de passe oublié', error: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé" });
       }
     })
   }
@@ -81,16 +81,16 @@ router.post('/:token', function(req, res, next) {
     !req.body.password.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) ||
     !req.body.password.length>7
   ){
-    res.render('recover', { title: 'Mot de passe oublié', body:req.body, failed:"Le mot de passe ne respecte pas les conditions générales de sécurité" });
+    res.render('recover', { title: 'Mot de passe oublié', body:req.body, error:"Le mot de passe ne respecte pas les conditions générales de sécurité" });
   } else if (req.body.password !== req.body['password-confirmation']){
-    res.render('recover', { title: 'Mot de passe oublié', body:req.body, failed:"Le nouveau mot de passe et sa confirmation ne sont pas identiques" });
+    res.render('recover', { title: 'Mot de passe oublié', body:req.body, error:"Le nouveau mot de passe et sa confirmation ne sont pas identiques" });
   } else {
 
     filePath = "../password_recovery/"+token
     fs.readFile(filePath, (err, data) => {
       if (err){
         console.error(err)
-        res.render('recover', { title: 'Mot de passe oublié',token:token, failed: "Token invalide" });
+        res.render('recover', { title: 'Mot de passe oublié',token:token, error:"Token invalide" });
       } else {
         console.log("File read : " + data)
         console.log("File read : " + data.toString())
@@ -113,7 +113,7 @@ router.post('/:token', function(req, res, next) {
         })
         .catch((err) => {
           console.log("Password update failed " + err)
-          res.render('recover', { title: 'Mot de passe oublié',token:token, failed: "Erreur lors de la modification du mot de passe" });
+          res.render('recover', { title: 'Mot de passe oublié',token:token, error: "Erreur lors de la modification du mot de passe" });
         })
       }
    })

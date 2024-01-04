@@ -7,18 +7,20 @@ html
 
 body
   nav.navbar
-        // Left
-        a.logo(href='/')
-            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
+    // Left
+    a.logo(href='/')
+        img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
 
-        // Right
-        ul.nav-links
-          li
-            a(href='/scoreboard') Scoreboard
-          li
-            a(href='/myprofile') Mon compte
-          li
-            a(href='/disconnect') Se déconnecter
+    // Right
+    ul.nav-links
+      li
+        a(href='/') Challenges
+      li
+        a(href='/scoreboard') Scoreboard
+      li
+        a(href='/myprofile') Mon compte
+      li
+        a(href='/disconnect') Déconnexion
             
   block content
     #background-element
@@ -32,7 +34,7 @@ body
                 th Titre
                 th Catégorie
                 th Difficulté
-                th Description
+                th Points
 
             tbody
               each challenge in challenges
@@ -40,8 +42,8 @@ body
                   td
                     a(href='/challenge/#{challenge.idChallenge}')= challenge.titleChallenge
                   td= challenge.itsCategory
-                  td= challenge.itsDifficulty
-                  td= challenge.descriptionChallenge
+                  td= challenge.itsDifficultyString
+                  td= challenge.reward
         else
           p Aucun challenge n'est disponible pour le moment.
   script(src="/javascripts/vantaThree.js")

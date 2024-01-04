@@ -9,7 +9,16 @@ html
         // Left
         a.logo(href='/')
           img(src='/logos/Full_Logo_Horizontal.png',width='310', height='75')
-        
+  
+        ul.nav-links
+          li
+            a(href='/') Challenges
+          li
+            a(href='/scoreboard') Scoreboard
+          li
+            a(href='/myprofile') Mon compte
+          li
+            a(href='/disconnect') Déconnexion
 
     block content
       #background-element
@@ -31,10 +40,15 @@ html
                 
                 button.login-button(type='submit') Vérifier son compte
           
-            if failed
-              .login-error-form
+            if error
+              div.div-verify-error
                 .text-center.mb-5
-                  p= failed
+                  p= error
+            if success
+              div.div-verify-success
+                .text-center.mb-5
+                  p= success
+
 
                  
   script(src="/javascripts/vantaThree.js")

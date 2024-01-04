@@ -6,39 +6,52 @@ html
     
   body
     nav.navbar
-        // Left
-        a.logo(href='/')
-            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
+      // Left
+      a.logo(href='/')
+          img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
 
-        // Right
-        ul.nav-links
-          li
-            a(href='/challenges') Challenges
-          li
-            a(href='/scoreboard') ScoreBoard
-          li
-            a(href='/disconnect') Disconnect
+      // Right
+      ul.nav-links
+        li
+          a(href='/') Challenges
+        li
+          a(href='/scoreboard') Scoreboard
+        li
+          a(href='/myprofile') Mon compte
+        li
+          a(href='/disconnect') Déconnexion
             
     block content
       #background-element
-        h2 Bienvenue sur votre profil, #{user.username}!
+        div.div-profile-container
+          h2 Bienvenue sur votre profil, #{user.username}!
 
-        if message
-          p= message
+          if message
+            p= message
 
-        // Formulaire de modification des informations
-        form(action='/myprofile', method='post', class='profile-form')
-          label(for='newUsername') Nom d'utilisateur :
-          input(type='text', id='newUsername', name='newUsername', value=user.username, class='form-control')
-          br
+          // Formulaire de modification des informations
+          form(action='/myprofile', method='post', class='profile-form')
+            label(for='newUsername') Nom d'utilisateur :
+            input(type='text', id='newUsername', name='newUsername', value=user.username, class='form-control')
+            br
 
-          label(for='newEmail') Email :
-          input(type='email', id='newEmail', name='newEmail', value=user.mail, class='form-control')
-          br
+            label(for='newEmail') Email :
+            input(type='email', id='newEmail', name='newEmail', value=user.mail, class='form-control')
 
-          input(type='submit', value='Mettre à jour', class='btn-submit')
+            p.alert Tout changement d'adresse e-mail entraînera une nouvelle vérification nécessaire de celle-ci, vous ne pourrez plus vous connecter tant que celle-ci n'aura pas été vérifiée
 
-        p= error
+            input(type='submit', value='Mettre à jour', class='btn-submit')
+
+
+          if error
+            div.div-myprofile-error
+              .text-center.mb-5
+                p= error
+          if success
+            div.div-myprofile-success
+              .text-center.mb-5
+                p= success
+
   script(src="/javascripts/vantaThree.js")
   script(src="/javascripts/vantaNet.js")
   script(src="/javascripts/background-element.js")

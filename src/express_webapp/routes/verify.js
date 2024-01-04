@@ -25,7 +25,7 @@ router.post('/:token', function(req, res, next) {
       req.body.password === ''
     ){
       console.log("Bad authentication during email verification")
-      res.render('verify', { title: 'Verify',token:token, failed: "Un des champs n'a pas été rempli" });
+      res.render('verify', { title: 'Verify',token:token, error: "Un des champs n'a pas été rempli" });
     } else {
       console.log("Arguments are valid")
       usersDAO.connect(req.body.username,req.body.password)
@@ -36,12 +36,12 @@ router.post('/:token', function(req, res, next) {
         fs.readFile(filePath, (err, data) => {
             if (err){
               console.error(err)
-              res.render('verify', { title: 'Verify',token:token, failed: "Token invalide" });
+              res.render('verify', { title: 'Verify',token:token, error: "Token invalide" });
             }else {
               console.log("File read : " + data)
               if (success.mail !== data.toString()){
                 console.log("Account invalid : " + typeof data.toString() + " " + typeof success.mail)
-                res.render('verify', { title: 'Verify',token:token, failed: "Le compte ne correspond pas à la bonne adresse e-mail" });
+                res.render('verify', { title: 'Verify',token:token, error: "Le compte ne correspond pas à la bonne adresse e-mail" });
               } else {
                 console.log("Everything ok, verifying account")
                 usersDAO.verifyAccount(success.mail)
@@ -63,7 +63,7 @@ router.post('/:token', function(req, res, next) {
                 })
                 .catch((err) => {
                   console.log("Error when verifying email : " + success.mail)
-                  res.render('verify', { title: 'Verify',token:token, failed: "Erreur serveur lors de la vérification de l'adresse e-mail" });
+                  res.render('verify', { title: 'Verify',token:token, error: "Erreur serveur lors de la vérification de l'adresse e-mail" });
                 })
               }
             }
@@ -73,7 +73,7 @@ router.post('/:token', function(req, res, next) {
       })
       .catch((err) => {
         console.log("Wrong credentials");
-        res.render('verify', { title: 'Verify',token:token, failed: "Mot de passe ou nom d'utilisateur incorrect" });
+        res.render('verify', { title: 'Verify',token:token, error: "Mot de passe ou nom d'utilisateur incorrect" });
 
       })
     }

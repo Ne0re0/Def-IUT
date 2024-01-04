@@ -13,11 +13,13 @@ html
         // Right
         ul.nav-links
           li
+            a(href='/') Challenges
+          li
             a(href='/scoreboard') Scoreboard
           li
             a(href='/myprofile') Mon compte
           li
-            a(href='/disconnect') Se déconnecter
+            a(href='/disconnect') Déconnexion
 
 
     block content
@@ -41,13 +43,14 @@ html
                   | Vous n'avez pas de compte ? 
                   a.a-tag(href='/register') Créer un compte
           
-            if failed
-              .text-center.mb-5
-                p= failed
+            if error
+              div.div-recover-error
+                .text-center.mb-5
+                  p= error
             if success
-              span.text-center.mt-5
-                  | Mot de passe réinitialisé avec succès 
-                  a.a-tag(href='/connect') Se connecter
+              div.div-connect-success
+                .text-center.mb-5
+                  p= success
 
                  
   script(src="/javascripts/vantaThree.js")

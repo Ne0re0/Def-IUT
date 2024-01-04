@@ -18,7 +18,7 @@ router.get('/:idChallenge', isConnected, async function(req, res, next) {
 
     const challengeDetails = await challengesDAO.findByID(challengeId);
     if (!challengeDetails) {
-      return res.status(404).send('Challenge not found');
+      return res.render('error');
     }
     console.log(challengeDetails)
 
@@ -43,7 +43,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
   try {
     const challengeDetails = await challengesDAO.findByID(challengeId);
     if (!challengeDetails) {
-      return res.status(404).send('Challenge not found');
+      return res.render('error');
     }
 
     console.log("Verif2");

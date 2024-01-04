@@ -51,21 +51,32 @@ html
     block content
       #background-element
         div.challenges-container
-          h1.vertical-space= challenge.titleChallenge
+          h1= challenge.titleChallenge
 
-          // Niveau de difficulté
-          p.vertical-space Difficulté:  #{challenge.itsDifficultyString}
+          p.challenge-description #{challenge.descriptionChallenge}
+          table.challenge-info
+            tr
+              td Difficulté:
+              td #{challenge.itsDifficultyString}
+            if challenge.connection
+              tr
+                td Connexion:
+                td
+                  a(href=challenge.connection) #{challenge.connection}
+            tr
+              td Nombre d'essais :
+              td #{retryCount}
 
-          // Description
-          p.vertical-space #{challenge.descriptionChallenge}
-
-          p.vertical-space Nombre d'essais : #{retryCount}
 
           // Formulaire pour soumettre le flag
-          form.vertical-space(action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
+          form(id="loginForm", action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
             label(for='flagInput') 
-            input(type='text', name='flagInput', id='flagInput', required)
-            button(type='submit') Valider
+            .inputs-container
+              .inputs.flag
+                input(type='text', name='flagInput', id='flagInput', placeholder='DEF{...}',required)
+            button.login-button(type='submit') Valider
+
+
 
           // Boîte modale pour afficher le résultat
           #resultModal.modal
@@ -94,7 +105,7 @@ html
                         td= user.rank
                         td= user.flagged
               else
-                p.vertical-space Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
+                p Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
 
     script(src="/javascripts/vantaThree.js")
     script(src="/javascripts/vantaNet.js")

@@ -33,7 +33,13 @@ router.get('/:idUser', isConnected, function(req, res, next) {
               if (undefined === chart){
                 chart = {flagged:[],reward:[]}
               } 
-              console.log(chart)
+              console.log("Chart : ")
+              for (object of chart){
+                console.log(object)
+              } 
+
+              // Modifie
+
               ownsDAO.getOwnedBadges(idUser)
               .then((ownedBadges) => {
                 console.log("Badges : " + ownedBadges)
@@ -72,5 +78,6 @@ router.get('/:idUser', isConnected, function(req, res, next) {
       })
   
 });
+
 
 module.exports = router;

@@ -1,6 +1,4 @@
 -- Drop tables
-DROP TABLE IF EXISTS Files;
-DROP TABLE IF EXISTS Dockers;
 DROP TABLE IF EXISTS HasTried;
 DROP TABLE IF EXISTS Owns;
 DROP TABLE IF EXISTS Badges;
@@ -94,17 +92,4 @@ CREATE TABLE HasTried (
     CONSTRAINT pk_HasTried PRIMARY KEY (aUser, aChallenge),
     CONSTRAINT fk_HasTried_Users FOREIGN KEY (aUser) REFERENCES Users(idUser),
     CONSTRAINT fk_HasTried_Challenges FOREIGN KEY (aChallenge) REFERENCES Challenges(idChallenge)
-);
-
-
--- Files
-CREATE TABLE Files (
-    idFile INTEGER 
-        CONSTRAINT pk_Files PRIMARY KEY AUTOINCREMENT,
-    filename TEXT 
-        CONSTRAINT nn_filename NOT NULL,
-    itsChallenge INTEGER
-        CONSTRAINT nn_Files_itsChallenge NOT NULL
-        CONSTRAINT uq_Files_itsChallenges UNIQUE,
-    CONSTRAINT fk_Files_Challenges FOREIGN KEY (itsChallenge) REFERENCES Challenges(idChallenge)
 );

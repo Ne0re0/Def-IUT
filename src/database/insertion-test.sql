@@ -30,11 +30,11 @@ INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag,
 INSERT INTO Challenges (titleChallenge, itsCategory, descriptionChallenge, flag, itsDifficulty, connection) VALUES ("Huitième challenge","Programmation","Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}","DEF{8}",4,NULL);
 
 -- Insert HasTried
-INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,1,'2023-12-11',1);
-INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,2,'2023-12-11',1);
-INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,3,'2023-12-10',1);
-INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,4,'2023-12-20',5);
-INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,8,'2023-11-10',10);
-INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,6,'2022-11-10',7);
-INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (2,1,'2023-12-11',1);
+INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,1,'18h25 11 déc. 2023',1);
+INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,2,'14h05 12 déc. 2023',1);
+INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,3,'10h25 11 déc. 2023',1);
+INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,4,'13h25 11 déc. 2023',5);
+INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,8,'12h23 13 déc. 2023',10);
+INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,6,'18h27 15 déc. 2023',7);
+INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (2,1,'12h35 11 déc. 2023',1);
 INSERT INTO HasTried (aUser, aChallenge, flagged, retryNb) VALUES (1,7,NULL,4);

@@ -112,14 +112,17 @@ const addTry = async (userId, challengeId) => {
 
 // Valid the challenge
 const addSuccessfulTry = async (userId, challengeId) => {
-    const date = new Date();
+    let months = ["jan.","fév.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."]
+
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const month = months[today.getMonth()];
     const day = String(today.getDate()).padStart(2, '0');
+    const hour = String(today.getHours()).padStart(2, '0');
+    const minute = String(today.getMinutes()).padStart(2, '0');
 
-    const dateStr = `${year}-${month}-${day}`;
-
+    const dateStr = `${hour}h${minute} ${day} ${month} ${year}`;
+    console.log(dateStr)
     howMuchTries(userId, challengeId)
       .then((nbTry) => {
         if (nbTry !== 0) {

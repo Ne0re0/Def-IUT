@@ -86,6 +86,29 @@ class ChallengesDAO {
             });
         });
     }
+
+    // Vérifier si un utilisateur a réussi un challenge de chaque catégorie
+    async hasCompletedAllCategories(userId) {
+        try {
+        const query = `
+            SELECT C.itsCategory, COUNT(HT.aChallenge) AS count
+            FROM Challenges C
+            LEFT JOIN HasTried HT ON C.idChallenge = HT.aChallenge AND HT.aUser = ?
+            WHERE HT.flagged IS NOT NULL
+            GROUP BY C.itsCategory
+        `;
+
+        const rows = await db.all(query, [userId]);
+
+        // Vérifier si toutes les catégories ont au moins un challenge réussi
+        const allCategoriesCompleted = rows.every(row => row.count > 0);
+
+        return allCategoriesCompleted;
+        } catch (error) {
+        console.error('Erreur lors de la vérification des challenges par catégorie :', error);
+        throw new Error('Erreur lors de la vérification des challenges par catégorie');
+        }
+    }
 }
 
 const dao = new ChallengesDAO();

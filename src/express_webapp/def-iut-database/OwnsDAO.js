@@ -102,6 +102,20 @@ class OwnsDAO {
             });
         });
     }
+
+    // Check if the user has already obtained the badge
+    alreadyObtained(userId, badgeId) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT COUNT(*) as count FROM Owns WHERE aUser = ? AND aBadge = ?';
+            db.get(query, [userId, badgeId], function(err, row) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(row.count > 0); // Resolve true if count is greater than 0, indicating that the badge has been obtained
+                }
+            });
+        });
+    }
 }
 
 const dao = new OwnsDAO();

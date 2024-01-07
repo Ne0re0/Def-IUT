@@ -87,27 +87,42 @@ class ChallengesDAO {
         });
     }
 
+    // Compter le nombre de catégories distinctes
+    countCategories() {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT COUNT(DISTINCT itsCategory) AS categoryCount FROM Challenges';
+            db.get(query, function(err, result) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.categoryCount);
+                }
+            });
+        });
+    }
+
     // Vérifier si un utilisateur a réussi un challenge de chaque catégorie
-    async hasCompletedAllCategories(userId) {
-        try {
-        const query = `
-            SELECT C.itsCategory, COUNT(HT.aChallenge) AS count
-            FROM Challenges C
-            LEFT JOIN HasTried HT ON C.idChallenge = HT.aChallenge AND HT.aUser = ?
-            WHERE HT.flagged IS NOT NULL
-            GROUP BY C.itsCategory
-        `;
-
-        const rows = await db.all(query, [userId]);
-
-        // Vérifier si toutes les catégories ont au moins un challenge réussi
-        const allCategoriesCompleted = rows.every(row => row.count > 0);
-
-        return allCategoriesCompleted;
-        } catch (error) {
-        console.error('Erreur lors de la vérification des challenges par catégorie :', error);
-        throw new Error('Erreur lors de la vérification des challenges par catégorie');
-        }
+    successedCategory(userId) {
+        return new Promise((resolve, reject) => {
+            const query = `
+            SELECT COUNT(*) AS categoryCount
+            FROM (
+                SELECT C.itsCategory, COUNT(HT.aChallenge) AS count
+                FROM Challenges C
+                LEFT JOIN HasTried HT ON C.idChallenge = HT.aChallenge AND HT.aUser = ?
+                WHERE HT.flagged IS NOT NULL
+                GROUP BY C.itsCategory
+            ) AS nbUnsuccessful;
+            `;
+    
+            db.get(query, [userId], function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
     }
 }
 

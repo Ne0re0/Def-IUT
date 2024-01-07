@@ -1,1 +1,2 @@
 DELETE FROM HasTried WHERE aUser = 11;
+DELETE FROM Owns WHERE aUser = 11;

@@ -47,7 +47,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
       return res.render('error');
     }
 
-    const retryCount = await hasTriedDAO.getRetryCount(session.user.idUser, challengeId);
+    const retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
 
     const isFlagged = await alreadyFlagged(userId, challengeId);
     if (!isFlagged) {
@@ -55,6 +55,17 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
         console.log("Flag = True");
         await addSuccessfulTry(userId, challengeId);
         success = "Bien joué! Vous avez réussi ce challenge !";
+
+        // Badges attribution
+        await WelcomeBadge(userId);
+        await FirstTryBadge(userId, challengeId);
+        await FirstBloodBadge(userId, challengeId);
+        await HappyHourBadge(userId);
+        await PerseverantBadge(userId, challengeId);
+        await ExplorerBadge(userId);
+        await CompletionistBadge(userId);
+        await HackermanBadge(userId);
+
       } else {
         console.log("Flag = False");
         await addTry(userId, challengeId);
@@ -123,7 +134,7 @@ const addSuccessfulTry = async (userId, challengeId) => {
 
     const dateStr = `${hour}h${minute} ${day} ${month} ${year}`;
     console.log(dateStr)
-    howMuchTries(userId, challengeId)
+    await howMuchTries(userId, challengeId)
       .then((nbTry) => {
         if (nbTry !== 0) {
           hasTriedDAO.update(userId, challengeId, dateStr, nbTry + 1)
@@ -173,7 +184,7 @@ const howMuchTries = async (userId, challengeId) => {
 // Get the Date
 function getTheDate() {
   const date = new Date();
-  return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+  return date.getFullYear() + "-" + parseInt(date.getMonth())+1 + "-" + date.getDate();
 }
 
 // Bienvenue
@@ -193,7 +204,6 @@ async function WelcomeBadge(userId) {
       return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
       console.error('Erreur lors de la vérification du badge "Bienvenue":', error);
-      throw new Error('Erreur lors de la vérification du badge "Bienvenue"');
   }
 }
 
@@ -207,7 +217,7 @@ async function FirstTryBadge(userId, challengeId) {
       if (!alreadyObtained) {
           // Vérifier si l'utilisateur a un seul essai pour le défi actuel
           const numberOfTries = await howMuchTries(userId, challengeId);
-
+          console.log("numberOfTries = " + numberOfTries);
           if (numberOfTries === 1) {
             // Accorder le badge "First try" à l'utilisateur
             await ownsDAO.insert([userId, id, getTheDate()]);
@@ -219,7 +229,6 @@ async function FirstTryBadge(userId, challengeId) {
       return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
       console.error('Erreur lors de la vérification du badge "First try":', error);
-      throw new Error('Erreur lors de la vérification du badge "First try"');
   }
 }
 
@@ -245,12 +254,11 @@ async function FirstBloodBadge(userId, challengeId) {
       return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
       console.error('Erreur lors de la vérification du badge "First blood":', error);
-      throw new Error('Erreur lors de la vérification du badge "First blood"');
   }
 }
 
 // Happy Hour
-async function HappyHourBadge(userId, challengeDate) {
+async function HappyHourBadge(userId) {
   const id = 4;
   try {
     // Vérifier si l'utilisateur a déjà obtenu le badge "Happy hour"
@@ -258,7 +266,7 @@ async function HappyHourBadge(userId, challengeDate) {
 
     if (!alreadyObtained) {
       // Vérifier si nous sommes en happy hour
-      const isValidHappyHour = await isHappyHour(challengeDate);
+      const isValidHappyHour = await isHappyHour();
 
       if (isValidHappyHour) {
         // Accorder le badge "Happy hour" à l'utilisateur
@@ -271,12 +279,12 @@ async function HappyHourBadge(userId, challengeDate) {
     return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
     console.error('Erreur lors de la vérification du badge "Happy hour":', error);
-    throw new Error('Erreur lors de la vérification du badge "Happy hour"');
   }
 }
 
-// Fonction pour vérifier si le défi a été validé un jeudi entre 17 et 19 heures
+// Fonction pour définir l'happy hour
 async function isHappyHour() {
+  return true;
   try {
     const date = new Date();
     
@@ -289,14 +297,13 @@ async function isHappyHour() {
     return isThursday && isHappyHourTime;
   } catch (error) {
     console.error('Erreur lors de la vérification de l\'heure "Happy hour":', error);
-    throw new Error('Erreur lors de la vérification de l\'heure "Happy hour"');
   }
 }
 
 // Persévérant
 async function PerseverantBadge(userId, challengeId) {
   const id = 5;
-  const requiredAttempts = 10;
+  const requiredAttempts = 0;
 
   try {
     // Vérifier si l'utilisateur a déjà obtenu le badge "Persévérant"
@@ -317,7 +324,6 @@ async function PerseverantBadge(userId, challengeId) {
     return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
     console.error('Erreur lors de la vérification du badge "Persévérant":', error);
-    throw new Error('Erreur lors de la vérification du badge "Persévérant"');
   }
 }
 
@@ -331,9 +337,13 @@ async function ExplorerBadge(userId) {
 
     if (!alreadyObtained) {
       // Vérifier si l'utilisateur a validé au moins un défi dans chaque catégorie
-      const hasValidatedInEachCategory = await hasTriedDAO.hasCompletedAllCategories(userId);
+      const nbsuccessedCategory = await challengesDAO.successedCategory(userId);
+      const nbCategories = await challengesDAO.countCategories();
 
-      if (hasValidatedInEachCategory) {
+      console.log("nbsuccessedCategory = " + nbsuccessedCategory.categoryCount);
+      console.log("nbCategories = " + nbCategories);
+
+      if (nbsuccessedCategory.categoryCount === nbCategories) {
         // Accorder le badge "Explorateur" à l'utilisateur
         await ownsDAO.insert([userId, id, getTheDate()]);
         console.log(`Badge "Explorateur" accordé à l'utilisateur avec l'ID ${userId}.`);
@@ -344,7 +354,6 @@ async function ExplorerBadge(userId) {
     return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
     console.error('Erreur lors de la vérification du badge "Explorateur":', error);
-    throw new Error('Erreur lors de la vérification du badge "Explorateur"');
   }
 }
 
@@ -358,18 +367,19 @@ async function CompletionistBadge(userId) {
 
     if (!alreadyObtained) {
       // Vérifier si l'utilisateur a validé tous les défis de la plateforme
-      const allChallenges = await challengesDAO.findAllChallenges();
+      const allChallenges = await challengesDAO.findAll();
 
       // Vérifier pour chaque défi
-      const hasValidatedAllChallenges = await Promise.all(
-        allChallenges.map(async (challenge) => {
-          const hasValidated = await hasTriedDAO.isFlagged(userId, challenge.idChallenge);
-          return hasValidated;
-        })
-      );
+      var hasValidatedAllChallenges = true;
+      for (var chall of allChallenges) {
+        var result = await alreadyFlagged(userId, chall.idChallenge);
+        if (!result) {
+            hasValidatedAllChallenges = false;
+        }
+      }
 
       // Si tous les défis ont été validés, accorder le badge "Complétionniste"
-      if (hasValidatedAllChallenges.every((validated) => validated)) {
+      if (hasValidatedAllChallenges) {
         await ownsDAO.insert([userId, id, getTheDate()]);
         console.log(`Badge "Complétionniste" accordé à l'utilisateur avec l'ID ${userId}.`);
         return true; // Indique que le badge a été accordé
@@ -379,7 +389,6 @@ async function CompletionistBadge(userId) {
     return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
     console.error('Erreur lors de la vérification du badge "Complétionniste":', error);
-    throw new Error('Erreur lors de la vérification du badge "Complétionniste"');
   }
 }
 
@@ -407,7 +416,6 @@ async function HackermanBadge(userId) {
     return false; // Indique que le badge n'a pas été accordé
   } catch (error) {
     console.error('Erreur lors de la vérification du badge "Hackerman":', error);
-    throw new Error('Erreur lors de la vérification du badge "Hackerman"');
   }
 }
 

@@ -45,6 +45,8 @@ body
                     span.icon-arrow &UpArrow;
                   th Points
                     span.icon-arrow &UpArrow;
+                  th Résolu
+                    span.icon-arrow &UpArrow;
 
               tbody
                 each challenge in challenges
@@ -54,6 +56,11 @@ body
                     td= challenge.itsCategory
                     td= challenge.itsDifficultyString
                     td= challenge.reward
+                    if challenge.flagged
+                      td.flagged &#0020;
+                       img(src='images/flag.png', alt='')
+                    else
+                      td.flagged  
           else
             p Aucun challenge n'est disponible pour le moment.
 

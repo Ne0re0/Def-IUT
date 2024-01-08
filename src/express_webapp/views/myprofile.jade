@@ -24,7 +24,10 @@ html
     block content
       #background-element
         div.div-profile-container
-          h2 Bienvenue sur votre profil, #{user.username}!
+          h2 Bienvenue sur votre profil privé, #{user.username}!
+
+          p.myprofile-information Pour accéder à votre profil public, cliquez 
+            a(href="/user/" + user.idUser) ici
 
           if message
             p= message

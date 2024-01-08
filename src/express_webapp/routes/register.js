@@ -5,7 +5,11 @@ var session = require('express-session');
 
 /* GET register page. */
 router.get('/', function(req, res, next) {
-  res.render('register', { title: 'Créer un compte' });
+  if (session.user !== undefined){
+    res.redirect("/");
+  } else {
+    res.render('register', { title: 'Créer un compte' });
+  }
 });
 
 router.post('/', function(req, res, next) {

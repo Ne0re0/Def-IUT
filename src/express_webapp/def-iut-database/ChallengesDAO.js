@@ -59,6 +59,19 @@ class ChallengesDAO {
         });
     }
 
+    findAllKnowingUser(idUser) {
+        return new Promise((resolve, reject) => {
+            const query = 'SELECT * FROM DistinguishedChallenges LEFT JOIN HasTried ON aChallenge = idChallenge WHERE aUser is NULL OR aUser = ?;';
+            db.all(query,[idUser] ,function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     // Trouver un Challenge par son id
     findByID(key) {
         return new Promise((resolve, reject) => {

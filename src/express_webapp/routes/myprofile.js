@@ -17,7 +17,20 @@ router.get('/', isConnected, function(req, res, next) {
 
 
 router.post('/', isConnected, function(req, res, next) {
+  if (session.user === undefined){
+    return res.redirect("/connect");
+  }
+
   console.log("first", req.body);
+
+  if (
+    req.body.newUsername === session.user.username &&
+    req.body.newEmail === session.user.mail 
+  ){
+    res.render('myprofile', { title: 'My Profile', body:req.body, user: session.user });
+    return;
+  }
+
   if (
     req.body.newUsername === undefined ||
     req.body.newUsername === '' || 

@@ -4,6 +4,7 @@ const usersDAO = require('def-iut-database').usersDAO;
 const nodemailer = require('nodemailer');
 const fs = require('node:fs');
 const CryptoJS = require('crypto-js');
+var session = require('express-session');
 
 
 // Create the transporter using nodemailer library
@@ -18,15 +19,27 @@ const transporter = nodemailer.createTransport({
 
 
 router.get('/', function(req, res, next) {
-  res.render('recover', { title: 'Mot de passe oublié' });
+  if (session.user !== undefined){
+    res.redirect("/");
+  } else {
+    res.render('recover', { title: 'Mot de passe oublié' });
+  }
 });
 
 
 router.get('/:token', function(req, res, next) {
-  res.render('newpassword', { title: 'Mot de passe oublié', token:req.params.token });
+  if (session.user !== undefined){
+    res.redirect("/");
+  } else {
+    res.render('newpassword', { title: 'Mot de passe oublié', token:req.params.token });
+  }
 });
 
 router.post('/', function(req, res, next) {
+
+  if (session.user !== undefined){
+    return res.redirect("/");
+  } 
 
   if (req.body === undefined || req.body.mail === undefined || req.body.mail === ''){
     res.render('recover', { title: 'Mot de passe oublié', error :"L'adresse e-mail n'a pas été précisée"});
@@ -71,6 +84,11 @@ router.post('/', function(req, res, next) {
 })
 
 router.post('/:token', function(req, res, next) {
+
+  if (session.user !== undefined){
+    return res.redirect("/");
+  } 
+
   console.log(req.body)
   console.log(req.params)
   var token = req.params.token;

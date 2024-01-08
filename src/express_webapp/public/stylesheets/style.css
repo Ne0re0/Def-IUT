@@ -160,8 +160,8 @@ body{
     transition:all 4s;
 }
 
-.green-color{
-    color:green !important;
+.#BBCCBB-color{
+    color:#BBCCBB !important;
 }
 .login-form .inputs input:focus{
     border:2px solid #890596;
@@ -468,6 +468,7 @@ tbody tr td img {
 
     overflow: hidden;
     max-width: 900px;
+    
 }
 
 .challenges-container .table__header {
@@ -525,6 +526,13 @@ tbody tr td img {
     color: black;
 }
 
+.challenges-container td.flagged {
+    text-align: center;
+}
+
+.challenges-container td.flagged img {
+    height: 20px;
+}
 
 .challenges-container thead th {
     position: sticky;
@@ -755,61 +763,69 @@ tbody tr td img {
     overflow:hidden;
     border-radius: 30px;
     background: linear-gradient(145deg, #ffffff, #dddddc);
-/*    box-shadow:  8px 8px 16px #000000,
-             -8px -8px 16px #7c7880;*/
+    width: 80vw;
+    max-width: 600px;
 }
 
 .div-register-error {
-    background-color: red;
+    background-color: #CCBBBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .div-register-success {
-    background-color: green;
+    background-color: #BBCCBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .div-recover-error {
-    background-color: red;
+    background-color: #CCBBBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .div-recover-success {
-    background-color: green;
+    background-color: #BBCCBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .div-connect-error {
-    background-color: red;
+    background-color: #CCBBBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .div-myprofile-error {
     margin-top: 30px;
     margin-bottom: -30px;
-    background-color: red;
+    background-color: #CCBBBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+    padding: 10px;
+
 }
 
 .div-myprofile-success {
     margin-top: 30px;
     margin-bottom: -30px;
-    background-color: green;
+    background-color: #BBCCBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .input-myprofile-update{
@@ -818,7 +834,7 @@ tbody tr td img {
 
 .div-verify-error {
     margin-top: 30px;
-    background-color: red;
+    background-color: #CCBBBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
@@ -826,7 +842,7 @@ tbody tr td img {
 
 .div-verify-success {
     margin-top: 30px;
-    background-color: green;
+    background-color: #BBCCBB;
     border-radius: 10px;
     font-size: 15px;
     font-weight: bold;
@@ -834,7 +850,6 @@ tbody tr td img {
 
 .alert{
     margin-top: 10px;
-    width: 400px;
     text-align: center;
     font-style: italic;
 }
@@ -1105,3 +1120,6 @@ tbody tr td img {
     transition: .2s ease-in-out;
 }
 
+.myprofile-information {
+    margin: 30px;
+}

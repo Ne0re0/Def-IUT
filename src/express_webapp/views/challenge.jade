@@ -6,30 +6,6 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css')
-    script.
-      // JavaScript for modal box
-      function showResultModal() {
-        var modal = document.getElementById('resultModal');
-        modal.style.display = 'block';
-
-        var resultMessage = document.getElementById('resultMessage');
-        // Le résultat réel dépend du contenu de la balise avec l'ID 'successMessage'
-        var successMessage = document.getElementById('successMessage').textContent;
-        resultMessage.innerHTML = successMessage;
-      }
-
-      function closeResultModal() {
-        var modal = document.getElementById('resultModal');
-        modal.style.display = 'none';
-      }
-
-      // Close the modal box
-      window.onclick = function(event) {
-        var modal = document.getElementById('resultModal');
-        if (event.target == modal) {
-          modal.style.display = 'none';
-        }
-      };
 
   body
     nav.navbar
@@ -50,73 +26,75 @@ html
             
     block content
       #background-element
-        div.challenges-container
-          h1= challenge.titleChallenge
+        div.challenge-container
+          section.table__header
+            h1= challenge.titleChallenge
+            form(id="loginForm", action='/challenge/#{challenge.idChallenge}', method='post')
+              label(for='flagInput') 
+              .input-group
+                input(type='text', name='flagInput', id='flagInput', placeholder='Entrer le flag ici...',required)
+                img(src='/images/flag.png', alt='')
+              button.sendFlag-button(type='submit', hidden) Valider
 
-          p.challenge-description #{challenge.descriptionChallenge}
-          table.challenge-info
-            tr
-              td Difficulté:
-              td #{challenge.itsDifficultyString}
-            if challenge.connection
+          section.table__body
+            p.challenge-description #{challenge.descriptionChallenge}
+            table
               tr
-                td Connexion:
-                td
-                  a(href=challenge.connection) #{challenge.connection}
-            tr
-              td Récompense :
-              td #{challenge.reward}
-            tr
-              td Nombre d'essais :
-              td #{retryCount}
-            if isFlagged
+                td Difficulté:
+                td #{challenge.itsDifficultyString}
+              if challenge.connection
+                tr
+                  td Connexion:
+                  td
+                    a(href=challenge.connection) #{challenge.connection}
               tr
-                td Résolu le :
-                td #{isFlagged.flagged}
+                td Récompense :
+                td #{challenge.reward}
+              tr
+                td Nombre d'essais :
+                td #{retryCount}
+              if isFlagged
+                tr
+                  td Résolu le :
+                  td #{isFlagged.flagged}
 
+            // Boîte modale pour afficher le résultat
+            #resultModal.modal
+              .modal-content
+                div#resultMessage
+                  if success
+                    p.challenge-success #{success}
+                    if obtentions !== undefined
+                      p.challenge-success Vous avez obtenue le(s) badges suivants :
+                        each element in obtentions
+                          p.challenge-success #{element}
+                  if failed
+                    p.challenge-failed #{success}
 
-          // Formulaire pour soumettre le flag
-          form(id="loginForm", action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
-            label(for='flagInput') 
-            .inputs-container
-              .inputs.flag
-                input(type='text', name='flagInput', id='flagInput', placeholder='DEF{...}',required)
-            button.login-button(type='submit') Valider
-
-
-          // Boîte modale pour afficher le résultat
-          #resultModal.modal
-            .modal-content
-              span.close(onclick='closeResultModal()') &times;
-              div#resultMessage
-                span#successMessage #{success}
-                if obtentions !== undefined
-                  p Vous avez obtenue le(s) badges suivants :
-                    each element in obtentions
-                      p #{element}
-                    
-
-          div.challenges-container
-            h3 Résultats du challenge
+          div.challenge-history-container
+            section.table__header
+              h3 Historique
             // Tableau des réussites
-            block successUsers
-              if (successUsers.length > 0)
+            section.table__body
                 table.table-successful-users
                   thead
                     tr
                       th Utilisateur
                       th Rang
                       th Date
+                  if (successUsers.length > 0)
 
-                  tbody
-                    each user in successUsers
-                      tr
-                        td
-                          a(href=`/user/${user.idUser}`)= user.username
-                        td= user.rank
-                        td= user.flagged
-              else
-                p Aucun utilisateur n'a réussi ce challenge jusqu'à présent.
+                    tbody
+                      each user in successUsers
+                        tr(onclick='redirectToUser('+user.idUser+')')
+                          td
+                            a(href=`/user/${user.idUser}`)= user.username
+                          td= user.rank
+                          td= user.flagged
+    script.
+      function redirectToUser(id) {
+        window.location.href = "/user/"+id;
+      }
 
     script(src="/javascripts/vantaThree.js")
     script(src="/javascripts/vantaNet.js")

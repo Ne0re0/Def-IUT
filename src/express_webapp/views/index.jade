@@ -25,27 +25,45 @@ body
   block content
     #background-element
       div.challenges-container
-        h1 Liste des Challenges
+        section.table__header
+          h1 Challenges
+          div.input-group
+            input(type='search', placeholder='Recherche...')
+            img(src='images/search.png', alt='')
 
-        if challenges.length > 0
-          table.table-challenges
-            thead
-              tr
-                th Titre
-                th Catégorie
-                th Difficulté
-                th Points
 
-            tbody
-              each challenge in challenges
+        section.table__body
+          if challenges.length > 0
+            table.table-challenges
+              thead
                 tr
-                  td
-                    a(href='/challenge/#{challenge.idChallenge}')= challenge.titleChallenge
-                  td= challenge.itsCategory
-                  td= challenge.itsDifficultyString
-                  td= challenge.reward
-        else
-          p Aucun challenge n'est disponible pour le moment.
+                  th Titre
+                    span.icon-arrow &UpArrow;
+                  th Catégorie
+                    span.icon-arrow &UpArrow;
+                  th Difficulté
+                    span.icon-arrow &UpArrow;
+                  th Points
+                    span.icon-arrow &UpArrow;
+
+              tbody
+                each challenge in challenges
+                  tr(onclick='redirectToChallenge('+challenge.idChallenge+')')
+                    td
+                      a(href='/challenge/#{challenge.idChallenge}')= challenge.titleChallenge
+                    td= challenge.itsCategory
+                    td= challenge.itsDifficultyString
+                    td= challenge.reward
+          else
+            p Aucun challenge n'est disponible pour le moment.
+
+  script.
+    function redirectToChallenge(id) {
+      window.location.href = "/challenge/"+id;
+    }
+
+  script(src="/javascripts/challenges.js")
+
   script(src="/javascripts/vantaThree.js")
   script(src="/javascripts/vantaNet.js")
   script(src="/javascripts/background-element.js")

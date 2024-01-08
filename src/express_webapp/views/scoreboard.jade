@@ -25,35 +25,29 @@ html
     #background-element
       block content
         div.scoreboard-container
-          h1 Tableau des scores
+          section.table__header
+            h1 Scoreboard
 
-          table.table-scoreboard
-            tr
-              th Classement
-              th Utilisateur
-              th Points
-
-            each user, index in users
-              //if user.score > 0
-              if index < 3
-                tr(id='podium-' + (index + 1))
-                  td= user.rank
-                  td
-                    a.username-link(href='/user/' + user.idUser)= user.username
-                  td= user.score
-              else
-                if user.rank %2 == 0
-                  tr(id='scoreboard-odd')
+          section.table__body
+            table.table-scoreboard
+              thead
+                tr
+                  th Classement
+                  th Utilisateur
+                  th Points
+              tbody
+                each user, index in users
+                  //if user.score > 0
+                  tr(id='podium-' + (index + 1), onclick='redirectToUser('+user.idUser+')')
                     td= user.rank
                     td
                       a.username-link(href='/user/' + user.idUser)= user.username
                     td= user.score
-                else 
-                  tr(id='scoreboard-even')
-                    td= user.rank
-                    td
-                      a.username-link(href='/user/' + user.idUser)= user.username
-                    td= user.score
+
+    script.
+      function redirectToUser(id) {
+        window.location.href = "/user/"+id;
+      }
 
     script(src="/javascripts/vantaThree.js")
     script(src="/javascripts/vantaNet.js")

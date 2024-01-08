@@ -75,7 +75,6 @@ html
                 td #{isFlagged.flagged}
 
 
-
           // Formulaire pour soumettre le flag
           form(id="loginForm", action='/challenge/#{challenge.idChallenge}', method='post', onsubmit='showResultModal(); return false;')
             label(for='flagInput') 
@@ -85,13 +84,17 @@ html
             button.login-button(type='submit') Valider
 
 
-
           // Boîte modale pour afficher le résultat
           #resultModal.modal
             .modal-content
               span.close(onclick='closeResultModal()') &times;
               div#resultMessage
                 span#successMessage #{success}
+                if obtentions !== undefined
+                  p Vous avez obtenue le(s) badges suivants :
+                    each element in obtentions
+                      p #{element}
+                    
 
           div.challenges-container
             h3 Résultats du challenge

@@ -57,14 +57,31 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
         success = "Bien joué! Vous avez réussi ce challenge !";
 
         // Badges attribution
-        await WelcomeBadge(userId);
-        await FirstTryBadge(userId, challengeId);
-        await FirstBloodBadge(userId, challengeId);
-        await HappyHourBadge(userId);
-        await PerseverantBadge(userId, challengeId);
-        await ExplorerBadge(userId);
-        await CompletionistBadge(userId);
-        await HackermanBadge(userId);
+        var obtentions = [];
+        if (await WelcomeBadge(userId)) {
+          obtentions.push("Bienvenue");
+        }
+        if (await FirstTryBadge(userId, challengeId)) {
+          obtentions.push("First Try");
+        }
+        if (await FirstBloodBadge(userId, challengeId)) {
+          obtentions.push("First Blood");
+        }
+        if (await HappyHourBadge(userId)) {
+          obtentions.push("Happy Hour");
+        }
+        if (await PerseverantBadge(userId, challengeId)) {
+          obtentions.push("Persévérant");
+        }
+        if (await ExplorerBadge(userId)) {
+          obtentions.push("Explorer");
+        }
+        if (await CompletionistBadge(userId)) {
+          obtentions.push("Complétionniste");
+        }
+        if (await HackermanBadge(userId)) {
+          obtentions.push("Hackerman");
+        }
 
       } else {
         console.log("Flag = False");
@@ -78,7 +95,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
 
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
 
-    res.render('challenge', { challenge: challengeDetails, success, successUsers, retryCount });
+    res.render('challenge', { challenge: challengeDetails, success, successUsers, retryCount, obtentions });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

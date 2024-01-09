@@ -1,24 +1,46 @@
-# CHALLENGES CONFIGURATION FILE
-# Each challenge is defined by its title, category, difficulty, description, flag and connection infos
+#############################################################################
+# CHALLENGES CONFIGURATION FILE                                             #
+# Each challenge is defined by its - title,                                 #
+#                                  - category,                              #
+#                                  - difficulty,                            #
+#                                  - description,                           #
+#                                  - flag,                                  #
+#                                  - connection infos                       #
+#############################################################################
 
+#############################################################################
+# BE CAREFUL, in the current application, you can add and edit challenges   #
+# BUT YOU CAN'T DELETE ANYTHING                                             #
+# Challenge identification is based on the title, if you change the title,  #
+# you create a new challenge instead of edit it                             #
+#############################################################################
+
+########## Start of the example challenge ######
 # The title of the challenge
 - title: "Premier challenge"
-  # The category of the challenge (Programmation, Reverse, Web,...)
+  # The category of the challenge 
+  # Current categories are "Programmation", "Reverse", "Web", "Cryptanalyse","Réseau" and "Autre"
   # Accepts strings
+  # Required
   category: "Reverse"
   # The difficulty of the challenge
   # Accepts integer from 1 to 5, 5 is the hardest difficulty
+  # Required
   difficulty: 4
   # The description of the challenge
   # Accepts strings
+  # Required
   description: "The best description"
-  # The validation flag for your challenge
+  # The flag for your challenge
   # Accepts strings
+  # Required
   flag: "p@$$w0rd"
   # The connexion information about how to connect to the challenge
   # Accepts strings
-  # Comment if not necessary
+  # Comment or delete if not necessary
   connection: "http://example.com/"
+########## End of the example challenge ######
+
 
 - title: "La belle et la bête 2"
   category: "Reverse"

@@ -9,9 +9,7 @@ router.get('/', isConnected, async function(req, res, next) {
   
   try {
     const challenges = await challengesDAO.findAllKnowingUser(session.user.idUser);
-    console.log(challenges)
-
-    res.render('index', { challenges });
+    res.render('index', { title:"Déf'IUT",challenges });
   } catch (error) {
     console.error(error);
     res.status(500).send('Erreur interne du serveur');

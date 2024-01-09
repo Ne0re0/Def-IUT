@@ -8,6 +8,7 @@ var session = require('express-session');
 const yaml = require('js-yaml');
 const readline = require('readline');
 const CONF_RECOVER_PATH = "../../conf/recover.yml"
+const LOG_FILE="../../log/defiut.log"
 
 // Create the transporter using nodemailer library
 const transporter = nodemailer.createTransport({
@@ -57,7 +58,6 @@ router.post('/', function(req, res, next) {
     try {
       fs.writeFileSync('../password_recovery/' + title, content);
       // file written successfully
-      console.log("Recovery file written successfully");
     } catch (err) {
       console.error(err);
     }
@@ -77,24 +77,26 @@ router.post('/', function(req, res, next) {
         mailOptions.subject = conf.subject;
         var url = 'http://' + conf.domain + ':' + conf.port + '/recover/' + title
         mailOptions.text = conf.text.replace('#link',url);
-        console.log(mailOptions);
-      } catch (err){
-        console.log(err);
+    } catch (err){
         mailOptions.subject =  "Réinitialisation du mot de passe Déf'IUT"
         mailOptions.text = "Madame, Monsieur, \n\n Nous expérimentons actuellement une erreur du côté de nos serveurs, veuillez réessayer ultérieurement\n\nCybèrement vôtre\nLe staff Déf'IUT"
-      }
+    }
 
 
     // Send mail
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log("Erreur lors de l'envoie de l\'e-mail")
-        console.log(error)
-        res.render('recover', { title: 'Mot de passe oublié', error: "Erreur lors de l'envoie du mail de vérification, veuillez vous réessayer ultérieurement" });
 
+        let event = "SERVER ERROR while sending password recovery mail for '"+mailOptions.to +"' " + error + "\n"
+        fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+
+        res.render('recover', { title: 'Mot de passe oublié', error: "Erreur lors de l'envoi du mail de vérification, veuillez vous réessayer ultérieurement" });
       } else {
-        console.log('Email envoyé :', info.response);
-        res.render('recover', { title: 'Mot de passe oublié', error: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé" });
+        
+        let event ="Password recovery email successfully sent to user '" + mailOptions.to +"' " + "\n"
+        fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+    
+        res.render('recover', { title: 'Mot de passe oublié', success: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé" });
       }
     })
   }
@@ -106,9 +108,8 @@ router.post('/:token', function(req, res, next) {
     return res.redirect("/");
   } 
 
-  console.log(req.body)
-  console.log(req.params)
   var token = req.params.token;
+  console.log(token)
   if(
     !req.body ||
     !req.body.password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/) ||
@@ -116,39 +117,36 @@ router.post('/:token', function(req, res, next) {
     !req.body.password.match(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/) ||
     !req.body.password.length>7
   ){
-    res.render('recover', { title: 'Mot de passe oublié', body:req.body, error:"Le mot de passe ne respecte pas les conditions générales de sécurité" });
+    res.render('newpassword', { title: 'Mot de passe oublié', body:req.body, token:token, error:"Le mot de passe ne respecte pas les conditions générales de sécurité" });
   } else if (req.body.password !== req.body['password-confirmation']){
-    res.render('recover', { title: 'Mot de passe oublié', body:req.body, error:"Le nouveau mot de passe et sa confirmation ne sont pas identiques" });
+    res.render('newpassword', { title: 'Mot de passe oublié', body:req.body, token:token, error:"Le nouveau mot de passe et sa confirmation ne sont pas identiques" });
   } else {
 
     filePath = "../password_recovery/"+token
+
     fs.readFile(filePath, (err, data) => {
       if (err){
-        console.error(err)
-        res.render('recover', { title: 'Mot de passe oublié',token:token, error:"Token invalide" });
+        let event = "User failed to update his password (invalid token) '"+token + "'\n"
+        fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+
+        res.render('newpassword', { title: 'Mot de passe oublié',token:token, error:"Token invalide" });
       } else {
-        console.log("File read : " + data)
-        console.log("File read : " + data.toString())
-        console.log("File read : " + typeof data.toString())
 
         usersDAO.updatePassword(data.toString(),req.body.password)
-
         .then(() => {
-          console.log("Password update succeed")
-          res.render('recover', { title: 'Mot de passe oublié',token:token, success: "Mot de passe réinitialisé, vous pouvez vous connecter" });
+          res.render('newpassword', { title: 'Mot de passe oublié',token:token, success: "Mot de passe réinitialisé, vous pouvez vous connecter" });
 
-          fs.unlink(filePath, (err) => {
-            if (err){
-              console.log("Error when deleting file " + filePath + " " + err)
-            } else {
-              console.log("File " + filePath + " deleted successfully")
-            }
-          }); 
+          fs.unlink(filePath, (err) => {}); 
+
+          let event = "User '"+data.toString() +"' successfully updated his password" + "\n"
+          fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
 
         })
         .catch((err) => {
-          console.log("Password update failed " + err)
-          res.render('recover', { title: 'Mot de passe oublié',token:token, error: "Erreur lors de la modification du mot de passe" });
+          let event = "SERVER ERROR while updating password for user '"+data.toString() +"' " + err +  "\n"
+          fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+
+          res.render('newpassword', { title: 'Mot de passe oublié',token:token, error: "Erreur lors de la modification du mot de passe" });
         })
       }
    })

@@ -8,6 +8,7 @@ const CryptoJS = require('crypto-js');
 const yaml = require('js-yaml');
 const readline = require('readline');
 const CONF_VERIFY_PATH = "../../conf/verify.yml"
+const LOG_FILE="../../log/defiut.log"
 // Create a readline object to read file
 const rl = readline.createInterface({
   input: process.stdin,
@@ -26,24 +27,22 @@ const transporter = nodemailer.createTransport({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(session);
   if (session.user !== undefined){
     res.redirect("/");
   } else {
-    res.render('connect', { title: 'Connect' });
+    res.render('connect', { title: 'Connexion' });
   }
 });
 
 
 router.post('/', function(req, res, next) {
-  console.log(req.body)
   if (req.body === undefined ||
       req.body.password === undefined ||
       req.body.username === undefined ||
       req.body.password === '' ||
       req.body.username === ''
   ){
-    res.render('connect', { title: 'Connect' });
+    res.render('connect', { title: 'Connexion' });
   } else {
     console.log(req.body);
     usersDAO.connect(req.body.username, req.body.password)
@@ -90,14 +89,20 @@ router.post('/', function(req, res, next) {
             if (error) {
               console.log("Erreur lors de l'envoie de l\'e-mail")
               console.log(error)
-              res.render('connect', { title: 'Connect', failed: "Erreur lors de l'envoie du mail de vérification, veuillez vous reconnecter" });
+              fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress+",SERVER ERROR : Email not sent to " + connected.mail );
+              res.render('connect', { title: 'Connexion', failed: "Erreur lors de l'envoie du mail de vérification, veuillez vous reconnecter\n" });
 
             } else {
               console.log('Email envoyé :', info.response);
-              res.render('connect', { title: 'Connect', failed: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé" });
+
+              fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress+",Verification email sent to '" + connected.mail +"'\n" );
+
+              res.render('connect', { title: 'Connexion', failed: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé\n" });
             }
           });
         } else {
+
+          fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress+",User '" + connected.mail + "' logged in\n" );
           console.log("User : " + connected.username + " logged in")
           session.user = connected;
           res.redirect("/");
@@ -107,7 +112,9 @@ router.post('/', function(req, res, next) {
       })
       .catch((err) => {
         console.log(err)
-        res.render('connect', { title: 'Connect', failed: err });
+        fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress+",User '" + req.body.username + "' failed to authenticate\n" );
+
+        res.render('connect', { title: 'Connexion', failed: err });
       });
   }
 });

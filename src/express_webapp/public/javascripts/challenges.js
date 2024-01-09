@@ -22,7 +22,6 @@ table_headings.forEach((head, i) => {
         } else {
             sortDifficulty(i,sort_asc)
         }
-        
     }
 })
 

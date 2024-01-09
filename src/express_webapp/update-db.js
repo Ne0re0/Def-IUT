@@ -10,6 +10,15 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+const successLog = (message) => {
+  console.log("\x1b[32m%s\x1b[0m", message); // Green color for success
+};
+
+const errorLog = (message) => {
+  errorLog("\x1b[31m%s\x1b[0m", message); // Red color for errors
+};
+
+
 console.log("Lecture du fichier conf/challenges.yml...")
 try {
   // Read challenge file
@@ -18,7 +27,7 @@ try {
   console.log("Vérification de la syntaxe...")
 
   if (!challenges || !Array.isArray(challenges) || challenges.length === 0) {
-    console.error("Le fichier de défis est vide ou au mauvais format");
+    errorLog("Le fichier de défis est vide ou au mauvais format");
     process.exit(1); // Exiting the process due to invalid data
   }
 
@@ -35,8 +44,8 @@ try {
       typeof challenge.flag !== "string" || 
       (challenge.connection && typeof challenge.connection !== "string")
     ) {
-      console.error("Syntaxe invalide pour le challenge à l'index " + index);
-      console.error("Arrêt...");
+      errorLog("Syntaxe invalide pour le challenge à l'index " + index);
+      errorLog("Arrêt...");
       syntaxError = true;
     }
   });
@@ -45,7 +54,7 @@ try {
     process.exit(1); // Exiting the process due to syntax errors
   }
 
-  console.log("Tous les formats sont valides");
+  successLog("Tous les formats sont valides");
   // Step 2: Verify that the challenges do not already exist
   console.log("Vérification de l'existence des challenges");
 
@@ -60,11 +69,8 @@ try {
 
     challengesDAO.findByChallengeTitle(challenge.title)
       .then((success) => {
-
         // Challenges exists
         if (success !== undefined) {
-          console.log("'" + challenge.title + "' existe");
-
           
           // Verify that update is necessary
           if (challenge.connection === undefined){
@@ -77,24 +83,32 @@ try {
               success.itsDifficulty === challenge.difficulty &&
               success.connection === challenge.connection
             ) {
-              console.log("La mise à jour n'est pas nécessaire")
+              successLog("La mise à jour de '"+challenge.title+"' n'est pas nécessaire")
               processChallenges(index + 1);
             } else {
+              console.log("Une intervention de votre part est nécessaire pour "+challenge.title)
               console.log("Challenge courant : ")
-              console.log(success)
-              console.log("Nouveau challenge : ")
+              var display = {} 
+              display.title = success.titleChallenge
+              display.category = success.itsCategory
+              display.difficulty = success.itsDifficulty
+              display.description = success.descriptionChallenge
+              display.flag = success.flag
+              display.connection = success.connection;
+              console.log(display)
+              console.log("Mise à jour : ")
               console.log(challenge)
 
-              rl.question("Voulez vous mettre a jour le challenge courant ? (y/n) : ", (userInput) => {
+              rl.question("Voulez-vous mettre à jour le challenge courant ? (y/n) : ", (userInput) => {
                 if (userInput === 'y') {
                   console.log("Mise a jour du challenge " + challenge.title);
                   challengesDAO.update(success.idChallenge, challenge.title, challenge.category, challenge.description, challenge.flag, challenge.difficulty, challenge.connection)
                     .then(() => {
-                      console.log("Mise a jour du challenge réussie");
+                      successLog("Mise a jour du challenge réussie");
                       processChallenges(index + 1);
                     })
                     .catch((err) => {
-                      console.error("Erreur lors de la mise a jour du challenge " + challenge.title + " " + err);
+                      errorLog("Erreur lors de la mise a jour du challenge " + challenge.title + " " + err);
                       processChallenges(index + 1);
                     });
                 } else {
@@ -108,17 +122,17 @@ try {
           console.log("Ajout du challenge : " + challenge.title);
           challengesDAO.insert(challenge.title, challenge.category, challenge.description, challenge.flag, challenge.difficulty, challenge.connection)
             .then((insertSuccess) => {
-              console.log("Insertion réussie, identifiant : " + insertSuccess);
+              successLog("Insertion réussie, identifiant : " + insertSuccess);
               processChallenges(index + 1);
             })
             .catch((err) => {
-              console.error("Erreur lors de l'insertion du challenge " + challenge.title + " " + err);
+              errorLog("Erreur lors de l'insertion du challenge " + challenge.title + " " + err);
               processChallenges(index + 1);
             });
         }
       })
       .catch((err) => {
-        console.error("Une erreur est survenue lors de la récupération du challenge " + challenge.title + " " + err);
+        errorLog("Une erreur est survenue lors de la récupération du challenge " + challenge.title + " " + err);
         processChallenges(index + 1);
       });
   };
@@ -127,5 +141,5 @@ try {
   processChallenges(0);
 
 } catch (err) {
-  console.error('Erreur lors de la lecture du fichier:', err);
+  errorLog('Erreur lors de la lecture du fichier:', err);
 }

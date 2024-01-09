@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd ./src/database
+./reset-database.sh
+cd ../../

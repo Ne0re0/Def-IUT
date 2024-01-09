@@ -8,3 +8,6 @@ src/emails_check/*
 # Password reset files
 src/password_recovery/*
 !src/password_recovery/README.md
+
+# Log files
+log/*.log

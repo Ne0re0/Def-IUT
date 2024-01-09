@@ -54,8 +54,6 @@ sqlitebrowser database.db
 
 ### Initialisation / Réinitialisation
 ```bash
-sqlite3 database.db < creation.sql 
-sqlite3 database.db < views.sql 
-sqlite3 database.db < insertion.sql 
+./reset-database.sh
 ```
 

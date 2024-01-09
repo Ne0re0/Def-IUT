@@ -10,7 +10,7 @@
 
 #############################################################################
 # BE CAREFUL, in the current application, you can add and edit challenges   #
-# BUT YOU CAN'T DELETE ANYTHING                                             #
+# BUT YOU CAN'T DELETE ANYTHING without reseting the database               #
 # Challenge identification is based on the title, if you change the title,  #
 # you create a new challenge instead of edit it                             #
 #############################################################################
@@ -41,17 +41,51 @@
   connection: "http://example.com/"
 ########## End of the example challenge ######
 
+- title: "Deuxième challenge"
+  category: "Autre"
+  difficulty: 2
+  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
+  flag: "DEF{8}"
+  connection: null
 
-- title: "La belle et la bête 2"
+- title: "Troisième challenge"
+  category: "Programmation"
+  difficulty: 3
+  description: "Aimez vous la plateforme ? Réponse : (oui/non)"
+  flag: "oui"
+  connection: null
+
+- title: "Quatrième challenge"
   category: "Reverse"
   difficulty: 4
-  description: "The best description 2"
-  flag: "p@$$w0rd2"
-  connection: "ssh bob@10.5.25.236 -p 52366"
+  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
+  flag: "DEF{8}"
+  connection: null
 
-- title: "La belle et la bête 3"
-  category: "Programmation"
+- title: "Cinquième challenge"
+  category: "Réseau"
   difficulty: 5
-  description: "The best description 3"
-  flag: "p@$$w0rd3"
-  connection: "http://example.com/3"
+  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
+  flag: "DEF{8}"
+  connection: null
+
+- title: "Sixième challenge"
+  category: "Programmation"
+  difficulty: 1
+  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
+  flag: "DEF{8}"
+  connection: null
+
+- title: "Septième challenge"
+  category: "Programmation"
+  difficulty: 2
+  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
+  flag: "DEF{8}"
+  connection: null
+
+- title: "Huitième challenge"
+  category: "Programmation"
+  difficulty: 4
+  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
+  flag: "DEF{8}"
+  connection: null

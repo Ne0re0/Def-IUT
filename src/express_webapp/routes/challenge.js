@@ -38,7 +38,8 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
   const challengeId = req.params.idChallenge;
   const submittedFlag = req.body.flagInput;
   const userId = session.user.idUser;
-  let success = "";
+  var success = "";
+  var failed = "";
 
 
   try {
@@ -50,6 +51,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
     const retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
 
     const isFlagged = await alreadyFlagged(userId, challengeId);
+    console.log(isFlagged);
     if (!isFlagged) {
       if (submittedFlag === challengeDetails.flag) {
         console.log("Flag = True");
@@ -90,12 +92,13 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
       }
     } else {
       console.log("Flag = Already Flagged");
+      console.log(success)
       success = "Vous avez déjà réussi ce challenge !";
     }
 
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
-
-    res.render('challenge', { challenge: challengeDetails, success, successUsers, retryCount, obtentions });
+    console.log(successUsers)
+    res.render('challenge', { challenge: challengeDetails, success, successUsers, retryCount, obtentions, failed });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -142,12 +145,12 @@ const addTry = async (userId, challengeId) => {
 const addSuccessfulTry = async (userId, challengeId) => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth()).padStart(2, '0');
+    const month = String(today.getMonth()+1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const hour = String(today.getHours()).padStart(2, '0');
     const minute = String(today.getMinutes()).padStart(2, '0');
 
-    const dateStr = ` ${year}/${month}/${day}`;
+    const dateStr = `${year}/${month}/${day}`;
     const hourStr = `${hour}:${minute}`;
     console.log(dateStr)
     await howMuchTries(userId, challengeId)

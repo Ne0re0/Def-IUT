@@ -829,24 +829,6 @@ tbody tr td img {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .user-container .history .table__header {
     width: 100%;
     height: 10%;
@@ -998,24 +980,22 @@ tbody tr td img {
     margin-bottom:20px ;
 }
 
-.user-container .badges .body .badgelist ul li ul li img {
-    border-radius: 20px;
+.user-container .badges .body .badgelist ul  {
+    margin-bottom: 30px;
 }
 
+.user-container .badges .body .badgelist ul li ul li img {
+    border-radius: 20px;
+    width: 100px;
+}
 
+.user-container .badges .body .badgelist ul li ul p.date {
+    font-style: italic;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+.user-container .badges .body .badgelist ul li p.title {
+    font-weight: bold;
+}
 
 
 
@@ -1132,8 +1112,8 @@ tbody tr td img {
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
-
-    overflow: hidden;
+    overflow: auto;
+    max-height: 85vh;
 }
 
 .challenge-container .table__header {

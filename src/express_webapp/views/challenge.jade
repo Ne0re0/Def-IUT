@@ -62,10 +62,11 @@ html
                 div#resultMessage
                   if success
                     p.challenge-success #{success}
-                    if obtentions.length > 0
-                      p.challenge-success Vous avez obtenue le(s) badges suivants :
-                        each element in obtentions
-                          p.challenge-success #{element}
+                    if obtentions
+                      if obtentions.length > 0
+                        p.challenge-success Vous avez obtenue le(s) badges suivants :
+                          each element in obtentions
+                            p.challenge-success #{element}
                   if failed
                     p.challenge-failed #{failed}
 
@@ -80,15 +81,15 @@ html
                       th Utilisateur
                       th Rang
                       th Date
-                  if (successUsers.length > 0)
-
-                    tbody
-                      each user in successUsers
-                        tr(onclick='redirectToUser('+user.idUser+')')
-                          td
-                            a(href=`/user/${user.idUser}`)= user.username
-                          td= user.rank
-                          td= user.flagged
+                  if successUsers
+                    if (successUsers.length > 0)
+                      tbody
+                        each user in successUsers
+                          tr(onclick='redirectToUser('+user.idUser+')')
+                            td
+                              a(href=`/user/${user.idUser}`)= user.username
+                            td= user.rank
+                            td= user.flagged
     script.
       function redirectToUser(id) {
         window.location.href = "/user/"+id;

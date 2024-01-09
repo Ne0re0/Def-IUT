@@ -77,26 +77,13 @@ html
             script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
 
 
-            script.
-              window.addEventListener('DOMContentLoaded', (event) => {
-                function formatDateInTable() {
-                  const rows = document.querySelectorAll('.table-user-history tbody tr');
-                  rows.forEach(row => {
-                    const dateCell = row.querySelector('td:nth-child(4)');
-                    if (dateCell) {
-                      const originalDate = dateCell.textContent.trim();
-                      const formattedDate = formatDate(originalDate);
-                      dateCell.textContent = formattedDate;
-                    }
-                  });
-                }
-                formatDateInTable();
-              });
+            
 
             script.
               window.addEventListener('DOMContentLoaded', (event) => {
                 function formatHourInTable() {
                   const rows = document.querySelectorAll('.table-user-history tbody tr');
+                  rows = rows + const rows = document.querySelectorAll('.table-user-history tbody tr');
                   rows.forEach(row => {
                     const hourCell = row.querySelector('td:nth-child(5)');
                     if (hourCell) {
@@ -154,15 +141,15 @@ html
                   section.subtitle
                     h4 Obtenus 
                   section.badgelist
-                  ul(style="list-style-type: none; padding-left: 0;")
-                    each line in ownedBadges
-                      li(style="display: inline-block; margin-right: 20px;") 
-                        p= line.titleBadge
-                        ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
-                          li(style="display: inline-block; margin-right: 10px;") 
-                            img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;", title=line.descriptionBadge)
-                          li
-                            p= line.obtentionDate
+                    ul(style="list-style-type: none; padding-left: 0;")
+                      each line in ownedBadges
+                        li(style="display: inline-block; margin-right: 20px;") 
+                          p.title= line.titleBadge
+                          ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                            li(style="display: inline-block; margin-right: 10px;") 
+                              img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;", title=line.descriptionBadge)
+                            li
+                              p.date= line.obtentionDate
               section.others
                 if otherBadges.length > 0
                   section.subtitle
@@ -171,13 +158,33 @@ html
                     ul(style="list-style-type: none; padding-left: 0; margin-top: 20px;")
                       each line in otherBadges
                         li(style="display: inline-block; margin-right: 20px;")
-                          p= line.titleBadge
+                          p.title= line.titleBadge
                           ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
                             li(style="display: inline-block; margin-right: 10px;")
                               img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);" title=line.descriptionBadge)
 
 
+      script.
+        window.addEventListener('DOMContentLoaded', (event) => {
+          function formatDateInTable() {
+            const rows = document.querySelectorAll('.table-user-history tbody tr');
+            const dates = document.querySelectorAll('.badgelist ul li ul li .date');
 
+            rows.forEach(row => {
+              const dateCell = row.querySelector('td:nth-child(4)');
+              if (dateCell) {
+                const originalDate = dateCell.textContent.trim();
+                const formattedDate = formatDate(originalDate);
+                dateCell.textContent = formattedDate;
+              }
+            });
+
+            dates.forEach(date => {
+              date.textContent = formatDate(date.textContent);
+          });
+          }
+          formatDateInTable();
+        });
 
 
 

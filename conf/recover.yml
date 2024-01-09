@@ -6,28 +6,29 @@
 # Domain is the domain name you want the link to point at
 # Example : Your site is hosted at defiut.com, so you want the following variable set to "defiut.com"
 # Accepts string
-Domain : "localhost"
+domain : "localhost"
 
 # Port is the port your application listens to
 # By default, many web applications runs on port 80
 # Accepts integers
-Port : 3000
+port : 3000
 
 # Subject is the title of the email
 # Accepts strings
-Subject : 
-  "Réinitialisation du mot de passe"
+subject : "Réinitialisation de votre mot de passe Déf'IUT"
 
 # Content of the email
 # Specify #link where you want the link to be written, 
-# if #link is not specified, users will receive mails without any link
+# if #link is not specified, nothing will be sent
+# Write \n to specify new line feeds
 # Accepts strings
-Content : "
-Bonjour Madame,Monsieur,
-
-  Vous pouvez dès à présent réinitialiser votre mot de passe de l'application Def'IUT 
-  en cliquant sur le lien suivant : #link
-
-Cybèrement vôtre,
-Le staff Def'IUT
+text : "
+Bonjour Madame,Monsieur,\n
+\n
+Ne perdez plus vos mots de passe, optez pour un gestionnaire de mot de passes !\n
+\n
+Vous pouvez dès à présent réinitialiser votre mot de passe de l'application Def'IUT en cliquant sur le lien suivant : #link\n
+\n
+Cybèrement vôtre,\n
+Le staff Déf'IUT\n
 "

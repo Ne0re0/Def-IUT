@@ -5,7 +5,9 @@ const nodemailer = require('nodemailer');
 const fs = require('node:fs');
 const CryptoJS = require('crypto-js');
 var session = require('express-session');
-
+const yaml = require('js-yaml');
+const readline = require('readline');
+const CONF_RECOVER_PATH = "../../conf/recover.yml"
 
 // Create the transporter using nodemailer library
 const transporter = nodemailer.createTransport({
@@ -60,13 +62,28 @@ router.post('/', function(req, res, next) {
       console.error(err);
     }
 
+
     // Write mail
     const mailOptions = {
       from: 'contact.defiut@gmail.com',
       to: req.body.mail,
       subject: 'Réinitialisation du mot de passe',
-      text: 'Vous pouvez réinitialiser votre mot de passe en cliquant sur le lien suivant : http://localhost:3000/recover/' + title 
+      text: ''
     };
+
+    try {
+        const confContent = fs.readFileSync(CONF_RECOVER_PATH, 'utf8');
+        const conf = yaml.load(confContent);
+        mailOptions.subject = conf.subject;
+        var url = 'http://' + conf.domain + ':' + conf.port + '/recover/' + title
+        mailOptions.text = conf.text.replace('#link',url);
+        console.log(mailOptions);
+      } catch (err){
+        console.log(err);
+        mailOptions.subject =  "Réinitialisation du mot de passe Déf'IUT"
+        mailOptions.text = "Madame, Monsieur, \n\n Nous expérimentons actuellement une erreur du côté de nos serveurs, veuillez réessayer ultérieurement\n\nCybèrement vôtre\nLe staff Déf'IUT"
+      }
+
 
     // Send mail
     transporter.sendMail(mailOptions, (error, info) => {

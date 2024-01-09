@@ -5,6 +5,14 @@ var session = require('express-session');
 const nodemailer = require('nodemailer');
 const fs = require('node:fs');
 const CryptoJS = require('crypto-js');
+const yaml = require('js-yaml');
+const readline = require('readline');
+const CONF_VERIFY_PATH = "../../conf/verify.yml"
+// Create a readline object to read file
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 // Create the transporter using nodemailer library
 const transporter = nodemailer.createTransport({
@@ -25,6 +33,7 @@ router.get('/', function(req, res, next) {
     res.render('connect', { title: 'Connect' });
   }
 });
+
 
 router.post('/', function(req, res, next) {
   console.log(req.body)
@@ -54,12 +63,27 @@ router.post('/', function(req, res, next) {
           }
 
           // Write mail
-          const mailOptions = {
+          var mailOptions = {
             from: 'contact.defiut@gmail.com',
             to: connected.mail,
             subject: 'Vérification de votre e-mail Def\'IUT',
             text: 'Vous pouvez vérifier votre compte en cliquant sur le lien suivant : http://localhost:3000/verify/' + title 
           };
+
+          try {
+            const confContent = fs.readFileSync(CONF_VERIFY_PATH, 'utf8');
+            const conf = yaml.load(confContent);
+            mailOptions.subject = conf.subject;
+            var url = 'http://' + conf.domain + ':' + conf.port + '/verify/' + title
+            mailOptions.text = conf.text.replace('#link',url);
+            console.log(mailOptions);
+          } catch (err){
+            console.log(err);
+            mailOptions.subject =  'Vérification de votre e-mail Def\'IUT',
+            mailOptions.text = 'Vous pouvez vérifier votre compte en cliquant sur le lien suivant : http://localhost:3000/verify/' + title 
+          }
+          
+
 
           // Send mail
           transporter.sendMail(mailOptions, (error, info) => {

@@ -5,7 +5,6 @@ const table_headings = document.querySelectorAll('thead th');
 
 
 table_headings.forEach((head, i) => {
-    console.log(i);
     let sort_asc = true;
     head.onclick = () => {
         table_headings.forEach(head => head.classList.remove('active'));
@@ -67,7 +66,6 @@ function sortDifficulty(column, sort_asc) {
 search.addEventListener('input', searchTable);
 
 function searchTable() {
-    console.log("Test")
     table_rows.forEach((row, i) => {
         let table_data = row.textContent.toLowerCase(),
             search_data = search.value.toLowerCase();

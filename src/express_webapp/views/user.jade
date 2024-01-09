@@ -136,8 +136,8 @@ html
             section.header
               h1 Badges
             section.body
-              section.owned
-                if ownedBadges.length > 0
+              if ownedBadges.length > 0
+                section.owned
                   section.subtitle
                     h4 Obtenus 
                   section.badgelist
@@ -147,11 +147,12 @@ html
                           p.title= line.titleBadge
                           ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
                             li(style="display: inline-block; margin-right: 10px;") 
-                              img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px;", title=line.descriptionBadge)
+                              img(src='/badges/' + line.idBadge + '.jpg', title=line.descriptionBadge)
                             li
                               p.date= line.obtentionDate
-              section.others
-                if otherBadges.length > 0
+              if otherBadges.length > 0
+                section.others
+                
                   section.subtitle
                     h4 Non obtenus
                   section.badgelist
@@ -161,7 +162,7 @@ html
                           p.title= line.titleBadge
                           ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
                             li(style="display: inline-block; margin-right: 10px;")
-                              img(src='/badges/' + line.idBadge + '.jpg', style="max-width: 100px; filter: grayscale(100%);" title=line.descriptionBadge)
+                              img(src='/badges/' + line.idBadge + '.jpg', style="filter: grayscale(100%);" title=line.descriptionBadge)
 
 
       script.

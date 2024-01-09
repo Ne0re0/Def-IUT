@@ -61,7 +61,7 @@ class ChallengesDAO {
 
     findAllKnowingUser(idUser) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT * FROM DistinguishedChallenges LEFT JOIN HasTried ON aChallenge = idChallenge WHERE aUser is NULL OR aUser = ?;';
+            const query = 'SELECT * FROM DistinguishedChallenges LEFT JOIN (SELECT * FROM HasTried WHERE aUser = ?) ON aChallenge = idCHallenge;';
             db.all(query,[idUser] ,function(err, rows) {
                 if (err) {
                     reject(err);

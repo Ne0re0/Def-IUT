@@ -62,12 +62,12 @@ html
                 div#resultMessage
                   if success
                     p.challenge-success #{success}
-                    if obtentions !== undefined
+                    if obtentions.length > 0
                       p.challenge-success Vous avez obtenue le(s) badges suivants :
                         each element in obtentions
                           p.challenge-success #{element}
                   if failed
-                    p.challenge-failed #{success}
+                    p.challenge-failed #{failed}
 
           div.challenge-history-container
             section.table__header

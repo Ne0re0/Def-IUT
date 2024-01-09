@@ -86,7 +86,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
       } else {
         console.log("Flag = False");
         await addTry(userId, challengeId);
-        success = "Bien tenté! Mais ce n'est pas le bon flag !";
+        failed = "Bien tenté! Mais ce n'est pas le bon flag !";
       }
     } else {
       console.log("Flag = Already Flagged");

@@ -1238,7 +1238,7 @@ tbody tr td img {
 }
 
 .challenge-container .challenge-failed {
-    background-color: #BBBB;
+    background-color: #fa2a2a93;
     font-size: 16px;
     font-style: italic;
     margin: 20px;

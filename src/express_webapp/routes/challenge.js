@@ -300,7 +300,6 @@ async function HappyHourBadge(userId) {
 
 // Fonction pour définir l'happy hour
 async function isHappyHour() {
-  return true;
   try {
     const date = new Date();
     
@@ -319,7 +318,7 @@ async function isHappyHour() {
 // Persévérant
 async function PerseverantBadge(userId, challengeId) {
   const id = 5;
-  const requiredAttempts = 0;
+  const requiredAttempts = 10;
 
   try {
     // Vérifier si l'utilisateur a déjà obtenu le badge "Persévérant"

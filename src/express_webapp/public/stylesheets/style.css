@@ -660,103 +660,368 @@ tbody tr td img {
  * Public user's profile view
  */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .user-container{
-    margin-top: 100px;
+    margin-top: 80px;
+    width: 82vw;
+    height: 80vh;
+    background-color: #fff5;
+
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #0005;
+    border-radius: .8rem;
+
+    overflow: auto;
+    max-width: 700px;
+    padding-bottom: 20px;
+}
+
+.user-container ::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.user-container ::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.user-container:hover ::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+
+.user-container .username .table__header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-container .username .table__header h1 {
+    box-sizing: border-box;
+    text-transform: capitalize;
+}
+
+.user-container .username .table__body {
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+    overflow: overlay;
+    max-width: 600px;
+}
+
+
+
+
+.user-container .username table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+.user-container .username td a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.user-container .username thead th {
     position: sticky;
-    top: 100px;
-    height: auto;
-    width: 1000px;
-    padding:10px;
-    overflow:hidden;
-    border-radius: 30px;
-    background: linear-gradient(145deg, #ffffff, #dddddc);
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+    cursor: pointer;
+    text-transform: capitalize;
     text-align: center;
-    content-justify:auto;
 }
-.user-username{
-    background-color: #B690A5;
+
+.user-container .username thead th:hover {
+    color: #92466D;
+}
+
+
+.user-container .username tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+.user-container .username tbody tr {
+
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+.user-container .username tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+.user-container .username tbody tr td {
+    text-align: center;
+    width: 200px;
+}
+
+.user-container .username tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+
+
+.user-container .stats {
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 400px;
+}
+
+.user-container .stats .header{
+    background-color: #d5d1defe;
     padding: 20px;
+    margin-top:30px;
+    margin-bottom: 0;
+    border-radius: 10px 10px 0 0;
 }
 
-/*@media screen and (max-width: 1850px) {
-  .user-container {
-    margin-top: 350px; 
-  }
+.user-container .stats .header h1:hover{
+    color: #92466D;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 540px) {
-  .user-container {
-    margin-top: 600px; /* Augmente le margin à 300px pour les écrans de moins de 500px 
-  }
-}*/
+.user-container .stats .chart{
+    background-color: #ffffff;
+    padding: 20px;
+    
+    margin-bottom:30px;
+    margin-top: 0;
+    border-radius: 0 0 10px 10px;
+}
 
-.user-username {
-    margin:50px 0px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.user-container .history .table__header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-container .history .table__header h1 {
+    box-sizing: border-box;
+    text-transform: capitalize;
+}
+
+.user-container .history .table__body {
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+    overflow: overlay;
+    max-width: 600px;
+}
+
+
+.user-container .history .table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.user-container .history .table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.user-container .history .table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+.user-container .history table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+.user-container .history td a {
+    text-decoration: none;
+    color: black;
+}
+
+
+.user-container .history thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+    cursor: pointer;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.user-container .history thead th:hover {
+    color: #92466D;
+}
+
+
+.user-container .history tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+.user-container .history tbody tr {
+
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+.user-container .history tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+.user-container .history tbody tr td {
+    text-align: center;
+    width: 200px;
+}
+
+.user-container .history tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+
+
+
+.user-container .badges {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin-top:20px
+}
+
+.user-container .badges .header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-container .badges .body {
+    align-items: center;
+    max-width: 650px;
+    min-width: 150px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin: 20px;
+    border-radius: 20px;
+
+}
+ .user-container .badges .body .owned {
+    margin-bottom:20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+ .user-container .badges .body .others {
+    margin-bottom:20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.user-container .badges .body .subtitle {
+    padding: 20px;
+    background-color: #ffffff0b;
+    border-radius: 10px 10px 0 0;
+    margin-bottom:20px ;
+}
+
+.user-container .badges .body .badgelist ul li ul li img {
     border-radius: 20px;
 }
 
-.table-user-status{
-    text-align: center;
-    font-size: 20px;
-    border: 2px solid black;
-}
-
-.table-user-status td {
-  padding: 0 100px; 
-  border: 2px solid black;
-}
-
-.div-user-status {
-    display: flex; /* Utilisation de Flexbox pour le centrage */
-    justify-content: center; /* Centre horizontalement le contenu */
-    align-items: center; /* Centre verticalement le contenu */
-    margin-bottom: 30px;
-}
-
-.div-user-graph {
-    display: flex; /* Utilisation de Flexbox pour le centrage */
-    justify-content: center; /* Centre horizontalement le contenu */
-    align-items: center; /* Centre verticalement le contenu */
-    margin-bottom: 30px;
-}
-
-.div-user-history {
-    display: flex; /* Utilisation de Flexbox pour le centrage */
-    justify-content: center; /* Centre horizontalement le contenu */
-    align-items: center; /* Centre verticalement le contenu */
-    margin-bottom: 30px;
-}
-
-.table-user-history {
-    margin-top: 30px;
-    text-decoration: none;
-    border: 2px solid black;
-}
-
-.table-user-history td {
-    color: black;
-    padding: 0 67px; 
-}
-
-.table-user-history td a {
-    text-decoration: none;
-    color: black;
-}
 
 
-.table-user-history td:first-child:hover {
-    color: white;
-    background-color: #bbbbbb;
-}
 
-.table-user-history th {
-    font-weight: bold;
-}
 
-.table-user-history tr:nth-child(even) td {
-  background-color: #cccccc; 
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Error and success pop ups
+ */
 
 .div-profile-container{
     padding:40px 20px;

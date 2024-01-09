@@ -126,10 +126,10 @@ const addTry = async (userId, challengeId) => {
 
     if (nbRetry > 0) {
       const newRetryCount = nbRetry + 1;
-      await hasTriedDAO.update(userId, challengeId, null, newRetryCount);
+      await hasTriedDAO.update(userId, challengeId, null, null, newRetryCount);
       console.log("Try added OK");
     } else {
-      await hasTriedDAO.insert(userId, challengeId, null, 1);
+      await hasTriedDAO.insert(userId, challengeId, null,null, 1);
       console.log("Try added OK");
     }
   } catch (err) {
@@ -140,21 +140,20 @@ const addTry = async (userId, challengeId) => {
 
 // Valid the challenge
 const addSuccessfulTry = async (userId, challengeId) => {
-    let months = ["jan.","fév.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."]
-
     const today = new Date();
     const year = today.getFullYear();
-    const month = months[today.getMonth()];
+    const month = String(today.getMonth()).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const hour = String(today.getHours()).padStart(2, '0');
     const minute = String(today.getMinutes()).padStart(2, '0');
 
-    const dateStr = `${hour}h${minute} ${day} ${month} ${year}`;
+    const dateStr = ` ${year}/${month}/${day}`;
+    const hourStr = `${hour}:${minute}`;
     console.log(dateStr)
     await howMuchTries(userId, challengeId)
       .then((nbTry) => {
         if (nbTry !== 0) {
-          hasTriedDAO.update(userId, challengeId, dateStr, nbTry + 1)
+          hasTriedDAO.update(userId, challengeId, dateStr, hourStr, nbTry + 1)
             .then(() => {
               console.log("Update succeed")
             })
@@ -162,7 +161,7 @@ const addSuccessfulTry = async (userId, challengeId) => {
               console.log("Update failed")
             })
         } else {
-          hasTriedDAO.insert(userId, challengeId, dateStr, 1)
+          hasTriedDAO.insert(userId, challengeId, dateStr, hourStr, 1)
             .then(() => {
               console.log("Update succeed")
             })
@@ -201,7 +200,7 @@ const howMuchTries = async (userId, challengeId) => {
 // Get the Date
 function getTheDate() {
   const date = new Date();
-  return date.getFullYear() + "-" + parseInt(date.getMonth())+1 + "-" + date.getDate();
+  return date.getFullYear() + "/" + String(parseInt(date.getMonth())+1).padStart(2, '0') + "/" + String(date.getDate()).padStart(2, '0');
 }
 
 // Bienvenue

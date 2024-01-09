@@ -247,7 +247,7 @@ class UserDAO {
      */
     getHistory(key){
         return new Promise((resolve,reject) => {
-            const query = "SELECT idChallenge,titleChallenge,itsCategory,reward,flagged FROM (SELECT * FROM HasTried JOIN DistinguishedChallenges ON idChallenge = aChallenge WHERE aUser = ? AND flagged IS NOT NULL ORDER BY flagged DESC) LIMIT 10;";         
+            const query = "SELECT * FROM (SELECT * FROM HasTried JOIN DistinguishedChallenges ON idChallenge = aChallenge WHERE aUser = ? AND flagged IS NOT NULL ORDER BY flagged DESC) LIMIT 10;";         
             this.db.all(query,[key],function(err,rows) {
                 if (err){
                     reject(err)

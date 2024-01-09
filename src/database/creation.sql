@@ -85,7 +85,8 @@ CREATE TABLE Challenges (
 CREATE TABLE HasTried (
     aUser INTEGER,
     aChallenge INTEGER,
-    flagged DATE,
+    flagged TEXT,
+    hour TEXT,
     retryNb INTEGER DEFAULT 0
         CONSTRAINT nn_retryNb NOT NULL 
         CONSTRAINT ck_HasTried_retryNb CHECK (retryNb >= 0),

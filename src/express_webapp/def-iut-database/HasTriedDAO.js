@@ -2,10 +2,10 @@ const db = require('./sqlite_connection');
 
 class HasTriedDAO {
     // Insérer un HasTried
-    insert(aUser, aChallenge, flagged, retryNB) {
+    insert(aUser, aChallenge, flagged, hour,retryNB) {
         return new Promise((resolve, reject) => {
-            const query = 'INSERT INTO HasTried (aUser, aChallenge, flagged , retryNB) VALUES (?, ?, ?, ?)';
-            db.run(query, [aUser, aChallenge, flagged, retryNB], function(err) {
+            const query = 'INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNB) VALUES (?, ?, ?, ?, ?)';
+            db.run(query, [aUser, aChallenge, flagged, hour,retryNB], function(err) {
                 if (err) {
                     reject(err);
                 } else {
@@ -16,10 +16,10 @@ class HasTriedDAO {
     }
 
     // Mettre à jour un HasTried
-    update(aUser, aChallenge, flagged, retryNB) {
+    update(aUser, aChallenge, flagged, hour,retryNB) {
         return new Promise((resolve, reject) => {
-            const query = 'UPDATE HasTried SET aUser = ?, aChallenge = ?, flagged = ?, retryNB = ? WHERE aUser = ? AND aChallenge = ?';
-            db.run(query, [aUser, aChallenge, flagged, retryNB, aUser, aChallenge], function(err) {
+            const query = 'UPDATE HasTried SET aUser = ?, aChallenge = ?, flagged = ?, hour = ?, retryNB = ? WHERE aUser = ? AND aChallenge = ?';
+            db.run(query, [aUser, aChallenge, flagged, hour, retryNB, aUser, aChallenge], function(err) {
                 if (err) {
                     console.error('SQL Error:', this.sql);
                     console.error('Error Message:', err.message);
@@ -66,7 +66,7 @@ class HasTriedDAO {
     getFlagged(idUser) {
         return new Promise((resolve, reject) => {
             console.log("debug")
-            const query = 'SELECT flagged,reward FROM HasTried JOIN DistinguishedChallenges ON aChallenge = idChallenge WHERE aUser = ? and flagged IS NOT NULL ORDER BY flagged DESC';
+            const query = 'SELECT flagged, hour,reward FROM HasTried JOIN DistinguishedChallenges ON aChallenge = idChallenge WHERE aUser = ? and flagged IS NOT NULL ORDER BY flagged DESC';
             db.all(query, [idUser],function(err, rows) {
                 if (err) {
                     reject(err);
@@ -96,7 +96,7 @@ class HasTriedDAO {
 
     getFlagDate(idUser, idChallenge) {
         return new Promise((resolve, reject) => {
-            const query = 'SELECT flagged FROM HasTried WHERE aUser = ? AND aChallenge = ? AND flagged IS NOT NULL';
+            const query = 'SELECT flagged, hour FROM HasTried WHERE aUser = ? AND aChallenge = ? AND flagged IS NOT NULL';
             db.get(query, [idUser, idChallenge], function(err, row) {
                 if (err) {
                     reject(err);

@@ -1,5 +1,6 @@
 # Custom files
 push.sh
+.obsidian/*
 
 # Email verification files
 src/emails_check/*

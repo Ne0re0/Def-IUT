@@ -1,0 +1,8 @@
+#!/bin/bash
+cd ./src/express_webapp
+echo "Installation du module personnalisé de base de donnée"
+npm i > /dev/null 2>/dev/null 
+echo "Installation des librairies nécessaires"
+npm i ./def-iut-database > /dev/null 2>/dev/null 
+echo "Installations terminées"
+cd ../../

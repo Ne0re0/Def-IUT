@@ -3,6 +3,9 @@
 Cette application a pour but d'héberger des challenges informatiques divers pour les étudiants de l'UBS  
 Pour plus d'informations, reportez vous au [cahier des charges](./documents/cahier_des_charges.pdf).
 
+Le répertoire de cette application est disponibles à l'adresse suivante : https://github.com/Ne0re0/Def-IUT/
+
+
 ## Installation
 
 1. Installation des packages nécessaires au bon fonctionnement de la conteneurisation
@@ -21,3 +24,7 @@ sudo docker-compose up --build -d # La première installation peut durer un cert
 ```
 
 4. L'application est lancée sur le port localhost:3000 http://localhost:3000
+
+```bash
+sudo docker exec -it def-iut_defiut1_1 /bin/bash
+```

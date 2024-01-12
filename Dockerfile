@@ -3,7 +3,7 @@ FROM node:14
 
 
 RUN apt-get update --fix-missing
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install sudo sqlite3 apt-utils
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install sudo sqlite3 apt-utils npm nano
 
 
 # Créez le répertoire de travail dans l'image
@@ -33,6 +33,7 @@ COPY ./src/express_webapp/public/challenges/ ./src/express_webapp/public/challen
 COPY ./src/express_webapp/public/images/ ./src/express_webapp/public/images/
 COPY ./src/express_webapp/public/javascripts/ ./src/express_webapp/public/javascripts/
 COPY ./src/express_webapp/public/stylesheets/ ./src/express_webapp/public/stylesheets/
+COPY ./src/express_webapp/public/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css ./src/express_webapp/public/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css
 # Copy of font-awesome
 COPY ./src/express_webapp/views/ ./src/express_webapp/views/
 COPY ./src/express_webapp/database.db ./src/express_webapp/database.db
@@ -47,17 +48,22 @@ COPY ./update-challenges .
 RUN ./install-libraries > /dev/null
 RUN ./reset-database
 
+
 # Create a user in order to not run the applicaion as sudo
 RUN useradd -m -s /bin/bash defiut && echo "defiut:defiut" | chpasswd
 # Give him sudo rights
 RUN usermod -aG sudo defiut
 # Switch to user defiut
-USER defiut
+
 
 WORKDIR /app/src/express_webapp
 
+RUN npm install http-errors
+
 # Exposez le port sur lequel le serveur Express écoutera
 EXPOSE 3000
+EXPOSE 8080
 
+USER defiut
 # Commande pour démarrer l'application lorsque le conteneur démarre
 CMD ["npm", "start"]

@@ -87,7 +87,7 @@ body{
 .register-form{
     width:350px;
     background-color:#fff;
-    height:630px;
+    height:auto;
     border-radius:10px;
     padding:10px;
     overflow:hidden;
@@ -256,7 +256,7 @@ body{
     padding: 30px;
 /*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 */  }
-  
+
   /* Groupes de formulaire */
   .form-group {
     margin-bottom: 20px;
@@ -283,6 +283,79 @@ body{
   .form-control:focus {
     outline: none;
     border-color: #92466D;
+  }
+
+  /* Hide the default checkbox */
+  .containerBox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .containerBox {
+    display: flex;
+    gap: 10px;
+  }
+  
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: relative;
+    box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+    background-color: rgba(16, 16, 16, 0.5);
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    margin-top: -1px;
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    transform-origin: 0px 10px;
+    border-radius: 4px;
+    margin: -1px 10px 0px 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  .containerBox input:checked ~ .checkmark {
+    box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
+    background-color: rgba(245, 24, 24, 0.5);
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    margin-top: -1px;
+    transition: all 0.2s ease 0s;
+    cursor: pointer;
+    transform-origin: 0px 10px;
+    border-radius: 4px;
+    margin: -1px 10px 0px 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .containerBox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .containerBox .checkmark:after {
+    left: 0.45em;
+    top: 0.25em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid white;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+    transition: all 500ms ease-in-out;
   }
   
   /* Bouton de soumission */

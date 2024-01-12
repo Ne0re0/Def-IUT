@@ -37,12 +37,16 @@ html
             label(for='newUsername') Nom d'utilisateur :
             input(type='text', id='newUsername', name='newUsername', value=user.username, class='form-control')
             br
-
+            
             label(for='newEmail') Email :
             input(type='email', id='newEmail', name='newEmail', value=user.mail, class='form-control')
 
             p.alert Tout changement d'adresse e-mail entraînera une nouvelle vérification nécessaire de celle-ci, vous ne pourrez plus vous connecter tant que celle-ci n'aura pas été vérifiée
-
+            br
+            label.containerBox
+              input(type="checkbox", id='delete', name='delete',class='form-control' )
+              .checkmark
+              p Supprimer mon compte
             input(type='submit', value='Mettre à jour', class='btn-submit')
 
 

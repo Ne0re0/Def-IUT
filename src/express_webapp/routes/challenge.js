@@ -49,7 +49,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
       return res.render('error');
     }
 
-    const retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
+    var retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
 
     const isFlagged = await alreadyFlagged(userId, challengeId);
     console.log(isFlagged);
@@ -100,6 +100,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
 
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
     console.log(successUsers)
+    retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
     res.render('challenge', { challenge: challengeDetails, success, successUsers, retryCount, obtentions, failed });
   } catch (error) {
     console.error(error);

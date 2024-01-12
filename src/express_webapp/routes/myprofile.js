@@ -26,16 +26,15 @@ router.post('/', isConnected, function(req, res, next) {
     usersDAO.findByID(session.user.idUser)
       .then(user => {
         var userId = user.idUser;
-        return usersDAO.delete(userId); 
-      })
-      .then(() => {
-        res.render('connect', { title: 'Connexion', failed:"Compte supprimé\n" });
+        usersDAO.delete(userId)
+        session.user = undefined;
+        res.render('connect', { title: 'Connexion', failed:"Compte supprimé" });
         return;
       })
       .catch(error => {
         console.error('Erreur lors de la suppression du compte :', error);
         res.status(500).send('Erreur lors de la suppression du compte');
-        
+        return;
       });
   }else{
     if (

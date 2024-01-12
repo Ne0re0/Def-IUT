@@ -83,7 +83,6 @@ html
                   input(type='checkbox', name='cgu', required)
                   | J'ai lu et accepté les 
                   a(href='/documents/utilisation.pdf', download='utilisation.pdf') conditions générales d'utilisation.
-                p La création de votre compte vaut acceptation intégrale des ces dernières !
 
                 button.login-button(type='submit') Valider
                 
@@ -95,7 +94,7 @@ html
                     .text-center.mb-5
                       p= error
                 if success
-                  div.div-register-success
+                  div.div-register-success(onclick='window.location.href="/connect"')
                     .text-center.mb-5
                       p= success
 

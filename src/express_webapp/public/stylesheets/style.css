@@ -1021,6 +1021,33 @@ tbody tr td img {
     font-weight: bold;
 }
 
+.give-badges {
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    margin-top:20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: #BBCCBB;
+    padding: 20px;
+    border-radius: 10px;
+}
+.give-badges ul li img {
+    padding: 1px;
+    border-radius: 20px;
+    width: 100px;
+    transition: transform 0.5s ease
+}
+.give-badges ul li img:hover {
+    transform: rotate(10deg);
+    background-color: #92466D;
+    padding: 1px;
+}
+.give-badges ul li p.title {
+    font-weight: bold;
+}
+
 /**
  * Error and success pop ups
  */

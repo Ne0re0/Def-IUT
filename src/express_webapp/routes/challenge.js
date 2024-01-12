@@ -4,6 +4,7 @@ const router = express.Router();
 const challengesDAO = require('def-iut-database').challengesDAO;
 const hasTriedDAO = require('def-iut-database').hasTriedDAO;
 const ownsDAO = require('def-iut-database').ownsDAO;
+const BadgesDAO = require('def-iut-database').badgesDAO;
 const { isConnected } = require('./middlewares/isConnected'); 
 // For connection state control
 
@@ -59,30 +60,31 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
         success = "Bien joué! Vous avez réussi ce challenge !";
 
         // Badges attribution
+        const badges = await BadgesDAO.findAll()
         var obtentions = [];
         if (await WelcomeBadge(userId)) {
-          obtentions.push("Bienvenue");
+          obtentions.push(badges[0]);
         }
         if (await FirstTryBadge(userId, challengeId)) {
-          obtentions.push("First Try");
+          obtentions.push(badges[1]);
         }
         if (await FirstBloodBadge(userId, challengeId)) {
-          obtentions.push("First Blood");
+          obtentions.push(badges[2]);
         }
         if (await HappyHourBadge(userId)) {
-          obtentions.push("Happy Hour");
+          obtentions.push(badges[3]);
         }
         if (await PerseverantBadge(userId, challengeId)) {
-          obtentions.push("Persévérant");
+          obtentions.push(badges[4]);
         }
         if (await ExplorerBadge(userId)) {
-          obtentions.push("Explorer");
+          obtentions.push(badges[5]);
         }
         if (await CompletionistBadge(userId)) {
-          obtentions.push("Complétionniste");
+          obtentions.push(badges[6]);
         }
         if (await HackermanBadge(userId)) {
-          obtentions.push("Hackerman");
+          obtentions.push(badges[7]);
         }
 
       } else {

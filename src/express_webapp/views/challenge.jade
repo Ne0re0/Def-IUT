@@ -65,9 +65,15 @@ html
                     p.challenge-success #{success}
                     if obtentions
                       if obtentions.length > 0
-                        p.challenge-success Vous avez obtenue le(s) badges suivants :
-                          each element in obtentions
-                            p.challenge-success #{element}
+                        p.challenge-success Vous avez obtenue le(s) badge(s) suivant(s) :
+                          .give-badges
+                            ul(style="list-style-type: none; padding-left: 0;")
+                              each badges in obtentions
+                                li(style="display: inline-block; margin-right: 20px;") 
+                                  p.title= badges.titleBadge
+                                  ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                                    li(style="display: inline-block; margin-right: 10px;") 
+                                      img(src='/badges/' + badges.idBadge + '.jpg', title=badges.descriptionBadge)
                   if failed
                     p.challenge-failed #{failed}
 

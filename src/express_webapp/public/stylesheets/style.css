@@ -353,7 +353,6 @@ body{
     height: 10%;
     background-color: #fff4;
     padding: .8rem 1rem;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -395,12 +394,17 @@ body{
 .scoreboard-container table, th, td {
     border-collapse: collapse;
     padding: 1rem;
-    text-align: left;
+    text-align: center;
 }
 
-.scoreboard-container td a {
+.scoreboard-container tbody td a {
     text-decoration: none;
     color: black;
+}
+
+.scoreboard-container td {
+    text-align: center;
+    cursor: pointer;
 }
 
 
@@ -411,6 +415,7 @@ body{
     background-color: #d5d1defe;
     cursor: pointer;
     text-transform: capitalize;
+    text-align: center;
 }
 
 .scoreboard-container thead th:hover {
@@ -1375,4 +1380,25 @@ tbody tr td img {
 
 .myprofile-information {
     margin: 30px;
+}
+
+.medal{
+    
+    border-radius: 10px;
+}
+
+#podium-1 td img {
+    max-width: 70px;
+}
+
+#podium-2 td img {
+    max-width: 60px;
+}
+
+#podium-3 td img {
+    max-width: 50px;
+}
+
+#podium-* td {
+    text-align: center;
 }

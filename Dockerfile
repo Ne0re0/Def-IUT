@@ -9,6 +9,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install sudo sqlite3 apt-utils npm
 # Créez le répertoire de travail dans l'image
 WORKDIR /app
 
+# Create a user in order to not run the applicaion as sudo
+RUN useradd -m -s /bin/bash defiut && echo "defiut:defiut" | chpasswd
+# Give him sudo rights
+RUN usermod -aG sudo defiut
+
+USER defiut
 # Copiez le reste des fichiers de l'application dans le répertoire de travail
 COPY ./conf/ ./conf/
 COPY ./documents/ ./documents/
@@ -44,17 +50,12 @@ COPY ./start .
 COPY ./stop .
 COPY ./update-challenges .
 
+
 # Installez les dépendances
+USER root
 RUN ./install-libraries > /dev/null
 RUN ./reset-database
-
-
-# Create a user in order to not run the applicaion as sudo
-RUN useradd -m -s /bin/bash defiut && echo "defiut:defiut" | chpasswd
-# Give him sudo rights
-RUN usermod -aG sudo defiut
-# Switch to user defiut
-
+RUN ./update-challenges
 
 WORKDIR /app/src/express_webapp
 

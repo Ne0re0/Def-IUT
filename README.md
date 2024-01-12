@@ -38,3 +38,11 @@ sudo docker exec -it defiut /bin/bash
 sudo docker-compose up   # Démarrage
 sudo docker-compose down # Arrêt
 ```
+
+## Ajout/modification de challenges
+Comme demandé dans le cahier des charges, la gestion des challenges se fait depuis un accès terminal ainsi qu'à un fichier de configuration conf/challenges.yml
+```bash
+sudo docker exec -it defiut /bin/bash
+# Modification du fichier /app/conf/challenges.yml selon les règles de sa documentation (à l'intérieur du fichier)
+./update-challenges
+```

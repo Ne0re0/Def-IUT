@@ -25,6 +25,9 @@ const recoverRouter = require('./routes/recover');
 // Generate application instance
 var app = express();
 
+// Static document directory
+app.use('/documents', express.static(path.join(__dirname, '../../documents')));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

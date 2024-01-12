@@ -78,6 +78,12 @@ html
                       i.fa.fa-circle
                       span Confirmation valide
 
+                // Checkbox CGU
+                label
+                  input(type='checkbox', name='cgu', required)
+                  | J'ai lu et accepté les 
+                  a(href='/documents/utilisation.pdf', download='utilisation.pdf') conditions générales d'utilisation.
+                p La création de votre compte vaut acceptation intégrale des ces dernières !
 
                 button.login-button(type='submit') Valider
                 

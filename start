@@ -1,5 +1,21 @@
 #!/bin/bash
-cd ./src/express_webapp
-npm start > /dev/null 2>/dev/null &
-cd ../../
-echo "Service démarré sur le port 3000 : http://localhost:3000"
+
+# Change directory to the application directory
+cd ./src/express_webapp || exit
+
+# Start the Node.js application in the background
+npm start > /dev/null 2>&1 &
+pid=$!
+
+# Check if the startup was successful
+if [ $? -eq 0 ]; then
+  echo "Service started on port 3000: http://localhost:3000"
+else
+  echo "Error starting the service."
+fi
+
+# Change back to the previous directory
+cd - || exit
+
+# Optional: Wait for a few seconds before displaying the message
+sleep 2

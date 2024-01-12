@@ -62,7 +62,6 @@ RUN npm install http-errors
 
 # Exposez le port sur lequel le serveur Express écoutera
 EXPOSE 3000
-EXPOSE 8080
 
 USER defiut
 # Commande pour démarrer l'application lorsque le conteneur démarre

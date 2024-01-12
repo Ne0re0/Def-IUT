@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Terminate all processes named 'node'
 pkill -9 'node'
+
+# Terminate all processes related to "npm start"
 pkill -9 "npm start"
-echo "Service arrêté"
+
+# Check if any processes were terminated
+if [ $? -eq 0 ]; then
+  echo "Service stopped"
+else
+  echo "Error stopping the service"
+fi

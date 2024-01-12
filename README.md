@@ -25,6 +25,16 @@ sudo docker-compose up --build -d # La première installation peut durer un cert
 
 4. L'application est lancée sur le port localhost:3000 http://localhost:3000
 
+## Accès distant
+Pour accéder à l'intérieur du Docker, il suffit d'éxecuter la commande suivante : 
 ```bash
-sudo docker exec -it def-iut_defiut1_1 /bin/bash
+# Depuis n'importe ou
+sudo docker exec -it defiut /bin/bash
+```
+
+## Démarrage / Arrêt 
+```bash
+# Depuis le répertoire Def-IUT/
+sudo docker-compose up   # Démarrage
+sudo docker-compose down # Arrêt
 ```

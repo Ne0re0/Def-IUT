@@ -1,7 +1,8 @@
 version: '3'
 
 services:
-  defiut:
+  default:
+    container_name: "defiut"
     image: defiut
     build:
       context: .

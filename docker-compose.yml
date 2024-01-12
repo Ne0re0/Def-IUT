@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  defiut1:
+  defiut:
     image: defiut
     build:
       context: .

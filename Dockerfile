@@ -14,7 +14,6 @@ RUN useradd -m -s /bin/bash defiut && echo "defiut:defiut" | chpasswd
 # Give him sudo rights
 RUN usermod -aG sudo defiut
 
-USER defiut
 # Copiez le reste des fichiers de l'application dans le répertoire de travail
 COPY ./conf/ ./conf/
 COPY ./documents/ ./documents/
@@ -49,7 +48,7 @@ COPY ./reset-database .
 COPY ./start .
 COPY ./stop .
 COPY ./update-challenges .
-
+RUN chown -R defiut:defiut /app
 
 # Installez les dépendances
 USER root

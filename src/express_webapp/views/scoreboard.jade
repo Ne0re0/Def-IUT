@@ -36,20 +36,20 @@ html
                   th Points
               tbody
                 each user, index in users
-                  
-                  tr(id='podium-' + (index + 1), onclick='redirectToUser('+user.idUser+')')
-                    td
-                      if index === 0
-                        img.medal(src='/images/first-place.jpeg')
-                      else if index === 1
-                        img.medal(src='/images/second-place.jpeg')
-                      else if index === 2
-                        img.medal(src='/images/third-place.jpeg')
-                      else
-                        p= user.rank
-                    td
-                      a.username-link(href='/user/' + user.idUser)= user.username
-                    td= user.score
+                  if user.score > 0
+                    tr(id='podium-' + (index + 1), onclick='redirectToUser('+user.idUser+')')
+                      td
+                        if index === 0
+                          img.medal(src='/images/first-place.jpeg')
+                        else if index === 1
+                          img.medal(src='/images/second-place.jpeg')
+                        else if index === 2
+                          img.medal(src='/images/third-place.jpeg')
+                        else
+                          p= user.rank
+                      td
+                        a.username-link(href='/user/' + user.idUser)= user.username
+                      td= user.score
 
     script.
       function redirectToUser(id) {

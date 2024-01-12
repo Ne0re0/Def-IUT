@@ -28,7 +28,7 @@ html
         div.challenge-container
           section.table__header
             h1= challenge.titleChallenge
-            form(id="loginForm", action='/challenge/#{challenge.idChallenge}', method='post')
+            form(id="FlagForm", action='/challenge/#{challenge.idChallenge}', method='post')
               label(for='flagInput') 
               .input-group
                 input(type='text', name='flagInput', id='flagInput', placeholder='Entrer le flag ici...',required)
@@ -88,6 +88,7 @@ html
                       th Utilisateur
                       th Rang
                       th Date
+                      th Heure
                   if successUsers
                     if (successUsers.length > 0)
                       tbody
@@ -97,6 +98,7 @@ html
                               a(href=`/user/${user.idUser}`)= user.username
                             td= user.rank
                             td= user.flagged
+                            td= user.hour
     script.
       function redirectToUser(id) {
         window.location.href = "/user/"+id;

@@ -27,7 +27,7 @@ router.get('/:idChallenge', isConnected, async function(req, res, next) {
 
     console.log("Rendering...");
     console.log(session.user.idUser);
-    res.render('challenge', { challenge: challengeDetails, successUsers, retryCount, isFlagged });
+    res.render('challenge', { title: "Challenge", challenge: challengeDetails, successUsers, retryCount, isFlagged });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

@@ -54,8 +54,8 @@ html
                 td #{retryCount}
               if isFlagged
                 tr
-                  td Résolu le :
-                  td #{isFlagged.flagged}
+                  td Résolution :
+                  td #{isFlagged.hour} #{isFlagged.flagged}
 
             // Boîte modale pour afficher le résultat
             #resultModal.modal
@@ -65,7 +65,7 @@ html
                     p.challenge-success #{success}
                     if obtentions
                       if obtentions.length > 0
-                        p.challenge-success Vous avez obtenue le(s) badge(s) suivant(s) :
+                        p.challenge-success Vous avez obtenu le(s) badge(s) suivant(s) :
                           .give-badges
                             ul(style="list-style-type: none; padding-left: 0;")
                               each badges in obtentions

@@ -34,7 +34,7 @@ html
             section.table__body
               table
                 thead
-                  tr
+                  tr(onclick="window.location.href='/scoreboard'")
                     th Rang
                     th Score
                     th Challenges validés
@@ -107,9 +107,6 @@ html
                 sum += element.reward;
                 y.push(sum);
               });
-
-              console.log(x);
-              console.log(y);
 
               new Chart("myChart", {
                 type: "line",

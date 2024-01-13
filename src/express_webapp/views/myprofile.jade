@@ -44,7 +44,7 @@ html
             p.alert Tout changement d'adresse e-mail entraînera une nouvelle vérification nécessaire de celle-ci, vous ne pourrez plus vous connecter tant que celle-ci n'aura pas été vérifiée
             br
             label.containerBox
-              input(type="checkbox", id='delete', name='delete', class='form-control', onclick='if(this.checked == true) {if(window.confirm("Vous êtes sur le point de supprimer votre compte.  \nEtes-vous sûr de vouloir continuer ? \nCela entraînera la perte définitive de toutes vos données.")){ this.checked = true; } else { this.checked = false; }}')
+              input(type="checkbox", id='delete', name='delete', class='form-control', onclick='if(this.checked == true) {if(window.confirm("Vous êtes sur le point de supprimer votre compte.  Etes-vous sûr de vouloir continuer ? Cela entraînera la perte définitive de toutes vos données.")){ this.checked = true; } else { this.checked = false; }}')
               .checkmark
               p Supprimer mon compte
             input(type='submit', value='Mettre à jour', class='btn-submit')

@@ -10,7 +10,6 @@ router.get('/', isConnected, function(req, res, next) {
   if (!session || session.user === undefined) {
     res.redirect("/connect");
   } else {
-  console.log("User session",session.user);
     res.render('myprofile', { title: 'My Profile', user: session.user })
   };
 });
@@ -21,7 +20,6 @@ router.post('/', isConnected, function(req, res, next) {
     return res.redirect("/connect");
   }
 
-  console.log("first", req.body);
   if (req.body.delete !== undefined) {
     usersDAO.findByID(session.user.idUser)
       .then(user => {
@@ -72,12 +70,10 @@ router.post('/', isConnected, function(req, res, next) {
         delete user.idUser;
   
         // Mettre à jour l'utilisateur
-        console.log(user)
         delete user.isVerified;
         user.accountVerified = 0;
         usersDAO.update(userId, Object.values(user))
           .then((utilisateur) => {
-            console.log("Profil mis à jour avec succès");
             usersDAO.findByID(userId)
             .then((user) => {
               session.user = user;

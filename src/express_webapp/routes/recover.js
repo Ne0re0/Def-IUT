@@ -6,7 +6,6 @@ const fs = require('node:fs');
 const CryptoJS = require('crypto-js');
 var session = require('express-session');
 const yaml = require('js-yaml');
-const readline = require('readline');
 const CONF_RECOVER_PATH = "../../conf/recover.yml"
 const LOG_FILE="../../log/defiut.log"
 
@@ -131,22 +130,42 @@ router.post('/:token', function(req, res, next) {
 
         res.render('newpassword', { title: 'Mot de passe oublié',token:token, error:"Token invalide" });
       } else {
+        // Case file has been read successfully
+        fs.stat(filePath,(err,stats) => {
+          if (err) {
+            console.error(err);
+          } else {
+            const currentDate = new Date();
+            const timer = Math.round((currentDate - stats.birthtime) / (1000 * 60));
+            if (timer > 1){
+              fs.unlink(filePath, (err) => {
+                if (err){
+                  console.log("Error when deleting file " + filePath + " " + err)
+                } 
+              }); 
+              res.render('newpassword', { title: 'Mot de passe oublié',token:token, error: "Token expiré" });
+              return;
+            } else {
 
-        usersDAO.updatePassword(data.toString(),req.body.password)
-        .then(() => {
-          res.render('newpassword', { title: 'Mot de passe oublié',token:token, success: "Mot de passe réinitialisé, vous pouvez vous connecter" });
+              usersDAO.updatePassword(data.toString(),req.body.password)
+                .then(() => {
+                  res.render('newpassword', { title: 'Mot de passe oublié',token:token, success: "Mot de passe réinitialisé, vous pouvez vous connecter" });
 
-          fs.unlink(filePath, (err) => {}); 
+                  fs.unlink(filePath, (err) => {}); 
 
-          let event = "User '"+data.toString() +"' successfully updated his password" + "\n"
-          fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+                  let event = "User '"+data.toString() +"' successfully updated his password" + "\n"
+                  fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
 
-        })
-        .catch((err) => {
-          let event = "SERVER ERROR while updating password for user '"+data.toString() +"' " + err +  "\n"
-          fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+                })
+                .catch((err) => {
+                  let event = "SERVER ERROR while updating password for user '"+data.toString() +"' " + err +  "\n"
+                  fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
 
-          res.render('newpassword', { title: 'Mot de passe oublié',token:token, error: "Erreur lors de la modification du mot de passe" });
+                  res.render('newpassword', { title: 'Mot de passe oublié',token:token, error: "Erreur lors de la modification du mot de passe" });
+                })
+
+            }
+          }
         })
       }
    })

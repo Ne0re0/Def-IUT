@@ -33,7 +33,8 @@ router.post('/', function(req, res, next) {
       req.body.password === undefined ||
       req.body.password === '' ||
       req.body['password-confirmation'] === undefined ||
-      req.body['password-confirmation'] === '' 
+      req.body['password-confirmation'] === '' ||
+      res.body.cgu != 'on'
     ){
 
       let event = "User "+req.body.username +"' failed to create an account (empty fields)\n"

@@ -15,14 +15,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
 
   // Check request body exists
   if (req.body === undefined){
     res.render('register', { title: 'Créer un compte' });
     return;
   }
-  console.log(req.body)
 
   // Check that parameters have been specified
   if (
@@ -34,7 +32,7 @@ router.post('/', function(req, res, next) {
       req.body.password === '' ||
       req.body['password-confirmation'] === undefined ||
       req.body['password-confirmation'] === '' ||
-      res.body.cgu != 'on'
+      req.body.cgu !== 'on'
     ){
 
       let event = "User "+req.body.username +"' failed to create an account (empty fields)\n"

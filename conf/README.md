@@ -4,11 +4,9 @@ Dans ce dossier `conf/` se trouvent les fichiers :
 - `challenges.yml` qui contient les challenges de l'application
 - `update-db.sh` qui doit être exécuté pour mettre a jour la base de données
 - `README.md` ce fichier
+Toutes la gestion des challenges passe au travers du fichier `challenges.yml`
 
-
-## Mise a jour de la base de données
-
-#### Modification de challenges.yml
+## Modification de `challenges.yml`
 Chaque challenge prends la forme suivante :
 ```yml
 # Le titre du challenge
@@ -33,7 +31,7 @@ Chaque challenge prends la forme suivante :
   connection: "http://example.com/"
 ```
 
-Pour ajouter un challenge il suffit de l'ajouter dans le fichier
+Pour ajouter un challenge il suffit de l'ajouter à la fin du fichier
 ```yml
 - title: "Premier challenge"
   category: "Reverse"
@@ -50,16 +48,16 @@ Pour ajouter un challenge il suffit de l'ajouter dans le fichier
   connection: "ssh carl@defiut.fr -p 2222"
 ```
 
-#### Application des modifications
-
+### A savoir
 Lorsqu'un challenge de la base de données possédant le même titre qu'un challenge du fichier est trouvé : 
 - Si le challenge est identique, rien ne se passe
-- Si certaines valeurs sont différentes, le script demande s'il faut mettre à jour la base de données.
+- Si certaines valeurs sont différentes, le script demande à l'utilisateur s'il souhaite mettre à jour la base de données.
 Attention, si vous changez le titre d'un challenge, il sera considéré comme un nouveau challenge à part entière
 
-----------------
+### Application des modifications
+
 ```bash
 ./update-db.sh 
 ```
-----------------
-PS : Il est possible d'insérer un challenge, de modifier un challenge existant mais il n'est pas possible de supprimer un challenge.
+
+**PS** : Il est possible d'insérer un challenge, de modifier un challenge existant mais il n'est pas possible de supprimer un challenge.

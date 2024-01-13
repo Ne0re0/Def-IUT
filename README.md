@@ -65,5 +65,8 @@ sudo docker exec -it defiut /bin/bash
 `/recover/JETON` permet à l'utilisateur dont le jeton correspond à changer son mot de passe 
 `verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupérer via un mail
 
-### Présentation de la base de données ici [[src/database/README|README]]
+### Présentation de la base de données [[src/database/README|ici]]
+### Présentation de la gestion des challenges [[conf/README|ici]]
+
+
 

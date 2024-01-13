@@ -4,12 +4,9 @@ var fullyDistinguishedUsersDAO = require('def-iut-database').fullyDistinguishedU
 const { isConnected } = require('./middlewares/isConnected'); // For connection state control
 
 /* GET home page. */
-router.get('/', isConnected, function(req, res, next) {
-  fullyDistinguishedUsersDAO.findAll()
-    .then((users) => {
-      console.log(users);
-      res.render('scoreboard', { title: 'Scoreboard', users:users});
-    })
+router.get('/', isConnected, async function(req, res, next) {
+  var users = await fullyDistinguishedUsersDAO.findAll();
+  res.render('scoreboard', { title: 'Scoreboard', users:users});
 });
 
 module.exports = router;

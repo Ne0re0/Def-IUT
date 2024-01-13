@@ -34,7 +34,6 @@ COPY ./src/express_webapp/routes/middlewares/ ./src/express_webapp/routes/middle
 COPY ./src/express_webapp/app.js ./src/express_webapp/app.js
 COPY ./src/express_webapp/public/ ./src/express_webapp/public/
 COPY ./src/express_webapp/public/badges/ ./src/express_webapp/public/badges/
-COPY ./src/express_webapp/public/challenges/ ./src/express_webapp/public/challenges/
 COPY ./src/express_webapp/public/images/ ./src/express_webapp/public/images/
 COPY ./src/express_webapp/public/javascripts/ ./src/express_webapp/public/javascripts/
 COPY ./src/express_webapp/public/stylesheets/ ./src/express_webapp/public/stylesheets/

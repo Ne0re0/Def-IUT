@@ -11,8 +11,7 @@ router.get('/', isConnected, async function(req, res, next) {
     const challenges = await challengesDAO.findAllKnowingUser(session.user.idUser);
     res.render('index', { title:"Déf'IUT",challenges });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Erreur interne du serveur');
+    res.render('error', { title:"Déf'IUT" });
   }
 });
 

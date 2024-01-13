@@ -15,18 +15,12 @@ router.get('/:idChallenge', isConnected, async function(req, res, next) {
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
     const retryCount = await hasTriedDAO.getRetryCount(session.user.idUser, challengeId);
     const isFlagged = await hasTriedDAO.getFlagDate(session.user.idUser, challengeId);
-    console.log(isFlagged);
-    console.log("getSuccessfulUsers = OK");
-    console.log(successUsers);
 
     const challengeDetails = await challengesDAO.findByID(challengeId);
     if (!challengeDetails) {
       return res.render('error');
     }
-    console.log(challengeDetails)
 
-    console.log("Rendering...");
-    console.log(session.user.idUser);
     res.render('challenge', { title: "Challenge", challenge: challengeDetails, successUsers, retryCount, isFlagged });
   } catch (error) {
     console.error(error);
@@ -52,10 +46,8 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
     var retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
 
     const isFlagged = await alreadyFlagged(userId, challengeId);
-    console.log(isFlagged);
     if (!isFlagged) {
       if (submittedFlag === challengeDetails.flag) {
-        console.log("Flag = True");
         await addSuccessfulTry(userId, challengeId);
         success = "Bien joué! Vous avez réussi ce challenge !";
 
@@ -88,22 +80,17 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
         }
 
       } else {
-        console.log("Flag = False");
         await addTry(userId, challengeId);
         failed = "Bien tenté! Mais ce n'est pas le bon flag !";
       }
     } else {
-      console.log("Flag = Already Flagged");
-      console.log(success)
       success = "Vous avez déjà réussi ce challenge !";
     }
 
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
-    console.log(successUsers)
     retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
     res.render('challenge', { challenge: challengeDetails, success, successUsers, retryCount, obtentions, failed });
   } catch (error) {
-    console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -128,18 +115,14 @@ const alreadyFlagged = async (userId, challengeId) => {
 const addTry = async (userId, challengeId) => {
   try {
     const nbRetry = await howMuchTries(userId, challengeId);
-    console.log("nbRetry = " + nbRetry);
 
     if (nbRetry > 0) {
       const newRetryCount = nbRetry + 1;
       await hasTriedDAO.update(userId, challengeId, null, null, newRetryCount);
-      console.log("Try added OK");
     } else {
       await hasTriedDAO.insert(userId, challengeId, null,null, 1);
-      console.log("Try added OK");
     }
   } catch (err) {
-    console.error(err);
     throw new Error('Internal Server Error');
   }
 };
@@ -155,8 +138,7 @@ const addSuccessfulTry = async (userId, challengeId) => {
 
     const dateStr = `${year}/${month}/${day}`;
     const hourStr = `${hour}:${minute}`;
-    console.log(dateStr)
-    await howMuchTries(userId, challengeId)
+    howMuchTries(userId, challengeId)
       .then((nbTry) => {
         if (nbTry !== 0) {
           hasTriedDAO.update(userId, challengeId, dateStr, hourStr, nbTry + 1)
@@ -219,7 +201,6 @@ async function WelcomeBadge(userId) {
       if (!alreadyObtained) {
         // Accorder le badge "Bienvenue" à l'utilisateur
         await ownsDAO.insert([userId, id, getTheDate()]);
-        console.log(`Badge "Bienvenue" accordé à l'utilisateur avec l'ID ${userId}.`);
         return true; // Indique que le badge a été accordé
       }
 
@@ -239,11 +220,9 @@ async function FirstTryBadge(userId, challengeId) {
       if (!alreadyObtained) {
           // Vérifier si l'utilisateur a un seul essai pour le défi actuel
           const numberOfTries = await howMuchTries(userId, challengeId);
-          console.log("numberOfTries = " + numberOfTries);
           if (numberOfTries === 1) {
             // Accorder le badge "First try" à l'utilisateur
             await ownsDAO.insert([userId, id, getTheDate()]);
-            console.log(`Badge "First try" accordé à l'utilisateur avec l'ID ${userId}.`);
             return true; // Indique que le badge a été accordé
           }
       }
@@ -268,7 +247,6 @@ async function FirstBloodBadge(userId, challengeId) {
           if (successfulUsers.length === 1 && successfulUsers[0].idUser === userId) {
             // Accorder le badge "First blood" à l'utilisateur
             await ownsDAO.insert([userId, id, getTheDate()]);
-            console.log(`Badge "First blood" accordé à l'utilisateur avec l'ID ${userId}.`);
             return true; // Indique que le badge a été accordé
           }
       }
@@ -293,7 +271,6 @@ async function HappyHourBadge(userId) {
       if (isValidHappyHour) {
         // Accorder le badge "Happy hour" à l'utilisateur
         await ownsDAO.insert([userId, id, getTheDate()]);
-        console.log(`Badge "Happy hour" accordé à l'utilisateur avec l'ID ${userId}.`);
         return true; // Indique que le badge a été accordé
       }
     }
@@ -337,7 +314,6 @@ async function PerseverantBadge(userId, challengeId) {
       if (numberOfTries >= requiredAttempts + 1) {
         // Accorder le badge "Persévérant" à l'utilisateur
         await ownsDAO.insert([userId, id, getTheDate()]);
-        console.log(`Badge "Persévérant" accordé à l'utilisateur avec l'ID ${userId}.`);
         return true; // Indique que le badge a été accordé
       }
     }
@@ -360,14 +336,9 @@ async function ExplorerBadge(userId) {
       // Vérifier si l'utilisateur a validé au moins un défi dans chaque catégorie
       const nbsuccessedCategory = await challengesDAO.successedCategory(userId);
       const nbCategories = await challengesDAO.countCategories();
-
-      console.log("nbsuccessedCategory = " + nbsuccessedCategory.categoryCount);
-      console.log("nbCategories = " + nbCategories);
-
       if (nbsuccessedCategory.categoryCount === nbCategories) {
         // Accorder le badge "Explorateur" à l'utilisateur
         await ownsDAO.insert([userId, id, getTheDate()]);
-        console.log(`Badge "Explorateur" accordé à l'utilisateur avec l'ID ${userId}.`);
         return true; // Indique que le badge a été accordé
       }
     }
@@ -402,7 +373,6 @@ async function CompletionistBadge(userId) {
       // Si tous les défis ont été validés, accorder le badge "Complétionniste"
       if (hasValidatedAllChallenges) {
         await ownsDAO.insert([userId, id, getTheDate()]);
-        console.log(`Badge "Complétionniste" accordé à l'utilisateur avec l'ID ${userId}.`);
         return true; // Indique que le badge a été accordé
       }
     }
@@ -429,7 +399,6 @@ async function HackermanBadge(userId) {
       if (notOwnedBadges.length === 1) {
         // Si tous les badges ont été obtenus, accorder le badge "Hackerman"
         await ownsDAO.insert([userId, id, getTheDate()]);
-        console.log(`Badge "Hackerman" accordé à l'utilisateur avec l'ID ${userId}.`);
         return true; // Indique que le badge a été accordé
       }
     }

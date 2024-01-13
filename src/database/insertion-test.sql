@@ -1,4 +1,5 @@
 -- Insert Users
+INSERT INTO Users(idUser, mail,accountVerified,username,password,isAdmin) VALUES (1,'admin@univ-ubs.fr',1,'admin','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);
 INSERT INTO Users(idUser, mail,accountVerified,username,password,isAdmin) VALUES (2,'test1@univ-ubs.fr',1,'test1','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);
 INSERT INTO Users(idUser, mail,accountVerified,username,password,isAdmin) VALUES (3,'test2@univ-ubs.fr',1,'test2','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);
 INSERT INTO Users(idUser, mail,accountVerified,username,password,isAdmin) VALUES (4,'test3@univ-ubs.fr',1,'test3','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);

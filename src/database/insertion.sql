@@ -28,8 +28,3 @@ INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(5,'Persévérant'
 INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(6,'Explorateur','Valider un défi de chaque catégorie');
 INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(7,'Completionniste','Valider tous les défis de la plateforme');
 INSERT INTO Badges(idbadge,titleBadge,descriptionBadge) VALUES(8,'Hackerman','Obtenir tous les badges');
-
--- Users
--- admin:admin
-INSERT INTO Users(idUser, mail,accountVerified,username,password,isAdmin) VALUES (1,'admin@univ-ubs.fr',1,'admin','$2a$10$QnGST8hQwYefFAELGrgMWuxD6IhETxAjUAp9AOi62s4jstZoTIz5e',1);
-

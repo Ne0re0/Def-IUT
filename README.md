@@ -1,9 +1,9 @@
-# Def-IUT
+# Déf-IUT
 
 Cette application a pour but d'héberger des challenges informatiques divers pour les étudiants de l'UBS  
 Pour plus d'informations, reportez vous au [cahier des charges](./documents/cahier_des_charges.pdf).
 
-Le répertoire de cette application est disponibles à l'adresse suivante : https://github.com/Ne0re0/Def-IUT/
+Le code source de cette application est disponibles à l'adresse suivante : https://github.com/Ne0re0/Def-IUT/
 
 ## Installation
 
@@ -46,7 +46,7 @@ sudo docker-compose down # Arrêt
 
 ## Ajout/modification des challenges
 
-Comme demandé dans le cahier des charges, la gestion des challenges se fait depuis un accès terminal ainsi qu'à un fichier de configuration conf/challenges.yml
+Comme demandé dans le cahier des charges, la gestion des challenges se fait depuis un accès terminal ainsi qu'à un fichier de configuration `conf/challenges.yml`
 
 ```bash
 sudo docker exec -it defiut /bin/bash
@@ -66,7 +66,8 @@ sudo docker exec -it defiut /bin/bash
 `verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupérer via un mail
 
 ### Présentation de la base de données [[src/database/README|ici]]
-### Présentation de la gestion des challenges [[conf/README|ici]]
+### Présentation de la gestion des challenges et des mails [[conf/README|ici]]
+### Présentation de la journalisation [[log/README|ici]]
 
-
-
+#### [Politique de confidentialité](./documents/confidentialité.pdf)
+#### [Conditions générales d'utilisation](./documents/utilisation.pdf)

@@ -1,4 +1,4 @@
-# Challenge configuration file
+# Gestion des challenges
 
 Dans ce dossier `conf/` se trouvent les fichiers : 
 - `challenges.yml` qui contient les challenges de l'application
@@ -55,9 +55,47 @@ Lorsqu'un challenge de la base de données possédant le même titre qu'un chall
 Attention, si vous changez le titre d'un challenge, il sera considéré comme un nouveau challenge à part entière
 
 ### Application des modifications
-
+**Si vous utilisez une instance Docker**
 ```bash
-./update-db.sh 
+sudo docker exec -it defiut /bin/bash # Si vous utilisez une instance docker
+cd /app/ && ./update-db.sh
+```
+**Sinon**
+```bash
+cd /chemin/vers/Def-IUT/
+./update-db.sh
 ```
 
-**PS** : Il est possible d'insérer un challenge, de modifier un challenge existant mais il n'est pas possible de supprimer un challenge.
+**PS** : Il est possible d'insérer un challenge, de modifier un challenge existant mais il n'est pas possible de supprimer un challenge pour le moment.
+
+# Gestion des mails
+Les fichiers  **`conf/recover.yml` ainsi que `conf/verify.yml`** sont respectivement les fichiers de configurations **liés à l'envoi de mail** en cas de **perte de mot de passe** et à l'envoi de mail lié à la **vérification d'adresse email**.
+
+Ils sont tous les deux identiques et composés de choses simples, veuillez vous référer à leur documentation respectives pour plus de détails
+
+**Dans la partie `text`, l'apparition de `#link` est obligatoire, il sera remplacé par les liens à destination de l'utilisateur automatiquement**
+
+#### Exemple : `verify.yml`
+Notez que la quantité de documentation de l'exemple est extrêmement limité par rapport au fichier actuel.
+
+```yml
+# Le domain sur lequel est hébergé l'application
+domain : "localhost"
+# Le port qui est ouvert pour l'application
+port : 3000 # 3000 par défaut
+# Le titre du mail
+subject : 
+  "Vérification de votre e-mail Déf'IUT"
+# Le contenu du mail
+# "#link" représente l'emplacement du lien à destination de l'utilisateur
+text : " 
+Madame,Monsieur,\n
+\n
+Nous sommes ravis de pouvoir vous compter parmi nos membres !\n
+\n
+Vous pouvez dès à présent vérifier votre compte Déf'IUT en cliquant sur le lien suivant : #link \n
+\n
+Cybèrement vôtre,\n
+Le staff Déf'IUT
+"
+```

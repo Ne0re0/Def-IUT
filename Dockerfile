@@ -2,8 +2,8 @@
 FROM node:14
 
 
-RUN apt-get update --fix-missing
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install sudo sqlite3 apt-utils npm nano
+RUN apt-get update --fix-missing > /dev/null
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install sudo sqlite3 apt-utils npm nano > /dev/null
 
 
 # Créez le répertoire de travail dans l'image
@@ -42,7 +42,7 @@ COPY ./src/express_webapp/public/stylesheets/font-awesome-4.7.0/css/font-awesome
 COPY ./src/express_webapp/views/ ./src/express_webapp/views/
 COPY ./src/express_webapp/database.db ./src/express_webapp/database.db
 
-COPY ./install-libraries .
+COPY ./install-libraries . 
 COPY ./reset-database .
 COPY ./start .
 COPY ./stop .
@@ -51,7 +51,7 @@ RUN chown -R defiut:defiut /app
 
 # Installez les dépendances
 USER root
-RUN ./install-libraries > /dev/null
+RUN ./install-libraries > /dev/null 2> /dev/null
 RUN ./reset-database
 RUN ./update-challenges
 

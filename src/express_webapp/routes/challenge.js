@@ -89,7 +89,7 @@ router.post('/:idChallenge', isConnected, async function(req, res, next) {
 
     const successUsers = await hasTriedDAO.getSuccessfulUsers(challengeId);
     retryCount = await hasTriedDAO.getRetryCount(userId, challengeId);
-    res.render('challenge', { challenge: challengeDetails, success, successUsers, retryCount, obtentions, failed });
+    res.render('challenge', { title:"Challenge", challenge: challengeDetails, success, successUsers, retryCount, obtentions, failed });
   } catch (error) {
     res.status(500).send('Internal Server Error');
   }

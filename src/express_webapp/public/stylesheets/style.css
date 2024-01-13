@@ -504,6 +504,7 @@ i.fa.fa-check.green-color {
     cursor: pointer;
     text-transform: capitalize;
     text-align: center;
+    width: 175px;
 }
 
 .scoreboard-container thead th:hover {
@@ -1250,6 +1251,7 @@ tbody tr td img {
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
     overflow: auto;
+    overflow-x: hidden;
     max-height: 85vh;
 }
 
@@ -1453,6 +1455,7 @@ tbody tr td img {
     border-collapse: collapse;
     padding: 1rem;
     text-align: left;
+    cursor: pointer;
 }
 
 .challenge-container .challenge-history-container th {

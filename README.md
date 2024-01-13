@@ -1,9 +1,9 @@
 # Déf-IUT
 
 Cette application a pour but d'héberger des challenges informatiques divers pour les étudiants de l'UBS  
-Pour plus d'informations, reportez vous au [cahier des charges](./documents/cahier_des_charges.pdf).
+Pour plus d'informations, reportez-vous au [cahier des charges](./documents/cahier_des_charges.pdf).
 
-Le code source de cette application est disponibles à l'adresse suivante : https://github.com/Ne0re0/Def-IUT/
+Le code source de cette application est disponible à l'adresse suivante : https://github.com/Ne0re0/Def-IUT/
 
 ## Installation
 
@@ -46,7 +46,7 @@ sudo docker-compose down # Arrêt
 
 ## Ajout/modification des challenges
 
-Comme demandé dans le cahier des charges, la gestion des challenges se fait depuis un accès terminal ainsi qu'à un fichier de configuration `conf/challenges.yml`
+Comme demandée dans le cahier des charges, la gestion des challenges se fait depuis un accès terminal ainsi qu'à un fichier de configuration `conf/challenges.yml`
 
 ```bash
 sudo docker exec -it defiut /bin/bash
@@ -60,10 +60,10 @@ sudo docker exec -it defiut /bin/bash
 `/challenge/ID` affiche le challenge dont l'identifiant correspond à ID
 `/user/ID` affiche le profil public de l'utilisation dont l'identifiant correspond à l'ID
 `/myprofile` affiche le profil privé de l'utilisateur et lui permet de modifier et supprimer son compte
-`/scoreboard` affiche un tableau des score
+`/scoreboard` affiche un tableau des scores
 `/recover` permet à l'utilisateur de s'envoyer un mail de récupération de mot de passe avec un jeton de réinitialisation
 `/recover/JETON` permet à l'utilisateur dont le jeton correspond à changer son mot de passe 
-`verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupérer via un mail
+`verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupéré via un mail
 
 ### Présentation de la base de données [[src/database/README|ici]]
 ### Présentation de la gestion des challenges et des mails [[conf/README|ici]]

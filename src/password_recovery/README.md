@@ -1,7 +1,6 @@
 # Mot de passe oublié ?
+Chaque fois qu'un utilisateur oublie son mot de passe, un mail lui est envoyé et un fichier contenant son adresse mail est créé dans ce dossier.
 
-A chaque fois qu'un utilisateur oublie son mot de passe, un mail lui est envoyé et un fichier contenant son adresse mail est créé dans ce dossier.
+C'est grâce à ce fichier que l'utilisateur peut réinitialiser son mot de passe en sécurité
 
-C'est grâce à ce fichier que l'utilisateur peut réinitialiser sont mot de passe en sécurité
-
-Le nom des fichiers est généré aléatoirement.
+Les noms des fichiers sont générés aléatoirement.

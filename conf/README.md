@@ -2,7 +2,7 @@
 
 Dans ce dossier `conf/` se trouvent les fichiers : 
 - `challenges.yml` qui contient les challenges de l'application
-- `update-db.sh` qui doit être exécuté pour mettre a jour la base de données
+- `update-db.sh` qui doit être exécuté pour mettre à jour la base de données
 - `README.md` ce fichier
 Toutes la gestion des challenges passe au travers du fichier `challenges.yml`
 
@@ -69,14 +69,14 @@ cd /chemin/vers/Def-IUT/
 **PS** : Il est possible d'insérer un challenge, de modifier un challenge existant mais il n'est pas possible de supprimer un challenge pour le moment.
 
 # Gestion des mails
-Les fichiers  **`conf/recover.yml` ainsi que `conf/verify.yml`** sont respectivement les fichiers de configurations **liés à l'envoi de mail** en cas de **perte de mot de passe** et à l'envoi de mail lié à la **vérification d'adresse email**.
+Les fichiers  **`conf/recover.yml` ainsi que `conf/verify.yml`** sont respectivement les fichiers de configuration **liés à l'envoi de mail** en cas de **perte de mot de passe** et à l'envoi de mail lié à la **vérification d'adresse email**.
 
-Ils sont tous les deux identiques et composés de choses simples, veuillez vous référer à leur documentation respectives pour plus de détails
+Ils sont tous les deux identiques et composés de choses simples, veuillez vous référer à leurs documentations respectives pour plus de détails
 
 **Dans la partie `text`, l'apparition de `#link` est obligatoire, il sera remplacé par les liens à destination de l'utilisateur automatiquement**
 
 #### Exemple : `verify.yml`
-Notez que la quantité de documentation de l'exemple est extrêmement limité par rapport au fichier actuel.
+Notez que la quantité de documentation de l'exemple est extrêmement limitée par rapport au fichier actuel.
 
 ```yml
 # Le domain sur lequel est hébergé l'application

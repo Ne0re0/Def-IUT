@@ -4,7 +4,7 @@ Ce dossier contient l'essence même de l'application :
 - `routes` contient les controlleurs
 - `views` contient les vues affichées a l'utilisateur
 - `def-iut-database` contient le modèle de l'application, c'est-à-dire permet toutes les interactions avec la base de données
-- `public` contient tous les élements accessibles depuis le web
+- `public` contient tous les éléments accessibles depuis le web
 - `node_modules` contient toutes les librairies nécessaires a l'application
 - `bin` contient le lancer de l'application
 - `app.js` est le squelette de l'application, il joint tous les fichiers entre eux

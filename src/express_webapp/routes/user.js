@@ -11,7 +11,6 @@ const { isConnected } = require('./middlewares/isConnected');
 router.get('/:idUser', isConnected, function(req, res, next) {
 
   // Checking ID value
-  console.log(req.params)
   if (req.params.idUser === undefined ||
       req.params.idUser === ""){
       res.render('usernotfound',{title:"Aucun utilisateur spécifié"});
@@ -24,28 +23,20 @@ router.get('/:idUser', isConnected, function(req, res, next) {
       .then((user) => {
         // User exists
         if (undefined !== user){
-          console.log(user);
           usersDAO.getHistory(idUser)
           .then((history) => {
-            console.log(history);
             hasTriedDAO.getFlagged(idUser)
             .then((chart) => {
               if (undefined === chart){
                 chart = {flagged:[],reward:[]}
-              } 
-              console.log("Chart : ")
-              for (object of chart){
-                console.log(object)
-              } 
+              }
 
               // Modifie
 
               ownsDAO.getOwnedBadges(idUser)
               .then((ownedBadges) => {
-                console.log("Badges : " + ownedBadges)
                 ownsDAO.getNotOwnedBadges(idUser)
                 .then((otherBadges) => {
-                  console.log(otherBadges);
                   res.render('user', {title:"Utilisateur",user:user , history:history, chart:chart, ownedBadges:ownedBadges, otherBadges,otherBadges});
                 })
                 .catch((error) => {

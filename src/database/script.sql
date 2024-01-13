@@ -1,2 +1,0 @@
-DELETE FROM HasTried WHERE aUser = 13;
-DELETE FROM Owns WHERE aUser = 13;

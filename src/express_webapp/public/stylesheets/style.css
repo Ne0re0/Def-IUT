@@ -4,6 +4,9 @@
 
     font-family: sans-serif;
 }
+#green-color {
+    color: green;
+}
 
 /* NavBar */
 .navbar {
@@ -179,11 +182,23 @@ body{
     color:#aaa;
 }
 
+i.fa.fa-check.green-color {
+    color: green;
+}
+
+.list-group span.green-color{
+    margin-left: 10px;
+    font-size:13px;
+    color:green;
+}
+
+
 .list-group span{
     margin-left: 10px;
     font-size:13px;
     color:#aaa;
 }
+
 
 .login-button{
     height:45px;

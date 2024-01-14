@@ -76,7 +76,7 @@ sudo docker exec -it defiut /bin/bash
 - `/scoreboard` affiche un tableau des scores
 - `/recover` permet à l'utilisateur de s'envoyer un mail de récupération de mot de passe avec un jeton de réinitialisation
 - `/recover/JETON` permet à l'utilisateur dont le jeton correspond à changer son mot de passe 
-- `verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupéré via un mail
+- `/verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupéré via un mail
 
 ### Présentation de la base de données [ici](./src/database/README.md)
 ### Présentation de la gestion des challenges et des mails [ici](./conf/README.md)

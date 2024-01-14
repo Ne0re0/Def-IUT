@@ -10,6 +10,7 @@
 | username (3) | Nom d'utilisateur  |
 | password (NN) | Mot de passe (à des fins de sécurité, est chiffré) |
 | isAdmin (NN) | Statut administrateur (0 ou 1) (non utilisé pour le moment) |
+
 **Description :** La table `Users` stocke les informations sur les utilisateurs du système, y compris leur adresse e-mail, statut de vérification du compte, nom d'utilisateur, mot de passe et statut administrateur.
 
 ### Tableau pour la table `Badges`
@@ -17,17 +18,20 @@
 | ---- | ---- |
 | titleBadge (2) | Titre du badge |
 | descriptionBadge (NN) | Description du badge |
+
 **Description :** La table `Badges` stocke des informations sur les badges qui peuvent être attribués aux utilisateurs.
 
 ### Tableau pour la table `Difficulties`
 | idDifficulty (1) | Identifiant du niveau de difficulté |
 | ---- | ---- |
 | difficultyString (2) | Chaîne de caractères représentant le niveau de difficulté |
+
 **Description :** La table `Difficulties` stocke les niveaux de difficulté possibles pour les défis.
 
 ### Tableau pour la table `Categories`
 | idCategory (1) | Identifiant de la catégorie |
 | ---- | ---- |
+
 **Description :** La table `Categories` stocke les catégories auxquelles peuvent appartenir les défis.
 
 ### Tableau pour la table `Owns`
@@ -35,6 +39,7 @@
 | ---- | ---- |
 | **aBadge (1)** | **Identifiant du badge possédé par l'utilisateur** |
 | obtentionDate (NN) | Date à laquelle le badge a été obtenu |
+
 **Description :** La table `Owns` établit la relation entre les utilisateurs et les badges qu'ils possèdent.
 
 ### Tableau pour la table `Challenges`
@@ -46,6 +51,7 @@
 | flag (NN) | Marque distinctive du défi |
 | itsDifficulty = Difficulties.idDifficulty (NN) | Niveau de difficulté du défi |
 | connection | Connexion associée au défi |
+
 **Description :** La table `Challenges` stocke des informations sur les défis proposés.
 
 ### Tableau pour la table `HasTried`
@@ -55,6 +61,7 @@
 | flagged | Marque distinctive du défi essayé |
 | hour | Heure à laquelle le défi a été essayé |
 | retryNb (NN) | Nombre de tentatives pour le défi (par défaut à 0) |
+
 **Description :** La table `HasTried` enregistre les tentatives des utilisateurs pour résoudre les défis, avec des détails tels que la marque distinctive, l'heure et le nombre de tentatives. Tant que la challenge n'a pas été validé, les colonnes `flagged` et `hour` sont `null`.
 
 ### Vues
@@ -69,6 +76,7 @@
 | isAdmin | Statut administrateur |
 | **challengeCount** | **Nombre total de défis essayés par l'utilisateur** |
 | **score** | **Score cumulatif basé sur les défis essayés et les récompenses associées** |
+
 **Description :** La vue `DistinguishedUsers` agrège des informations sur les utilisateurs, y compris le nombre total de défis essayés et le score cumulatif en fonction des défis réussis.
 
 #### 2. `FullyDistinguishedUsers`
@@ -82,6 +90,7 @@
 | challengeCount | Nombre total de défis essayés par l'utilisateur |
 | score | Score cumulatif basé sur les défis essayés et les récompenses associées |
 | **rank** | **Classement de l'utilisateur en fonction du score et du nombre de défis** |
+
 **Description :** La vue `FullyDistinguishedUsers` étend la vue `DistinguishedUsers` en ajoutant un classement aux utilisateurs en fonction de leur score.
 
 #### 3.`DistinguishedChallenges`
@@ -95,6 +104,7 @@
 | connection | Connexion associée au défi |
 | **itsDifficultyString** | **Chaîne de caractères représentant le niveau de difficulté du défi** |
 | **reward** | **Récompense associée au défi (calculée en fonction de la difficulté)** |
+
 **Description :** La vue `DistinguishedChallenges` ajoute la chaîne de caractères liée à la difficulté ainsi que le score calculé de la manière suivante : `score = 100 + difficulty*100`
 
 
@@ -121,6 +131,7 @@
 | Cryptanalyse |
 | Réseau |
 | Autre |
+
 ### Table `Difficulties`
 | idDifficulty (1) | difficultyString (2) |
 | ---- | ---- |

@@ -17,8 +17,47 @@ Le code source de cette application est disponible à l'adresse suivante : https
 
 **Tableau des scores**
 ![scoreboard.png](img/scoreboard.png)
+## Installation locale
+1. Installation des packages nécessaires au lancement de l'application
 
-## Installation
+```bash
+sudo apt install git npm -y
+```
+
+2. Clonage du répertoire
+
+```bash
+git clone https://github.com/Ne0re0/Def-IUT.git
+cd Def-IUT
+```
+
+3. Installation des librairies `npm`
+
+```bash
+./install-libraries
+```
+
+4. Réinitialisation de la base de données
+
+```bash
+./reset-database
+```
+
+5. Ajout des challenges "exemple" dans l'application
+**/!\\ N'exécutez cette commande que si vous souhaitez ajouter les challenges exemples**  
+Si vous souhaitez ajouter vos propres challenges, veuillez d'abord remplacer les challenges présents dans `conf/challenges.yml` par les vôtres (cf [personnalisation des challenges](./conf/README.md))
+```bash
+./update-challenges
+```
+
+6. Lancement de l'application
+
+```bash
+./start
+```
+
+7. L'application est lancée sur le port 3000 :  http://localhost:3000
+## Installation avec Docker
 
 1. Installation des packages nécessaires au bon fonctionnement de la conteneurisation
 

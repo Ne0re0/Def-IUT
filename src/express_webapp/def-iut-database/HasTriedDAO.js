@@ -65,7 +65,6 @@ class HasTriedDAO {
      */
     getFlagged(idUser) {
         return new Promise((resolve, reject) => {
-            console.log("debug")
             const query = 'SELECT flagged, hour,reward FROM HasTried JOIN DistinguishedChallenges ON aChallenge = idChallenge WHERE aUser = ? and flagged IS NOT NULL ORDER BY flagged DESC';
             db.all(query, [idUser],function(err, rows) {
                 if (err) {

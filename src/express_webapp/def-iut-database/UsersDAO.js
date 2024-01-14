@@ -12,11 +12,6 @@ class UserDAO {
      * @returns user ID if successfull
      */
     insert(mail, accountVerified, username, password, isAdmin) {
-        console.log(mail);
-        console.log(accountVerified);
-        console.log(username);
-        console.log(password);
-        console.log(isAdmin);
         return new Promise((resolve, reject) => {
           const query = 'INSERT INTO Users (mail, accountVerified, username, password, isAdmin) VALUES (?, ?, ? ,? ,?)';
       
@@ -24,24 +19,19 @@ class UserDAO {
             .then((salt) => {
               bcrypt.hash(password, salt)
                 .then((hash) => {
-                  console.log(hash)
                   this.db.run(query, [mail, accountVerified, username, hash, isAdmin], function(err) {
                     if (err) {
-                      console.log("Insertion échouée " + err)
                       reject(err);
                     } else {
-                      console.log("Insertion réussie")
                       resolve(this.lastID);
                     }
                   });
                 })
                 .catch((err) => {
-                  console.log("Erreur lors du hachage du mot de passe " + err);
                   reject(err);
                 });
             })
             .catch((err) => {
-              console.log("Erreur lors de la génération du sel " + err);
               reject(err);
             });
         });
@@ -104,15 +94,12 @@ class UserDAO {
                 .then((salt) => {
                     bcrypt.hash(password, salt)
                         .then((hash) => {
-                            console.log(mail,hash)
-                            console.log(typeof mail, typeof hash)
                             this.db.run(query, [hash.toString(),mail.toString()], function(err) {
                                 if (err) {
                                     console.error('SQL Error:', this.sql);
                                     console.error('Error Message:', err.message);
                                     reject(err);
                                 } else {
-                                    console.log("Password updated")
                                     resolve();
                                 }
                             });
@@ -147,13 +134,11 @@ class UserDAO {
     // Delete users
     delete(key) {
         return new Promise((resolve, reject) => {
-            console.log(key);
             const query = 'DELETE FROM Users WHERE idUser = ?';
             this.db.run(query, [key], function(err) {
                 if (err) {
                     reject(err);
                 } else {
-                    console.log('Utilisateur supprimé');
                     resolve();
                 }
             });

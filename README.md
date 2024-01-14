@@ -84,3 +84,5 @@ sudo docker exec -it defiut /bin/bash
 
 #### [Politique de confidentialité](./documents/confidentialité.pdf)
 #### [Conditions générales d'utilisation](./documents/utilisation.pdf)
+
+**PS :** Certaines dépendances utilisées ont un impact sur le niveau de sécurité de l'application, nous en avons conscience et travaillons actuellement à la remédiation de ces dépendances. Cependant, par manque de temps, tout n'a pas pu être corrigé avant la date de rendu de la preuve de concept (POC) de ce dimanche 14 janvier.

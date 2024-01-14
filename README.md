@@ -7,16 +7,16 @@ Le code source de cette application est disponible à l'adresse suivante : https
 ## Aperçu
 
 **Page d'accueil**
-![[img/Pasted image 20240114122555.png]]
+![Accueil](img/index.png)
 
 **Page de challenge**
-![[img/Pasted image 20240114122815.png]]
+![Challenge](img/challenge.png)
 
 **Profil public d'un utilisateur**
-![[img/Pasted image 20240114122909.png]]
+![Profil utilisateur](img/user.png)
 
 **Tableau des scores**
-![[img/Pasted image 20240114123304.png]]
+![scoreboard.png](img/scoreboard.png)
 
 ## Installation
 
@@ -69,18 +69,18 @@ sudo docker exec -it defiut /bin/bash
 
 ## Présentation de l'API
 
-`/` liste les challenges disponibles
-`/challenge/ID` affiche le challenge dont l'identifiant correspond à ID
-`/user/ID` affiche le profil public de l'utilisation dont l'identifiant correspond à l'ID
-`/myprofile` affiche le profil privé de l'utilisateur et lui permet de modifier et supprimer son compte
-`/scoreboard` affiche un tableau des scores
-`/recover` permet à l'utilisateur de s'envoyer un mail de récupération de mot de passe avec un jeton de réinitialisation
-`/recover/JETON` permet à l'utilisateur dont le jeton correspond à changer son mot de passe 
-`verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupéré via un mail
+- `/` liste les challenges disponibles
+- `/challenge/ID` affiche le challenge dont l'identifiant correspond à ID
+- `/user/ID` affiche le profil public de l'utilisation dont l'identifiant correspond à l'ID
+- `/myprofile` affiche le profil privé de l'utilisateur et lui permet de modifier et supprimer son compte
+- `/scoreboard` affiche un tableau des scores
+- `/recover` permet à l'utilisateur de s'envoyer un mail de récupération de mot de passe avec un jeton de réinitialisation
+- `/recover/JETON` permet à l'utilisateur dont le jeton correspond à changer son mot de passe 
+- `verify/JETON` permet à l'utilisateur de vérifier son adresse e-mail, le jeton est récupéré via un mail
 
-### Présentation de la base de données [[src/database/README|ici]]
-### Présentation de la gestion des challenges et des mails [[conf/README|ici]]
-### Présentation de la journalisation [[log/README|ici]]
+### Présentation de la base de données [ici](./src/database/README.md)
+### Présentation de la gestion des challenges et des mails [ici](./conf/README.md)
+### Présentation de la journalisation [ici](./log/README.md)
 
 #### [Politique de confidentialité](./documents/confidentialité.pdf)
 #### [Conditions générales d'utilisation](./documents/utilisation.pdf)

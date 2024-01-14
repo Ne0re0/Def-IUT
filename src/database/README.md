@@ -145,7 +145,7 @@
 Pour accéder à la base de données, il faut installer l'utilitaire `sqlite3`
 ```bash
 sudo apt update -y
-sudo apt install sqlite3 -y
+sudo apt install sqlite3 npm -y
 ```
 
 ### Accès aux données

@@ -22,9 +22,9 @@ INSERT INTO Owns (aUser, aBadge, obtentionDate) VALUES (1, 6, '2023/12/11');
 -- Insert HasTried
 INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,1,'2024/01/08','18:01',1);
 INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,2,'2023/11/18','10:01',1);
-INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,3,'2023/12/30','18:01',1);
-INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,4,'2024/01/14','18:01',5);
-INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,8,'2024/01/30','11:01',10);
+INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (4,3,'2023/12/30','18:01',1);
+INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (2,4,'2024/01/14','18:01',5);
+INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (2,8,'2024/01/30','11:01',10);
 INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,6,'2024/01/01','14:01',7);
-INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (2,1,'2024/01/20','10:01',1);
+INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (3,1,'2024/01/20','10:01',1);
 INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,7,NULL,null,4);

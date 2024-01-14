@@ -4,6 +4,19 @@ Cette application a pour but d'héberger des challenges informatiques divers pou
 Pour plus d'informations, reportez-vous au [cahier des charges](./documents/cahier_des_charges.pdf).
 
 Le code source de cette application est disponible à l'adresse suivante : https://github.com/Ne0re0/Def-IUT/
+## Aperçu
+
+**Page d'accueil**
+![[img/Pasted image 20240114122555.png]]
+
+**Page de challenge**
+![[img/Pasted image 20240114122815.png]]
+
+**Profil public d'un utilisateur**
+![[img/Pasted image 20240114122909.png]]
+
+**Tableau des scores**
+![[img/Pasted image 20240114123304.png]]
 
 ## Installation
 

@@ -4,9 +4,6 @@
 
     font-family: sans-serif;
 }
-#green-color {
-    color: green;
-}
 
 /* NavBar */
 .navbar {
@@ -560,8 +557,9 @@ tbody tr td img {
     box-shadow: 0 .4rem .8rem #0005;
     border-radius: .8rem;
 
-    overflow: hidden;
+    overflow-x: hidden;
     max-width: 900px;
+    max-height: 80vh;
     
 }
 
@@ -1432,7 +1430,7 @@ tbody tr td img {
 
     overflow: auto;
     overflow: overlay;
-    max-width: 600px;
+    max-width: 60vw;
 }
 
 
@@ -1496,7 +1494,11 @@ tbody tr td img {
 }
 
 .challenge-container .challenge-history-container tbody tr td {
-    width: 200px;
+    width: 300px;
+}
+
+.challenge-container .challenge-history-container thead tr th {
+    width: 300px;
 }
 
 .challenge-container .challenge-history-container tbody tr td,

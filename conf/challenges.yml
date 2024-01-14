@@ -17,7 +17,7 @@
 
 ########## Start of the example challenge ######
 # The title of the challenge
-- title: "Premier challenge"
+- title: "egnellahC"
   # The category of the challenge 
   # Current categories are "Programmation", "Reverse", "Web", "Cryptanalyse","Réseau" and "Autre"
   # Accepts strings
@@ -26,66 +26,66 @@
   # The difficulty of the challenge
   # Accepts integer from 1 to 5, 5 is the hardest difficulty
   # Required
-  difficulty: 4
+  difficulty: 1
   # The description of the challenge
   # Accepts strings
   # Required
-  description: "The best description"
+  description: "! risialp uA .s1ht_esrev3r tse galf eL ? etxet ec esrever ut-saruas ,nawadaP enuej iot à ruojnoB"
   # The flag for your challenge
   # Accepts strings
   # Required
-  flag: "p@$$w0rd"
+  flag: "r3verse_th1s"
   # The connexion information about how to connect to the challenge
   # Accepts strings
   # Comment or delete if not necessary
-  connection: "http://example.com/"
+  # connection: "http://example.com/"
 ########## End of the example challenge ######
 
-- title: "Deuxième challenge"
+- title: "BabyMaths"
   category: "Autre"
-  difficulty: 2
+  difficulty: 1
   description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
   flag: "DEF{8}"
-  connection: null
+  # connection: null
 
-- title: "Troisième challenge"
-  category: "Programmation"
-  difficulty: 3
+- title: "Aimez vous ?"
+  category: "Web"
+  difficulty: 1
   description: "Aimez vous la plateforme ? Réponse : (oui/non)"
   flag: "oui"
   connection: null
 
-- title: "Quatrième challenge"
+- title: "Temporaire 1"
   category: "Reverse"
   difficulty: 4
-  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
-  flag: "DEF{8}"
-  connection: null
+  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
+  flag: "T3MP0R41RE"
+  connection: "http://example.com"
 
-- title: "Cinquième challenge"
-  category: "Réseau"
-  difficulty: 5
-  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
-  flag: "DEF{8}"
-  connection: null
-
-- title: "Sixième challenge"
-  category: "Programmation"
-  difficulty: 1
-  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
-  flag: "DEF{8}"
-  connection: null
-
-- title: "Septième challenge"
+- title: "Temporaire 2"
   category: "Programmation"
   difficulty: 2
-  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
-  flag: "DEF{8}"
-  connection: null
+  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
+  flag: "T3MP0R41RE"
+  connection: "http://example.com"
 
-- title: "Huitième challenge"
-  category: "Programmation"
+- title: "Temporaire 3"
+  category: "Cryptanalyse"
+  difficulty: 3
+  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
+  flag: "T3MP0R41RE"
+  connection: "http://example.com"
+
+- title: "Temporaire 4"
+  category: "Réseau"
   difficulty: 4
-  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
-  flag: "DEF{8}"
-  connection: null
+  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
+  flag: "T3MP0R41RE"
+  connection: "http://example.com"
+
+- title: "Temporaire 5"
+  category: "Autre"
+  difficulty: 5
+  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
+  flag: "T3MP0R41RE"
+  connection: "http://example.com"

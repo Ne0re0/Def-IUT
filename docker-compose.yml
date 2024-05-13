@@ -11,3 +11,5 @@ services:
       - "3000:3000"
     restart: "always"
     hostname: "defiut-docker"
+    volumes:
+      - ./src/express_webapp/database.db:/app/src/express_webapp/database.db

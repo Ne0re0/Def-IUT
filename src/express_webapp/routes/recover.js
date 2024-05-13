@@ -10,13 +10,22 @@ const CONF_RECOVER_PATH = "../../conf/recover.yml"
 const LOG_FILE="../../log/defiut.log"
 
 // Create the transporter using nodemailer library
-const transporter = nodemailer.createTransport({
+/*const transporter = nodemailer.createTransport({
   host: 'smtp.elasticemail.com',
   auth: {
     user: 'noreply@defiut.fr', 
     pass: '679DC955B585DB021B569AC890725BD30DF8'
   },
   port : 2525
+});*/
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  auth: {
+    user: 'contact.defiut@gmail.com', 
+    pass: 'xdocwapuoeqjkvzh'
+  },
+  port : 587
 });
 
 

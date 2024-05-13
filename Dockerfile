@@ -40,17 +40,16 @@ COPY ./src/express_webapp/public/stylesheets/ ./src/express_webapp/public/styles
 COPY ./src/express_webapp/public/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css ./src/express_webapp/public/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css
 # Copy of font-awesome
 COPY ./src/express_webapp/views/ ./src/express_webapp/views/
-COPY ./src/express_webapp/database.db ./src/express_webapp/database.db
+# COPY ./src/express_webapp/database.db ./src/express_webapp/database.db
 
 COPY ./install-libraries . 
 COPY ./reset-database .
 COPY ./start .
-COPY ./stop .
 COPY ./update-challenges .
-RUN chown -R defiut:defiut /app
 
 # Installez les dépendances
 USER root
+RUN chown -R defiut:defiut /app
 RUN ./install-libraries > /dev/null 2> /dev/null
 RUN ./reset-database
 RUN ./update-challenges

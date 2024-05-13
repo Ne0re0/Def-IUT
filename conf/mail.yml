@@ -4,18 +4,18 @@
 # The SMTP server FQDN
 # Accepts string
 # Required
-smtpserver : "smtp.gmail.com"
+smtpServer : "smtp.gmail.com"
 
 # Login used to authenticate to the SMTP server
 # Often an email address
 # Accepts string
 # Required
-login: "your_login_here"
+login: "contact.defiut@gmail.com"
 
 # Password used to authenticate to the SMTP server
 # Accepts string
 # Required
-password: 'your_password_here'
+password: 'xdocwapuoeqjkvzh'
 
 # Port used by the SMTP server (often 587 or 25)
 # Accepts integer

@@ -3,7 +3,7 @@ push.sh
 .obsidian
 
 # Sensitive configuration files
-#conf/mail.yml
+conf/mail.yml
 
 # Email verification files
 src/emails_check/*

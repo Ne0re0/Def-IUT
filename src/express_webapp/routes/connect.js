@@ -9,30 +9,15 @@ const yaml = require('js-yaml');
 const readline = require('readline');
 const CONF_VERIFY_PATH = "../../conf/verify.yml"
 const LOG_FILE="../../log/defiut.log"
+const CONF_MAIL_PATH="../../conf/mail.yml"
+
 // Create a readline object to read file
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-// Create the transporter using nodemailer library
-/*const transporter = nodemailer.createTransport({
-  host: 'smtp.elasticemail.com',
-  auth: {
-    user: 'noreply@defiut.fr', 
-    pass: '679DC955B585DB021B569AC890725BD30DF8'
-  },
-  port : 2525
-});*/
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  auth: {
-    user: 'contact.defiut@gmail.com', 
-    pass: 'xdocwapuoeqjkvzh'
-  },
-  port : 587
-});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -89,6 +74,17 @@ router.post('/', function(req, res, next) {
           }
           
 
+          // Create the transporter using nodemailer library
+          const config = yaml.load(fs.readFileSync(CONF_MAIL_PATH, 'utf8'));
+
+          const transporter = nodemailer.createTransport({
+            host: config.smtpServer,
+            port: config.smtpPort,
+            auth: {
+              user: config.login,
+              pass: config.password
+            }
+          });
 
           // Send mail
           transporter.sendMail(mailOptions, (error, info) => {

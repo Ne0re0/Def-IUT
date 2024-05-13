@@ -7,26 +7,8 @@ const CryptoJS = require('crypto-js');
 var session = require('express-session');
 const yaml = require('js-yaml');
 const CONF_RECOVER_PATH = "../../conf/recover.yml"
+const CONF_MAIL_PATH = "../../conf/mail.yml"
 const LOG_FILE="../../log/defiut.log"
-
-// Create the transporter using nodemailer library
-/*const transporter = nodemailer.createTransport({
-  host: 'smtp.elasticemail.com',
-  auth: {
-    user: 'noreply@defiut.fr', 
-    pass: '679DC955B585DB021B569AC890725BD30DF8'
-  },
-  port : 2525
-});*/
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  auth: {
-    user: 'contact.defiut@gmail.com', 
-    pass: 'xdocwapuoeqjkvzh'
-  },
-  port : 587
-});
 
 
 router.get('/', function(req, res, next) {
@@ -54,14 +36,14 @@ router.post('/', function(req, res, next) {
 
   if (req.body === undefined || req.body.mail === undefined || req.body.mail === ''){
     res.render('recover', { title: 'Mot de passe oublié', error :"L'adresse e-mail n'a pas été précisée"});
-
   } else if (!req.body.mail.match(/^[A-Za-z0-9._%+-]+@.*univ-ubs\.fr$/)) {
     res.render('recover', { title: 'Mot de passe oublié', error :"L'adresse e-mail doit être une adresse UBS valide"});
-
   } else {
     // Write password recovery file
     const content = req.body.mail;
-    const title = CryptoJS.MD5(Math.random());
+
+    let random = Math.random();
+    const title = CryptoJS.MD5(random.toString());
 
     try {
       fs.writeFileSync('../password_recovery/' + title, content);
@@ -92,21 +74,38 @@ router.post('/', function(req, res, next) {
 
 
     // Send mail
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
 
-        let event = "SERVER ERROR while sending password recovery mail for '"+mailOptions.to +"' " + error + "\n"
-        fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+    try {
 
-        res.render('recover', { title: 'Mot de passe oublié', error: "Erreur lors de l'envoi du mail de vérification, veuillez vous réessayer ultérieurement" });
-      } else {
-        
-        let event ="Password recovery email successfully sent to user '" + mailOptions.to +"' " + "\n"
-        fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+      const config = yaml.load(fs.readFileSync(CONF_MAIL_PATH, 'utf8'));
+
+      const transporter = nodemailer.createTransport({
+        host: config.smtpServer,
+        port: config.smtpPort,
+        auth: {
+          user: config.login,
+          pass: config.password
+        }
+      });
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          let event = "SERVER ERROR while sending password recovery mail for '"+mailOptions.to +"' " + error + "\n"
+          fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+
+          res.render('recover', { title: 'Mot de passe oublié', error: "Erreur lors de l'envoi du mail de vérification, veuillez vous réessayer ultérieurement" });
+        } else {
+          let event ="Password recovery email successfully sent to user '" + mailOptions.to +"' " + "\n"
+          fs.appendFileSync(LOG_FILE, String(new Date())+","+req.connection.remoteAddress + ","+event );
+      
+          res.render('recover', { title: 'Mot de passe oublié', success: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé" });
+        }
+      })
+
+    } catch (err){
+      console.log(err);
+    }
     
-        res.render('recover', { title: 'Mot de passe oublié', success: "Veuillez vérifier votre adresse mail, un e-mail vous a été envoyé" });
-      }
-    })
   }
 })
 
@@ -117,7 +116,6 @@ router.post('/:token', function(req, res, next) {
   } 
 
   var token = req.params.token;
-  console.log(token)
   if(
     !req.body ||
     !req.body.password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/) ||
@@ -146,7 +144,7 @@ router.post('/:token', function(req, res, next) {
           } else {
             const currentDate = new Date();
             const timer = Math.round((currentDate - stats.birthtime) / (1000 * 60));
-            if (timer > 1){
+            if (timer > 15){
               fs.unlink(filePath, (err) => {
                 if (err){
                   console.log("Error when deleting file " + filePath + " " + err)

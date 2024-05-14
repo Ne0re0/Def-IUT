@@ -3,6 +3,7 @@
 Dans ce dossier `conf/` se trouvent les fichiers : 
 - `challenges.yml` qui contient les challenges de l'application
 - `update-db.sh` qui doit être exécuté pour mettre à jour la base de données
+- `mail.yml` qui doit être complété avec les informations sur le relai SMTP
 - `README.md` ce fichier
 Toutes la gestion des challenges passe au travers du fichier `challenges.yml`
 

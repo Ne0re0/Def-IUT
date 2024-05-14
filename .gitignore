@@ -19,3 +19,6 @@ log/*.log
 # JS libs
 src/express_webapp/node_modules
 src/express_webapp/def-iut-database/node_modules
+
+# Database
+src/express_webapp/database.db

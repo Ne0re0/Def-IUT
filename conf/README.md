@@ -100,3 +100,32 @@ Cybèrement vôtre,\n
 Le staff Déf'IUT
 "
 ```
+
+#### Exemple : `mail.yml`
+
+```yml
+# Ce fichier yaml est utilisé pour configurer un serveur SMTP en tant que relais de courrier
+# Par défaut, cette application utilise un serveur SMTP GMAIL
+
+# Le nom de domaine complet du serveur SMTP
+# Accepte une chaîne de caractères
+# Requis
+smtpServer: "smtp.exemple.com"
+
+# Identifiant utilisé pour s'authentifier auprès du serveur SMTP
+# Souvent une adresse e-mail
+# Accepte une chaîne de caractères
+# Requis
+login: "exemple@exemple.com"
+
+# Mot de passe utilisé pour s'authentifier auprès du serveur SMTP (clé API)
+# Accepte une chaîne de caractères
+# Requis
+password: 'password_here'
+
+# Port utilisé par le serveur SMTP (souvent 587 ou 25)
+# Accepte un entier
+# Requis
+smtpPort: 587    
+
+```

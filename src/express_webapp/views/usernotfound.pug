@@ -2,25 +2,33 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
 
   body
-    nav.navbar
-        // Left
-        a.logo(href='/') Site's logo
 
-        // Right
-        ul.nav-links
-          li
-            a(href='/') Challenges
-          li
-            a(href='/scoreboard') Scoreboard
-          li
-            a(href='/myprofile') Mon compte
-          li
-            a(href='/disconnect') Déconnexion
+
+    nav.navbar
+      // Left
+      a.logo(href='/')
+          img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
+
+      // Right
+      ul.nav-links
+        li
+          a(href='/') Challenges
+        li
+          a(href='/scoreboard') Scoreboard
+        li
+          a(href='/myprofile') Mon compte
+        li
+          a(href='/disconnect') Déconnexion
             
-    #background-element       
-    h1= title
+    block content
+      #background-element
+        .container
+            h1= title
+
   script(src="/javascripts/vantaThree.js")
   script(src="/javascripts/vantaNet.js")
   script(src="/javascripts/background-element.js")

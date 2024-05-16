@@ -3,6 +3,7 @@ html
   head
     title Page non trouvée
     link(rel='stylesheet', href='/stylesheets/style.css') 
+  
   body
     nav.navbar
         // Left
@@ -22,6 +23,8 @@ html
 
     #background-element       
       div.container-error
+        pre #{error.stack}
+
         h1 Erreur 404 : Page non trouvée
         p La page que vous recherchez a peut-être été supprimée, a changé de nom ou est temporairement indisponible.
         button(type='button', onclick="location.href='/'", class='error-button') Retourner à la liste des challenges

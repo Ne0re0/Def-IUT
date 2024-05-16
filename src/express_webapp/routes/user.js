@@ -4,20 +4,14 @@ var fullyDistinguishedUsersDAO = require('def-iut-database').fullyDistinguishedU
 var usersDAO = require('def-iut-database').usersDAO;
 var hasTriedDAO = require('def-iut-database').hasTriedDAO;
 var ownsDAO = require('def-iut-database').ownsDAO;
-const { isConnected } = require('./middlewares/isConnected'); 
 
 
 /* GET */
-router.get('/:idUser', isConnected, function(req, res, next) {
+router.get('/:idUser', function(req, res, next) {
 
-  // Checking ID value
-  if (req.params.idUser === undefined ||
-      req.params.idUser === ""){
-      res.render('usernotfound',{title:"Aucun utilisateur spécifié"});
+    const idUser = req.params.idUser
 
-  }
-  const idUser = req.params.idUser
-  
+
     // Fetching from database
     fullyDistinguishedUsersDAO.findByID(idUser)
       .then((user) => {

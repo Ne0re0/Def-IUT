@@ -1,190 +1,179 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src="/javascripts/challenge.js")
 
-    script(src="/javascripts/challenge.js")
-      
+    body
+        nav.navbar
+            // Left
+            a.logo(href='/')
+                img(src='/logos/Full_Logo_Horizontal.png', alt="Website logo", width='310', height='75')
 
+            // Right
+            ul.nav-links
+                li
+                    a(href='/') Challenges
+                li
+                    a(href='/scoreboard') Scoreboard
+                li
+                    a(href='/myprofile') Mon compte
+                li
+                    a(href='/disconnect') Déconnexion
 
-  body
-    nav.navbar
-      // Left
-      a.logo(href='/')
-          img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
+        block content
+            #background-element
+                div.user-container
+                    section.username
+                        section.table__header
+                            h1.user-username= user.username
+                        section.table__body
+                            table
+                                thead
+                                    tr(onclick="window.location.href='/scoreboard'")
+                                        th Rang
+                                        th Score
+                                        th Challenges validés
+                                tbody
+                                    tr
+                                        td= user.rank
+                                        td= user.score
+                                        td= user.challengeCount
 
-      // Right
-      ul.nav-links
-        li
-          a(href='/') Challenges
-        li
-          a(href='/scoreboard') Scoreboard
-        li
-          a(href='/myprofile') Mon compte
-        li
-          a(href='/disconnect') Déconnexion
+                    section.stats
+                        section.header
+                            h1 Statistiques
+                        section.chart
+                            canvas#myChart(style="width:100%;max-width:700px")
 
-    block content
-      #background-element
-        div.user-container
-          section.username
-            section.table__header
-              h1.user-username= user.username 
-            section.table__body
-              table
-                thead
-                  tr(onclick="window.location.href='/scoreboard'")
-                    th Rang
-                    th Score
-                    th Challenges validés
-                tbody
-                  tr
-                    td= user.rank
-                    td= user.score
-                    td= user.challengeCount
+                    section.history
+                        section.table__header
+                            h1 Historique des défis
 
-          section.stats
-            section.header
-              h1 Statistiques
-            section.chart
-              canvas#myChart(style="width:100%;max-width:700px")
+                        section.table__body
+                            table.table-user-history
+                                thead
+                                    tr
+                                        th Titre
+                                        th Catégorie
+                                        th Récompense
+                                        th Date
+                                        th Heure
+                                tbody
+                                    each line in history
+                                        tr
+                                            td
+                                                a(href='/challenge/' + line.idChallenge)= line.titleChallenge
+                                            td= line.itsCategory
+                                            td= line.reward
+                                            td= line.flagged
+                                            td= line.hour
 
-          section.history
-            section.table__header
-              h1 Historique des défis
+                        script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
 
-            section.table__body
-              table.table-user-history
-               thead
-                  tr
-                    th Titre
-                    th Catégorie
-                    th Récompense
-                    th Date
-                    th Heure
-                tbody
-                  each line in history
-                    tr
-                      td
-                        a(href='/challenge/' + line.idChallenge)= line.titleChallenge
-                      td= line.itsCategory
-                      td= line.reward
-                      td= line.flagged
-                      td= line.hour
+                        script.
+                            window.addEventListener('DOMContentLoaded', (event) => {
+                                function formatHourInTable() {
+                                    const rows = document.querySelectorAll('.table-user-history tbody tr');
+                                    rows.forEach(row => {
+                                        const hourCell = row.querySelector('td:nth-child(5)');
+                                        if (hourCell) {
+                                            const originalHour = hourCell.textContent.trim();
+                                            const [hour, minute] = originalHour.split(":");
+                                            const formattedHour = `${hour}h${minute}`;
+                                            hourCell.textContent = formattedHour;
+                                        }
+                                    });
+                                }
+                                formatHourInTable();
+                            });
 
+                        script.
+                            var x = [];
+                            var y = [];
+                            var i = !{JSON.stringify(chart)};
+                            var sum = 0;
 
-            script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js")
+                            i.reverse().forEach((element) => {
+                                x.push(element.flagged);
+                                sum += element.reward;
+                                y.push(sum);
+                            });
 
+                            new Chart("myChart", {
+                                type: "line",
+                                data: {
+                                    labels: x,
+                                    datasets: [{
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: "rgba(0,0,255,1.0)",
+                                        borderColor: "rgba(0,0,255,0.1)",
+                                        data: y
+                                    }]
+                                },
+                                options: {
+                                    legend: { display: false },
+                                    scales: {
+                                        yAxes: [{ ticks: { min: 0, max: sum } }],
+                                    }
+                                }
+                            });
 
-            
+                    section.badges
+                        section.header
+                            h1 Badges
+                        section.body
+                            if ownedBadges.length > 0
+                                section.owned
+                                    section.subtitle
+                                        h4 Obtenus
+                                    section.badgelist
+                                        ul(style="list-style-type: none; padding-left: 0;")
+                                            each line in ownedBadges
+                                                li(style="display: inline-block; margin-right: 20px;")
+                                                    p.title= line.titleBadge
+                                                    ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                                                        li(style="display: inline-block; margin-right: 10px;")
+                                                            img(src='/badges/' + line.idBadge + '.jpg', title=line.descriptionBadge)
+                                                        li
+                                                            p.date= line.obtentionDate
+                            if otherBadges.length > 0
+                                section.others
+                                    section.subtitle
+                                        h4 Non obtenus
+                                    section.badgelist
+                                        ul(style="list-style-type: none; padding-left: 0; margin-top: 20px;")
+                                            each line in otherBadges
+                                                li(style="display: inline-block; margin-right: 20px;")
+                                                    p.title= line.titleBadge
+                                                    ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
+                                                        li(style="display: inline-block; margin-right: 10px;")
+                                                            img(src='/badges/' + line.idBadge + '.jpg', style="filter: grayscale(100%);", title=line.descriptionBadge)
 
             script.
-              window.addEventListener('DOMContentLoaded', (event) => {
-                function formatHourInTable() {
-                  const rows = document.querySelectorAll('.table-user-history tbody tr');
-                  rows.forEach(row => {
-                    const hourCell = row.querySelector('td:nth-child(5)');
-                    if (hourCell) {
-                      const originalHour = hourCell.textContent.trim();
-                      const [hour,minute] = originalHour.split(":");
-                      const formattedHour = `${hour}h${minute}`;
-                      hourCell.textContent = formattedHour;
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    function formatDateInTable() {
+                        const rows = document.querySelectorAll('.table-user-history tbody tr');
+                        const dates = document.querySelectorAll('.badgelist ul li ul li .date');
+
+                        rows.forEach(row => {
+                            const dateCell = row.querySelector('td:nth-child(4)');
+                            if (dateCell) {
+                                const originalDate = dateCell.textContent.trim();
+                                const formattedDate = formatDate(originalDate);
+                                dateCell.textContent = formattedDate;
+                            }
+                        });
+
+                        dates.forEach(date => {
+                            date.textContent = formatDate(date.textContent);
+                        });
                     }
-                  });
-                }
-                formatHourInTable();
-              });
+                    formatDateInTable();
+                });
 
-            script.
-              var x = [];
-              var y = [];
-              var i = !{JSON.stringify(chart)};
-              var sum = 0;
-
-              i.reverse().forEach((element) => { 
-                x.push(element.flagged);
-                sum += element.reward;
-                y.push(sum);
-              });
-
-              new Chart("myChart", {
-                type: "line",
-                data: {
-                  labels: x,
-                  datasets: [{
-                    fill: false,
-                    lineTension: 0,
-                    backgroundColor: "rgba(0,0,255,1.0)",
-                    borderColor: "rgba(0,0,255,0.1)",
-                    data: y
-                  }]
-                },
-                options: {
-                  legend: {display: false},
-                  scales: {
-                    yAxes: [{ticks: {min: 0, max: sum}}],
-                  }
-                }
-              });
-
-          section.badges
-            section.header
-              h1 Badges
-            section.body
-              if ownedBadges.length > 0
-                section.owned
-                  section.subtitle
-                    h4 Obtenus 
-                  section.badgelist
-                    ul(style="list-style-type: none; padding-left: 0;")
-                      each line in ownedBadges
-                        li(style="display: inline-block; margin-right: 20px;") 
-                          p.title= line.titleBadge
-                          ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
-                            li(style="display: inline-block; margin-right: 10px;") 
-                              img(src='/badges/' + line.idBadge + '.jpg', title=line.descriptionBadge)
-                            li
-                              p.date= line.obtentionDate
-              if otherBadges.length > 0
-                section.others
-                
-                  section.subtitle
-                    h4 Non obtenus
-                  section.badgelist
-                    ul(style="list-style-type: none; padding-left: 0; margin-top: 20px;")
-                      each line in otherBadges
-                        li(style="display: inline-block; margin-right: 20px;")
-                          p.title= line.titleBadge
-                          ul(style="list-style-type: none; padding-left: 0; margin-top: 5px;")
-                            li(style="display: inline-block; margin-right: 10px;")
-                              img(src='/badges/' + line.idBadge + '.jpg', style="filter: grayscale(100%);" title=line.descriptionBadge)
-
-
-      script.
-        window.addEventListener('DOMContentLoaded', (event) => {
-          function formatDateInTable() {
-            const rows = document.querySelectorAll('.table-user-history tbody tr');
-            const dates = document.querySelectorAll('.badgelist ul li ul li .date');
-
-            rows.forEach(row => {
-              const dateCell = row.querySelector('td:nth-child(4)');
-              if (dateCell) {
-                const originalDate = dateCell.textContent.trim();
-                const formattedDate = formatDate(originalDate);
-                dateCell.textContent = formattedDate;
-              }
-            });
-
-            dates.forEach(date => {
-              date.textContent = formatDate(date.textContent);
-          });
-          }
-          formatDateInTable();
-        });
-
-
-
-      script(src="/javascripts/vantaThree.js")
-      script(src="/javascripts/vantaNet.js")
-      script(src="/javascripts/background-element.js")
+            script(src="/javascripts/vantaThree.js")
+            script(src="/javascripts/vantaNet.js")
+            script(src="/javascripts/background-element.js")

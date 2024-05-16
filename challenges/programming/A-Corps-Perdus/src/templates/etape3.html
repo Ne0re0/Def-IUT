@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Flask</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Etape 3</h1>
+
+        <h2>Informations</h2>
+        <p>La fonction que vous devez créer doit avoir la signature suivante : <strong>{{signature}}</strong></p>
+        
+        <h2>Tableau de données</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Entrée s : string</th>
+                    <th>Sortie attendue : list</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Holiday</td>
+                    <td>HyoaldiidlaoyH</td>
+                </tr>
+                <tr>
+                    <td>Hello World!</td>
+                    <td>H!edlllroo WW oorlllde!H</td>
+                </tr>
+                <tr>
+                    <td>Le bon Nobel</td>
+                    <td>Llee bbooNn  nNoobb eelL</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form id="python-form" action="/etape3" method="POST">
+            <label for="python-code">Entrez votre code Python :</label><br>
+            <textarea id="python-code" name="python-code" rows="10" cols="50" >{{code}}</textarea><br>
+            <button type="submit">Exécuter</button>
+        </form>
+        <div id="output">{{returnStatement}}</div>
+    </div>
+</body>
+</html>

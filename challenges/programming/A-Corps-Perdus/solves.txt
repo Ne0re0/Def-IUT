@@ -1,0 +1,30 @@
+def main(val1:str,val2:str):
+	return 4
+	
+def main(val1:str,val2:str)->int:
+    h = val1.split(':')
+    a = val2.split(':')
+    return (int(a[0]) - int(h[0])) * 60 + int(a[1]) - int(h[1])
+    
+    
+# solve step 1
+def main( val1 : str, val2 : str ) -> int :
+    h = val1.split(':')
+    a = val2.split(':')
+    return (int(a[0]) - int(h[0])) * 60 + int(a[1]) - int(h[1])
+    
+# solve step 2
+def main(s : str) -> list:
+    out = []
+    for i in range(len(s)):
+        out.append(s[i:] + s[:i])
+    return out
+    
+# solve step 3
+def main(s : str) -> str:
+    out = ""
+    s2 = s[::-1]
+    for i in range(len(s)):
+        out += s[i] + s2[i]
+    return out
+

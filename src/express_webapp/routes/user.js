@@ -35,31 +35,31 @@ router.get('/:idUser', function(req, res, next) {
                 })
                 .catch((error) => {
                   console.log(error)
-                  res.render('usernotfound',{title:"Erreur interne"})
+                  res.render('error',{title:"Erreur interne"})
                 })
               })
               .catch((error) => {
                 console.log(error)
-                res.render('usernotfound',{title:"Erreur interne"})
+                res.render('error',{title:"Erreur interne"})
               })
             })
             .catch((error) => {
               console.log(error)
-              res.render('usernotfound',{title:"Erreur interne"})
+              res.render('error',{title:"Erreur interne"})
             })
           })
           .catch((error) => {
             console.log(error)
-            res.render('usernotfound',{title:"Erreur interne"})
+            res.render('error',{title:"Erreur interne"})
           })
         } else {
-          res.render('usernotfound',{title:"Utilisateur inexistant"});
+          res.render('error',{title:"Utilisateur inexistant"});
         }
       })
       .catch((error) => {
         // User does not exists
         console.log(error)
-        res.render('usernotfound',{title:"Utilisateur inexistant"});
+        res.render('error',{title:"Utilisateur inexistant"});
       })
   
 });

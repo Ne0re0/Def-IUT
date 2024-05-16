@@ -1,12 +1,21 @@
-FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine
+FROM python:3.6-slim
 
-# Copier les fichiers de configuration Apache dans le conteneur
+RUN apt-get clean \
+    && apt-get -y update
 
-COPY ./src/ /app
+RUN apt-get -y install uwsgi-plugin-python3 \
+    && apt-get -y install python3-dev \
+    && apt-get -y install build-essential \
+    && apt-get -y install uwsgi-core 
+
+COPY src/app/ /app
+COPY src/uwsgi.ini /app/uwsgi.ini
+COPY start /start
+
+RUN pip3 install -r /app/requirements.txt --src /usr/local/src
 
 WORKDIR /app
-# Exposer le port 80 pour le serveur web
-EXPOSE 5000
+RUN chmod +x /start
+# CMD ["flask","run","-p","80", "--host", "0.0.0.0"]
+CMD ["/start"]
 
-# Démarrer les services Apache et MySQL lorsque le conteneur est lancé
-CMD flask run

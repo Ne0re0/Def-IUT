@@ -8,4 +8,4 @@ services:
       dockerfile: Dockerfile
     container_name: a-corps-perdus-01
     ports:
-      - "90:80"
+      - "80:80"

@@ -28,7 +28,7 @@ html
         div.challenge-container
           section.table__header
             h1= challenge.titleChallenge
-            form(id="FlagForm", action='/challenge/#{challenge.idChallenge}', method='post')
+            form(id="FlagForm", action='/challenge/'+challenge.idChallenge, method='post')
               label(for='flagInput') 
               .input-group
                 input(type='text', name='flagInput', id='flagInput', placeholder='Entrer le flag ici...',required)

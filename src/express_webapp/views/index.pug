@@ -51,8 +51,7 @@ body
               tbody
                 each challenge in challenges
                   tr(onclick='redirectToChallenge('+challenge.idChallenge+')')
-                    td
-                      a(href='/challenge/#{challenge.idChallenge}')= challenge.titleChallenge
+                    td= challenge.titleChallenge
                     td= challenge.itsCategory
                     td= challenge.itsDifficultyString
                     td= challenge.reward

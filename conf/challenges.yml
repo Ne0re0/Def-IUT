@@ -9,6 +9,18 @@
 #############################################################################
 
 #############################################################################
+# CATEGORIES                                                                #
+# What's about available categories :                                       #
+#                                       - "Programmation"                   #
+#                                       - "Reverse"                         #
+#                                       - "Web"                             #
+#                                       - "Cryptanalyse"                    #
+#                                       - "Réseau"                          #
+#                                       - "Autre"                           #
+#                                                                           #
+#############################################################################
+
+#############################################################################
 # BE CAREFUL, in the current application, you can add and edit challenges   #
 # BUT YOU CAN'T DELETE ANYTHING without reseting the database               #
 # Challenge identification is based on the title, if you change the title,  #
@@ -17,12 +29,12 @@
 
 ########## Start of the example challenge ######
 # The title of the challenge
-- title: "egnellahC"
+- title: "Bienvenue"
   # The category of the challenge 
   # Current categories are "Programmation", "Reverse", "Web", "Cryptanalyse","Réseau" and "Autre"
   # Accepts strings
   # Required
-  category: "Reverse"
+  category: "Autre"
   # The difficulty of the challenge
   # Accepts integer from 1 to 5, 5 is the hardest difficulty
   # Required
@@ -30,62 +42,34 @@
   # The description of the challenge
   # Accepts strings
   # Required
-  description: "! risialp uA .s1ht_esrev3r tse galf eL ? etxet ec esrever ut-saruas ,nawadaP enuej iot à ruojnoB"
+  description: "! risialp uA .rusneib snes nob el snad }s1ht_esrev3r{TUIFED tse galf eL ? etxet ec esrever ut-saruas ,regnellahc enuej iot à ruojnoB"
   # The flag for your challenge
   # Accepts strings
   # Required
-  flag: "r3verse_th1s"
+  flag: "DEFIUT{r3verse_th1s}"
   # The connexion information about how to connect to the challenge
   # Accepts strings
   # Comment or delete if not necessary
   # connection: "http://example.com/"
 ########## End of the example challenge ######
 
-- title: "BabyMaths"
-  category: "Autre"
-  difficulty: 1
-  description: "Le flag est la réponse à la formule suivante : 4*2. N'oubliez pas d'entourer la réponse dans DEF{la réponse ici}"
-  flag: "DEF{8}"
-  # connection: null
-
-- title: "Aimez vous ?"
-  category: "Web"
-  difficulty: 1
-  description: "Aimez vous la plateforme ? Réponse : (oui/non)"
-  flag: "oui"
-  connection: null
-
-- title: "Temporaire 1"
-  category: "Reverse"
-  difficulty: 4
-  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
-  flag: "T3MP0R41RE"
-  connection: "http://example.com"
-
-- title: "Temporaire 2"
+- title: "A corps perdus (1/3)"
   category: "Programmation"
-  difficulty: 2
-  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
-  flag: "T3MP0R41RE"
-  connection: "http://example.com"
+  difficulty: 1
+  description: "Un peu de programmation ?"
+  flag: "DEFIUT{PYTHON_IS_NOT_RUDE_TO_ANYONE_WHO_LIKES_CODING}"
+  connection: https://acorpsperdus.defiut.fr
 
-- title: "Temporaire 3"
-  category: "Cryptanalyse"
-  difficulty: 3
-  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
-  flag: "T3MP0R41RE"
-  connection: "http://example.com"
+- title: "A corps perdus (2/3)"
+  category: "Programmation"
+  difficulty: 1
+  description: "Un peu de programmation ?"
+  flag: "DEFIUT{S0M3_CARACT3RE_FLIPP1NG}"
+  connection: https://acorpsperdus.defiut.fr
 
-- title: "Temporaire 4"
-  category: "Réseau"
-  difficulty: 4
-  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
-  flag: "T3MP0R41RE"
-  connection: "http://example.com"
-
-- title: "Temporaire 5"
-  category: "Autre"
-  difficulty: 5
-  description: "Ce challenge est temporaire et existe dans l'attente d'autres challenges, le flag est T3MP0R41RE"
-  flag: "T3MP0R41RE"
-  connection: "http://example.com"
+- title: "A corps perdus (3/3)"
+  category: "Programmation"
+  difficulty: 1
+  description: "Un peu de programmation ?"
+  flag: "DEFIUT{M4K3_3VERY7HING_P4L1DR0ME}"
+  connection: https://acorpsperdus.defiut.fr

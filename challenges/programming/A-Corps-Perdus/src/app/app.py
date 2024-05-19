@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
-flag1 = "DEFIUT{PYTHON_IS_NOT_RUDE_TO_ANYONE_WHO_LIKE_CODING}"
+flag1 = "DEFIUT{PYTHON_IS_NOT_RUDE_TO_ANYONE_WHO_LIKES_CODING}"
 flag2 = "DEFIUT{S0M3_CARACT3RE_FLIPP1NG}"
 flag3 = "DEFIUT{M4K3_3VERY7HING_P4L1DR0ME}"
 

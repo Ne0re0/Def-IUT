@@ -58,18 +58,18 @@
   difficulty: 1
   description: "Un peu de programmation ?"
   flag: "DEFIUT{PYTHON_IS_NOT_RUDE_TO_ANYONE_WHO_LIKES_CODING}"
-  connection: https://acorpsperdus.defiut.fr
+  connection: http://localhost:30001/etape1
 
 - title: "A corps perdus (2/3)"
   category: "Programmation"
   difficulty: 1
   description: "Un peu de programmation ?"
   flag: "DEFIUT{S0M3_CARACT3RE_FLIPP1NG}"
-  connection: https://acorpsperdus.defiut.fr
+  connection: http://localhost:30001/etape2
 
 - title: "A corps perdus (3/3)"
   category: "Programmation"
   difficulty: 1
   description: "Un peu de programmation ?"
   flag: "DEFIUT{M4K3_3VERY7HING_P4L1DR0ME}"
-  connection: https://acorpsperdus.defiut.fr
+  connection: http://localhost:30001/etape3

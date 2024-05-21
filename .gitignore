@@ -22,3 +22,5 @@ src/express_webapp/def-iut-database/node_modules
 
 # Database
 src/express_webapp/database.db
+
+node_modules

@@ -1,11 +1,16 @@
-version: '3'
+version: '3.8'
 
 services:
-  mysql-db:
-    image: sakila-db
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: sakila-db
+  mysql:
+    build: .
+    container_name: mysql_sakila
     ports:
-      - "3307:3306"
+      - "30004:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

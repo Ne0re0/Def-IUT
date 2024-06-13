@@ -241,19 +241,18 @@ def handle_client(conn, addr):
     end_time = time.time()
     
     elapsed_time = end_time - start_time
-
+    
     # Out of time
     if elapsed_time >= 3 :
-        conn.sendall("Trop long, tu dois répondre en moins de 3 secondes !".encode("utf-8"))
+        conn.sendall("Trop long, tu dois répondre en moins de 3 secondes !".encode("utf-8") + b"\n")
     
     # Bad answer
     elif Counter(set(answer)) != Counter(set(getWordsInGrid(grid,ALL_WORDS))) : 
-        conn.sendall("Mauvaise réponse !".encode("utf-8"))
+        conn.sendall(f"Mauvaise réponse ! La bonne réponse était {set(getWordsInGrid(grid,ALL_WORDS))}".encode("utf-8") + b"\n")
         
     # Good answer
     else :
-        conn.sendall(b"BRAVO ! Voici ton flag : DEFIUT{S0CK3TS_C4N_B3_FUN}")
-    conn.sendall(b"\n")
+        conn.sendall(b"BRAVO ! Voici ton flag : DEFIUT{S0CK3TS_C4N_B3_FUN}\n")
     conn.close()
 
 

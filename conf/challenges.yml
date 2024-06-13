@@ -73,3 +73,13 @@
   description: "Un peu de programmation ?"
   flag: "DEFIUT{M4K3_3VERY7HING_P4L1DR0ME}"
   connection: http://localhost:30001/etape3
+
+- title: "Les Mots Croisés Mais En Mieux"
+  category: "Programmation"
+  difficulty: 5
+  description: "On cherche ici à trouver les mots de la liste présents dans la grille. On peut chercher les lettres pour
+reconstituer les mots en se déplaçant de manière verticale ou horizontale uniquement. Il est interdit
+de se déplacer en diagonale ou de sauter les cellules adjacentes. Il est également interdit de repasser
+sur une lettre pour le même mot."
+  flag: "DEFIUT{S0CK3TS_C4N_B3_FUN}"
+  connection: tcp://localhost:30002

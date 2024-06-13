@@ -130,5 +130,5 @@ if __name__ =='__main__' :
     
     p.sendline(b"END")
     
-    output = p.recvline().decode()
+    output = p.clean().decode()
     print(output)

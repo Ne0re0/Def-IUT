@@ -1,16 +1,18 @@
 from pwn import *
 import copy
+import os
+import time
 
 
 def getWords(output) : 
     lines = output.split("\n")
-    words = lines[15].split(" ")[:-1]
+    words = lines[19].split(" ")[:-1]
     return words
 
 def getGrid(output) : 
     lines = output.split("\n")
     grid = []
-    for k in range(19,29) : 
+    for k in range(23,33) : 
         # print(lines[k])
         line = eval(lines[k])
         grid.append(line)
@@ -73,16 +75,10 @@ def get_letters_aroud(board, coordinates):
             letters_aroud[board[l][c]] = [(l,c)]
         else:
             letters_aroud[board[l][c]].append((l,c))
-        
-    """letters_without_blank = {}
-    for i in letters_aroud.keys():
-        if i != "":
-            letters_without_blank[i] = letters_aroud[i]"""
     
     return letters_aroud
 
 def findWord(board, word, from_coordinates=None):
-    #print("findWord(" + word + ", " + str(from_coordinates) + ")" )
 
     found = False
     if len(word) == 1:
@@ -116,24 +112,30 @@ def main(board, words):
 
 if __name__ =='__main__' :
     
-    p = remote("localhost",30002)
-    output = p.clean().decode()
+    while True :
+        p = remote("localhost",30002)
+        output = p.clean().decode()
+        print(output)
+        words = getWords(output)
+        grid = getGrid(output)
+        
+        for line in grid : 
+            print(line)
+        
+        
 
-    words = getWords(output)
-    grid = getGrid(output)
-    
-    for line in grid : 
-        print(line)
-    
-    
-
-    found_words = main(grid, words)
-    
-    for w in set(found_words) : 
-        p.sendline(w.encode("utf-8"))
-    
-    p.sendline(b"END")
-    
-    output = p.clean().decode()
-    
-    print(output)
+        found_words = main(grid, words)
+        
+        for w in set(found_words) : 
+            print(w)
+            time.sleep(.01)
+            p.sendline(w.encode("utf-8"))
+        
+        p.sendline(b"END")
+        
+        output = p.clean().decode()
+        
+        print(output)
+        time.sleep(1)
+        
+        p.close()

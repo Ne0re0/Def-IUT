@@ -1,10 +1,8 @@
-# FROM python:3.6-slim
-
-FROM ubuntu:latest
+FROM python:3.6-slim
 
 RUN apt-get clean \
     && apt-get -y update \
-    && apt-get install nano python3 -y
+    && pip install pwn netcat
 
 
 COPY ./src/ /app/
@@ -13,5 +11,5 @@ WORKDIR /app
 
 EXPOSE 30002
 
-CMD ["python3","/app/app.py"]
+CMD ["/usr/local/bin/python3","/app/app.py"]
 

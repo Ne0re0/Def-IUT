@@ -50,13 +50,26 @@ Si vous souhaitez ajouter vos propres challenges, veuillez d'abord remplacer les
 ./update-challenges
 ```
 
-6. Lancement de l'application
+6. Configurer le serveur SMTP
+Pour que l'envoi de courriels puisse être effectif, il convient de compléter cette configuration en suivant les étapes ci-dessous :
+```bash
+mv conf/mail.yml.template conf/mail.yml
+```
+Ouvrez `conf/mail.yml` avec l'éditeur de votre choix et compléter les informations suivantes :
+- smtpServer
+- login
+- password
+- smtpPort
+
+Sauvegardez et quittez
+
+7. Lancement de l'application
 
 ```bash
 ./start
 ```
 
-7. L'application est lancée sur le port 3000 :  http://localhost:3000
+8. L'application est lancée sur le port 3000 :  http://localhost:3000
 ## Installation avec Docker
 
 1. Installation des packages nécessaires au bon fonctionnement de la conteneurisation
@@ -72,13 +85,27 @@ git clone https://github.com/Ne0re0/Def-IUT.git
 cd Def-IUT
 ```
 
-3. Lancement de la conteneurisation
+3. Configurer le serveur SMTP
+Pour que l'envoi de courriels puisse être effectif, il convient de compléter cette configuration en suivant les étapes ci-dessous :
+```bash
+mv conf/mail.yml.template conf/mail.yml
+```
+Ouvrez `conf/mail.yml` avec l'éditeur de votre choix et compléter les informations suivantes :
+- smtpServer
+- login
+- password
+- smtpPort
+
+Sauvegardez et quittez
+
+
+4. Lancement de la conteneurisation
 
 ```bash
 sudo docker-compose up --build -d # La première installation peut durer un certain moment en fonction de votre débit
 ```
 
-4. L'application est lancée sur le port 3000 :  http://localhost:3000
+5. L'application est lancée sur le port 3000 :  http://localhost:3000
 
 ## Accès distant
 
@@ -123,5 +150,3 @@ sudo docker exec -it defiut /bin/bash
 
 #### [Politique de confidentialité](./documents/confidentialité.pdf)
 #### [Conditions générales d'utilisation](./documents/utilisation.pdf)
-
-**PS :** Certaines dépendances utilisées ont un impact sur le niveau de sécurité de l'application, nous en avons conscience et travaillons actuellement à la remédiation de ces dépendances. Cependant, par manque de temps, tout n'a pas pu être corrigé avant la date de rendu de la preuve de concept (POC) de ce dimanche 14 janvier.

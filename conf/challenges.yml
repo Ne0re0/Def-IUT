@@ -83,3 +83,27 @@ de se déplacer en diagonale ou de sauter les cellules adjacentes. Il est égale
 sur une lettre pour le même mot."
   flag: "DEFIUT{S0CK3TS_C4N_B3_FUN}"
   connection: tcp://localhost:30002
+
+- title: "Des requêtes au service du septième art"
+  category: "Autre"
+  difficulty: 4
+  description: "Vous êtes sur le point de démarrer une quête cinématographique passionnante à travers la base de
+données Sakila. Vous allez devoir utiliser des requêtes MySQL afin résoudre une série d'énigmes.
+Votre objectif est de découvrir un flag composé de quatre morceaux : DEFIUT{film-prénom-montant-nom}, par
+exemple DEFIUT{COAST RAINBOW-LISA-123.15-COOPER). Chaque étape est indépendante et vous rapprochera
+de ce flag mystérieux.
+Étape 1 : le film idéal : Commencez votre aventure en cherchant le film idéal, quelque chose de beau et
+peut-être même de la science-fiction. Il faut trouver un film avec le mot 'beautiful' dans sa description,
+appartenant à la catégorie 'Sci-Fi'. Après avoir identifié quelques films correspondant aux critères,
+plongez dans le monde de la qualité en cherchant celui qui a le plus d’acteurs. Le titre de ce film sera la
+première partie du flag.
+Étape 2 : prénom mystérieux : Explorez les prénoms des clients ou des acteurs dont le prénom
+commence par la lettre 'S'. Choisissez celui qui a le moins de lettres parmi les cinq premiers résultats.
+Ce prénom constituera la deuxième partie du flag.
+Étape 3 : riche client français : Découvrez les clients français et trouvez celui qui a payé le plus cher pour
+une location. Ce montant sera la troisième partie du flag.
+Étape 4 : un cinéphile : Enfin, identifiez le client qui a loué au moins sept films de chaque catégorie, à
+l'exception de la catégorie 'Documentary'. Trouvez son nom, car cela constituera la dernière partie du
+flag."
+  flag: "DEFIUT{FRISCO FORREST-SAM-10.99-SELBY}"
+  connection: "commande : mysql -h 127.0.0.1 -P 30004 -u user -p ; password : user"

@@ -10,7 +10,7 @@ html
     nav.navbar
         // Left
         a.logo(href='/')
-            img(src='/logos/Full_Logo_Horizontal.png',alt="Website logo",width='310', height='75')
+            img(src='/logos/Full_Logo_Horizontal.png', alt="Website logo", width='310', height='75')
 
         // Right
         ul.nav-links
@@ -31,12 +31,12 @@ html
             form(id="FlagForm", action='/challenge/'+challenge.idChallenge, method='post')
               label(for='flagInput') 
               .input-group
-                input(type='text', name='flagInput', id='flagInput', placeholder='Entrer le flag ici...',required)
+                input(type='text', name='flagInput', id='flagInput', placeholder='Entrer le flag ici...', required)
                 img(src='/images/flag.png', alt='')
               button.sendFlag-button(type='submit', hidden) Valider
 
           section.table__body
-            p.challenge-description #{challenge.descriptionChallenge}
+            p.challenge-description!= challenge.descriptionChallenge
             table
               tr
                 td Difficulté:
@@ -119,11 +119,10 @@ html
 
           dates.forEach(date => {
             date.textContent = formatDate(date.textContent);
-        });
+          });
         }
         formatDateInTable();
       });
-
 
     script(src="/javascripts/vantaThree.js")
     script(src="/javascripts/vantaNet.js")

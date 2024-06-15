@@ -28,7 +28,7 @@ COPY ./src/express_webapp/ ./src/express_webapp/
 COPY ./src/express_webapp/bin/ ./src/express_webapp/bin/
 COPY ./src/express_webapp/def-iut-database/ ./src/express_webapp/def-iut-database/
 COPY ./src/express_webapp/package.json ./src/express_webapp/package.json
-COPY ./src/express_webapp/package-lock.json ./src/express_webapp/package-lock.json
+# COPY ./src/express_webapp/package-lock.json ./src/express_webapp/package-lock.json
 COPY ./src/express_webapp/routes/ ./src/express_webapp/routes/
 COPY ./src/express_webapp/routes/middlewares/ ./src/express_webapp/routes/middlewares/
 COPY ./src/express_webapp/app.js ./src/express_webapp/app.js
@@ -50,6 +50,7 @@ COPY ./update-challenges .
 # Installez les dépendances
 USER root
 RUN chown -R defiut:defiut /app
+RUN chmod 777 /app/src/express_webapp/database.db
 RUN ./install-libraries > /dev/null 2> /dev/null
 RUN ./reset-database
 RUN ./update-challenges

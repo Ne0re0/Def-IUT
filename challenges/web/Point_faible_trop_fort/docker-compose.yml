@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  point-faible:
+    image: defiut-image-web-point-faible
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "30003:30003"
+    container_name: defiut-container-web-point-faible
+    volumes:
+      - ./app/html:/var/www/html
+    restart: always

@@ -10,5 +10,6 @@ services:
       - "30003:30003"
     container_name: defiut-container-web-point-faible
     volumes:
-      - ./app/html:/var/www/html
+      - ./app/html:/var/www/localhost/htdocs
     restart: always
+

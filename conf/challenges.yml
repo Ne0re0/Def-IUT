@@ -112,7 +112,7 @@ flag."
   flag: "DEFIUT{FRISCO FORREST-SAM-10.99-SELBY}"
   connection: "mysql -h 127.0.0.1 -P 30004 -u user sakila -puser"
   
-  - title: "Point faible : trop fort"
+- title: "Point faible : trop fort"
   category: "Web"
   difficulty: 3
   description: "On cherche ici à obtenir l’accès au compte d’administration en utilisant une injection de type SQL"

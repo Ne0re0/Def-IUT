@@ -1,4 +1,4 @@
-# Utiliser une image de base avec Apache et PHP sur Alpine
+# Utiliser une image de base ubuntu
 FROM ubuntu
 
 # Mettre à jour les paquets et installer les logiciels nécessaires
@@ -12,7 +12,7 @@ COPY ./app/apache-config.conf /etc/apache2/sites-available/000-default.conf
 
 RUN rm /var/www/html/index.html
 
-# Exposer le port 30003
+# Exposer le port 80
 EXPOSE 80
 
 # Commande pour démarrer Apache

@@ -24,7 +24,7 @@ Le code source de cette application est disponible à l'adresse suivante : https
 1. Installation des packages nécessaires au lancement de l'application
 
 ```bash
-sudo apt install git npm sqlte3 docker-compose -y
+sudo apt install git npm sqlite3 docker-compose -y
 ```
 
 2. Clonage du répertoire

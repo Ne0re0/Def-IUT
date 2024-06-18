@@ -1,5 +1,8 @@
 {
   "dependencies": {
+    "@npmcli/fs": "^3.1.1",
+    "lru-cache": "^10.2.2",
+    "npmlog": "^7.0.1",
     "pug": "^3.0.2"
   }
 }

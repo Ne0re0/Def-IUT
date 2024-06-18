@@ -3,8 +3,8 @@ echo "Installation des executables linux indispensables"
 sudo apt install sqlite3 npm -y 
 cd ./src/express_webapp
 echo "Installation du module personnalisé de base de donnée"
-npm i 
+npm i 2> /dev/null > /dev/null
 echo "Installation des librairies nécessaires"
-npm i ./def-iut-database 
+npm i ./def-iut-database 2> /dev/null > /dev/null
 echo "Installations terminées"
 cd ../../

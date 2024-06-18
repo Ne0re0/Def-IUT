@@ -34,6 +34,12 @@ git clone https://github.com/Ne0re0/Def-IUT.git
 cd Def-IUT
 ```
 
+3. Mise à jour des droits sur la base de données
+
+```bash
+chmod 777 src/express_webapp/database.db
+```
+
 4. Réinitialisation de la base de données
 
 ```bash

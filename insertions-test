@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sqlite3 src/express_webapp/database.db < src/database/insertion-test.sql

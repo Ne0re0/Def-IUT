@@ -17,11 +17,14 @@ Le code source de cette application est disponible à l'adresse suivante : https
 
 **Tableau des scores**
 ![scoreboard.png](img/scoreboard.png)
-## Installation locale
+
+
+## Configuration
+
 1. Installation des packages nécessaires au lancement de l'application
 
 ```bash
-sudo apt install git npm -y
+sudo apt install git npm sqlte3 docker-compose -y
 ```
 
 2. Clonage du répertoire
@@ -31,21 +34,18 @@ git clone https://github.com/Ne0re0/Def-IUT.git
 cd Def-IUT
 ```
 
-3. Installation des librairies `npm`
-
-```bash
-./install-libraries
-```
-
 4. Réinitialisation de la base de données
 
 ```bash
 ./reset-database
 ```
 
-5. Ajout des challenges "exemple" dans l'application
+5. Mise à jour des challenges dans l'application
+
 **/!\\ N'exécutez cette commande que si vous souhaitez ajouter les challenges exemples**  
+
 Si vous souhaitez ajouter vos propres challenges, veuillez d'abord remplacer les challenges présents dans `conf/challenges.yml` par les vôtres (cf [personnalisation des challenges](./conf/README.md))
+
 ```bash
 ./update-challenges
 ```
@@ -63,40 +63,25 @@ Ouvrez `conf/mail.yml` avec l'éditeur de votre choix et compléter les informat
 
 Sauvegardez et quittez
 
-7. Lancement de l'application
+
+## Installation locale 
+
+1. Installation des librairies `npm`
+
+```bash
+./install-libraries
+```
+
+2. Lancement de l'application
 
 ```bash
 ./start
 ```
 
-8. L'application est lancée sur le port 3000 :  http://localhost:3000
+3. L'application est lancée sur le port 3000 :  http://localhost:3000
+
+
 ## Installation avec Docker
-
-1. Installation des packages nécessaires au bon fonctionnement de la conteneurisation
-
-```bash
-sudo apt install docker-compose git -y
-```
-
-2. Clonage du répertoire
-
-```bash
-git clone https://github.com/Ne0re0/Def-IUT.git
-cd Def-IUT
-```
-
-3. Configurer le serveur SMTP
-Pour que l'envoi de courriels puisse être effectif, il convient de compléter cette configuration en suivant les étapes ci-dessous :
-```bash
-mv conf/mail.yml.template conf/mail.yml
-```
-Ouvrez `conf/mail.yml` avec l'éditeur de votre choix et compléter les informations suivantes :
-- smtpServer
-- login
-- password
-- smtpPort
-
-Sauvegardez et quittez
 
 
 4. Lancement de la conteneurisation

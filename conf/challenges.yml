@@ -42,11 +42,11 @@
   # The description of the challenge
   # Accepts strings
   # Required
-  description: "! risialp uA .rusneib snes nob el snad }s1ht_esrev3r{TUIFED tse galf eL ? etxet ec esrever ut-saruas ,regnellahc enuej iot à ruojnoB"
+  description: "Bonjour, <br>Aimez-vous les crêpes ?<br>Solution : Oui"
   # The flag for your challenge
   # Accepts strings
   # Required
-  flag: "DEFIUT{r3verse_th1s}"
+  flag: "Oui"
   # The connexion information about how to connect to the challenge
   # Accepts strings
   # Comment or delete if not necessary

@@ -40,7 +40,14 @@ cd Def-IUT
 ./reset-database
 ```
 
-5. Mise à jour des challenges dans l'application
+5. Installation des librairies `npm`
+
+```bash
+./install-libraries
+```
+
+
+6. Mise à jour des challenges dans l'application
 
 **/!\\ N'exécutez cette commande que si vous souhaitez ajouter les challenges exemples**  
 
@@ -50,7 +57,7 @@ Si vous souhaitez ajouter vos propres challenges, veuillez d'abord remplacer les
 ./update-challenges
 ```
 
-6. Configurer le serveur SMTP
+7. Configurer le serveur SMTP
 Pour que l'envoi de courriels puisse être effectif, il convient de compléter cette configuration en suivant les étapes ci-dessous :
 ```bash
 mv conf/mail.yml.template conf/mail.yml
@@ -66,31 +73,26 @@ Sauvegardez et quittez
 
 ## Installation locale 
 
-1. Installation des librairies `npm`
 
-```bash
-./install-libraries
-```
-
-2. Lancement de l'application
+1. Lancement de l'application
 
 ```bash
 ./start
 ```
 
-3. L'application est lancée sur le port 3000 :  http://localhost:3000
+2. L'application est lancée sur le port 3000 :  http://localhost:3000
 
 
 ## Installation avec Docker
 
 
-4. Lancement de la conteneurisation
+1. Lancement de la conteneurisation
 
 ```bash
 sudo docker-compose up --build -d # La première installation peut durer un certain moment en fonction de votre débit
 ```
 
-5. L'application est lancée sur le port 3000 :  http://localhost:3000
+2. L'application est lancée sur le port 3000 :  http://localhost:3000
 
 ## Accès distant
 

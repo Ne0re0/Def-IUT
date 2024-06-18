@@ -34,26 +34,20 @@ git clone https://github.com/Ne0re0/Def-IUT.git
 cd Def-IUT
 ```
 
-3. Mise à jour des droits sur la base de données
-
-```bash
-chmod 777 src/express_webapp/database.db
-```
-
-4. Réinitialisation de la base de données
+3. Réinitialisation de la base de données
 
 ```bash
 ./reset-database
 ```
 
-5. Installation des librairies `npm`
+4. Installation des librairies `npm`
 
 ```bash
 ./install-libraries
 ```
 
 
-6. Mise à jour des challenges dans l'application
+5. Mise à jour des challenges dans l'application
 
 **/!\\ N'exécutez cette commande que si vous souhaitez ajouter les challenges exemples**  
 
@@ -63,7 +57,7 @@ Si vous souhaitez ajouter vos propres challenges, veuillez d'abord remplacer les
 ./update-challenges
 ```
 
-7. Configurer le serveur SMTP
+6. Configurer le serveur SMTP
 Pour que l'envoi de courriels puisse être effectif, il convient de compléter cette configuration en suivant les étapes ci-dessous :
 ```bash
 mv conf/mail.yml.template conf/mail.yml

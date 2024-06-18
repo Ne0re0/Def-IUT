@@ -33,3 +33,5 @@ execute_sql_file "$INSERTION_SQL"
 
 echo "Réinitialisation terminée"
 echo -e "\e[34mN'oubliez pas d'enregistrer vos challenges\e[0m"
+
+chmod 777 "$DB_PATH"

@@ -27,4 +27,3 @@ INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (2,4,'20
 INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (2,8,'2024/01/30','11:01',10);
 INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,6,'2024/01/01','14:01',7);
 INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (3,1,'2024/01/20','10:01',1);
-INSERT INTO HasTried (aUser, aChallenge, flagged, hour, retryNb) VALUES (1,7,NULL,null,4);

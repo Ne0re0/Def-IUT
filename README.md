@@ -70,6 +70,14 @@ Ouvrez `conf/mail.yml` avec l'éditeur de votre choix et compléter les informat
 
 Sauvegardez et quittez
 
+## Tests
+
+Cette étape est uniquement utile dans un but de démonstration.  
+Ne saississez pas cette commande en production
+```bash
+./insertions-test
+```
+
 
 ## Installation locale 
 

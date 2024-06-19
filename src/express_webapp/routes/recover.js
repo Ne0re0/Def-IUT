@@ -29,7 +29,7 @@ router.get('/:token', function(req, res, next) {
 });
 
 
-// Fonction de création et envoie du mail de récupération 
+// Create and send mail function
 router.post('/', function(req, res, next) {
 
   if (session.user !== undefined){
@@ -44,6 +44,7 @@ router.post('/', function(req, res, next) {
     // Write password recovery file
     const content = req.body.mail;
 
+    // Create token
     let random = Math.random();
     const title = CryptoJS.MD5(random.toString());
 

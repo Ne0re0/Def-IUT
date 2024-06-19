@@ -10,7 +10,7 @@ const CONF_RECOVER_PATH = "../../conf/recover.yml"
 const CONF_MAIL_PATH = "../../conf/mail.yml"
 const LOG_FILE="../../log/defiut.log"
 
-
+// Fonction de routage vers la vue recover.pug
 router.get('/', function(req, res, next) {
   if (session.user !== undefined){
     res.redirect("/");
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
   }
 });
 
-
+// Fonction de routage vers la vue newpassword.pug
 router.get('/:token', function(req, res, next) {
   if (session.user !== undefined){
     res.redirect("/");
@@ -28,6 +28,8 @@ router.get('/:token', function(req, res, next) {
   }
 });
 
+
+// Fonction de création et envoie du mail de récupération 
 router.post('/', function(req, res, next) {
 
   if (session.user !== undefined){
@@ -74,7 +76,6 @@ router.post('/', function(req, res, next) {
 
 
     // Send mail
-
     try {
 
       const config = yaml.load(fs.readFileSync(CONF_MAIL_PATH, 'utf8'));
@@ -109,8 +110,9 @@ router.post('/', function(req, res, next) {
   }
 })
 
-router.post('/:token', function(req, res, next) {
 
+// Fonction de changement de mot de passe
+router.post('/:token', function(req, res, next) {
   if (session.user !== undefined){
     return res.redirect("/");
   } 

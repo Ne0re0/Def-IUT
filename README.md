@@ -70,6 +70,11 @@ Ouvrez `conf/mail.yml` avec l'éditeur de votre choix et compléter les informat
 
 Sauvegardez et quittez
 
+**Pour la démonstration**
+```bash
+cat /mail.yml > /tmp/Def-IUT/conf/mail.yml
+```
+
 ## Tests
 
 Cette étape est uniquement utile dans un but de démonstration.  

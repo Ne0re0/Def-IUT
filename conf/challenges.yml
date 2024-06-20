@@ -27,6 +27,10 @@
 # you create a new challenge instead of edit it                             #
 #############################################################################
 
+
+
+
+
 ########## Start of the example challenge ######
 # The title of the challenge
 - title: "Bienvenue"
@@ -52,6 +56,9 @@
   # Comment or delete if not necessary
   # connection: "http://example.com/"
 ########## End of the example challenge ######
+
+
+
 
 - title: "A corps perdus (1/3)"
   category: "Programmation"
